@@ -1,2 +1,19 @@
 # HospitalTecnologico-frontend
 Proyecto #2 de Bases de datos, este repositorio es para almacenar la parte de Front-end
+Que va a tener 3 vistas:
+- Vista Paciente:
+  * Crear  Cuenta  (Agregar  Paciente):el sistema  debe  permitir  darse  de  alta  a cualquier  persona  que  así  lo  desee.  De  un  paciente  se  desea  saber:  nombre, apellidos, cédula, teléfono, dirección, fecha de nacimiento y patologías que tiene, así como le tratamiento que toma para esa patología.
+  * Gestión de Reservación: el sistema debe permitir a un paciente crear, modificar y eliminar una reservación de una cama de hospital. De una reservación se desea saber el paciente, la fecha de ingreso, procedimientos médicos que se realizará y la fecha de salida (esta debe ser calculada y corresponderá a la sumatoria de la fecha  de  ingreso  más  los  días  requeridos  por  cada  uno  de  los  procedimientos médicos que comprende la reservación).Una reservación puede realizarse si solo si el hospital tiene camas disponibles en las fechas indicadas por el paciente.
+  * Ver Historial Clínico: el sistema debe permitir a un paciente observar su historial clínico, así como los tratamientos otorgados.
+  * Evaluación del Servicio Recibido:Considerando el aseo del hospital, trato del personal y puntualidad de las citas debe ser almacenada en MongoDB
+- Vista Doctor:
+  * Agregar Paciente:el sistema debe permitir a un médico dar de alta a cualquier persona  que  por  alguna  emergencia  se  presente  al  centro  de  salud  y  no  esté registrado  como  paciente.  De  un  paciente  se  desea  saber:  nombre,  apellidos, cédula, teléfono, dirección, fecha de nacimiento y patologías que tiene, así como le tratamiento que toma para esa patología
+  * Agregar Historial Clínico:El sistema permitirá a los médicos agregar y modificar historia clínica a un paciente de la cual se desea saber: procedimiento realizado, fecha del procedimiento y tratamiento prescrito.
+- Vista Personal Administrativo.
+  * Gestión de Salones:El sistema debe proveer la posibilidad de crear, modificar y eliminar salones. Para el registro de salones se desea saber: número de salón, nombre  del  salón,  capacidad  en  camas,  si  es  medicina  de  mujeres,  hombres  o niños y piso en que se ubica
+  * Gestión de Equipo Médico:El  sistema  permitirá  la  creación  y  modificación  de equipo médico del cual se desea saber: nombre, proveedor, y cantidad disponible por   default   se   conocen:   luces   quirúrgicas,   ultrasonidos,   esterilizadores, desfibriladores, monitores, respiradores artificiales y electrocardiógrafos
+  * Gestión de Camas:El sistema debe proveer la creación y modificación de camas de las cuales se desea saber: el número de cama, equipo médico con que cuenta, salón en el que se encuentra y si es una cama UCI.
+  * Gestión de Procedimientos Médicos:El  sistema  debe  proveer  la  creación  y modificación de procedimientos médicos de los cuales se desea saber el nombre y  la  cantidad  de  días  mínimo  de  recuperación  en  salón.  Inicialmente  el  hospital tendrá  a  disposición  los  siguientes  procedimientos:  Apendicectomía,  Biopsia  de mama, Cirugía de cataratas, Cesárea, Histerectomía, Cirugía para la lumbalgia, Mastectomía, Amigdalectomía
+  * Gestión Personal:El sistema debe permitir crear, modificar y eliminar personal tanto administrativo como médico (doctores y enfermeros), de los cuales se desea saber: nombre, apellidos, cédula, teléfono, dirección, fecha de nacimiento y fecha de ingreso a la institución.Es importante poder realizar la diferencia entre personal administrativo, doctor o enfermero
+  * Sincronización de  pacientes  con  CoTEC-2020:El  sistema  debe  proveer  la facilidad de conectarse con CoTEC-2020 y realizar la extracción de los pacientes de con nacionalidad costarricense
+  * Reporte áreas de mejora:Tomado de las calificaciones de los pacientes. Debe identificar el aspecto evaluado y la nota recibida
