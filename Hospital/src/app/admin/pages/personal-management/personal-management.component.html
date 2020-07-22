@@ -112,12 +112,42 @@
         style="font-size: 30px; font-weight: bold;"
         >Gestión de Personal</span
       >
+      <button
+        type="button"
+        class="btn"
+        onclick=""
+        (click)="personalCreate()"
+        *ngIf="listPersonal"
+        style="position: absolute; right: 5%;"
+      >
+        <img
+          src="https://cdn3.iconfinder.com/data/icons/eightyshades/512/14_Add-512.png"
+          alt="button1"
+          style="width: 10%; height: 10%;"
+        />
+        <div class="card-inner"></div>
+      </button>
+      <button
+        type="button"
+        class="btn"
+        onclick=""
+        (click)="personalList()"
+        *ngIf="createPersonal || viewPersonal"
+        style="position: absolute; right: 5%;"
+      >
+        <img
+          src="https://cdn4.iconfinder.com/data/icons/essential-app-2/16/back-left-arrow-botton-512.png"
+          alt="button1"
+          style="width: 10%; height: 10%;"
+        />
+        <div class="card-inner"></div>
+      </button>
     </div>
     <!-- End horizontal navbar -->
 
     <!-- Page content holder -->
     <div class="page-content py-3" id="content">
-      <div class="container">
+      <div class="container" *ngIf="listPersonal">
         <!-- Table Haeder -->
         <div class="row">
           <div class="col-md-12">
@@ -127,15 +157,26 @@
                 class="col-md-1"
                 style="font-weight: bold; font-size: 20px; color: #ffffff;"
               >
-                ID
+                CÉDULA
               </div>
               <div
                 class="col-md-2"
                 style="font-weight: bold; font-size: 20px; color: #ffffff;"
               >
-                NOTA
+                NOMBRE
               </div>
-              <div class="col-md-1"></div>
+              <div
+                class="col-md-2"
+                style="font-weight: bold; font-size: 20px; color: #ffffff;"
+              >
+                APELLIDOS
+              </div>
+              <div
+                class="col-md-2"
+                style="font-weight: bold; font-size: 20px; color: #ffffff;"
+              >
+                ROL
+              </div>
               <!-- End column title -->
             </nav>
           </div>
@@ -143,27 +184,33 @@
         <!-- End table Haeder -->
 
         <!-- Tables for the reports -->
-          <div class="col-md-12" style="background-color: white;"> 
-            <div
-              class="scrollbar"
-              id="style-2"
-            >
-              <!-- Tables for the cleanliness -->
-              <table
-                class="table table-hover"
-                data-sort-order="desc"
-              >
-                <tbody>
-                  
-                </tbody>
-              </table>
-              <!-- End tables for the cleanliness -->
-
-            </div>
+        <div class="col-md-12" style="background-color: white;">
+          <div class="scrollbar" id="style-2">
+            <!-- Tables for the cleanliness -->
+            <table class="table table-hover" data-sort-order="desc">
+              <tbody>
+                <tr *ngFor="let x of personal" (click)="personalView(x.dni)">
+                  <td style="width: 23%;">
+                    {{ x.dni }}
+                  </td>
+                  <td style="width: 30%;">
+                    {{ x.nombre }}
+                  </td>
+                  <td style="width: 31%;">
+                    {{ x.apellido }}
+                  </td>
+                  <td>
+                    {{ x.role }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- End tables for the cleanliness -->
           </div>
-          <!-- End tables for the reports -->
         </div>
+        <!-- End tables for the reports -->
       </div>
+    </div>
     <!-- End page content holder -->
   </body>
 </html>

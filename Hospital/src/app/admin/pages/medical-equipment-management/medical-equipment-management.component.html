@@ -112,12 +112,42 @@
         style="font-size: 30px; font-weight: bold;"
         >Gestión de Equipo Médico</span
       >
+      <button
+        type="button"
+        class="btn"
+        onclick=""
+        (click)="equipmentCreate()"
+        *ngIf="listEquipment"
+        style="position: absolute; right: 5%;"
+      >
+        <img
+          src="https://cdn3.iconfinder.com/data/icons/eightyshades/512/14_Add-512.png"
+          alt="button1"
+          style="width: 10%; height: 10%;"
+        />
+        <div class="card-inner"></div>
+      </button>
+      <button
+        type="button"
+        class="btn"
+        onclick=""
+        (click)="equipmentList()"
+        *ngIf="createEquipment || viewEquipment"
+        style="position: absolute; right: 5%;"
+      >
+        <img
+          src="https://cdn4.iconfinder.com/data/icons/essential-app-2/16/back-left-arrow-botton-512.png"
+          alt="button1"
+          style="width: 10%; height: 10%;"
+        />
+        <div class="card-inner"></div>
+      </button>
     </div>
     <!-- End horizontal navbar -->
 
     <!-- Page content holder -->
     <div class="page-content py-3" id="content">
-      <div class="container">
+      <div class="container" *ngIf="listEquipment">
         <!-- Table Haeder -->
         <div class="row">
           <div class="col-md-12">
@@ -127,13 +157,19 @@
                 class="col-md-1"
                 style="font-weight: bold; font-size: 20px; color: #ffffff;"
               >
-                ID
+                NOMBRE
               </div>
               <div
                 class="col-md-2"
                 style="font-weight: bold; font-size: 20px; color: #ffffff;"
               >
-                NOTA
+                PROVEEDOR
+              </div>
+              <div
+                class="col-md-2"
+                style="font-weight: bold; font-size: 20px; color: #ffffff;"
+              >
+                CANTIDAD
               </div>
               <div class="col-md-1"></div>
               <!-- End column title -->
@@ -154,7 +190,17 @@
                 data-sort-order="desc"
               >
                 <tbody>
-                  
+                  <tr *ngFor="let x of equipment" (click)="equipmentView(x.nombre)">
+                    <td style="width: 26%;">
+                      {{ x.nombre }}
+                    </td>
+                    <td style="width: 33%;">
+                      {{ x.proveedor }}
+                    </td>
+                    <td>
+                      {{ x.cantidad }}
+                    </td>
+                  </tr>
                 </tbody>
               </table>
               <!-- End tables for the cleanliness -->

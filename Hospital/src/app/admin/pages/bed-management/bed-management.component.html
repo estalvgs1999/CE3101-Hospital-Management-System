@@ -112,12 +112,42 @@
         style="font-size: 30px; font-weight: bold;"
         >Gestión de Camas</span
       >
+      <button
+        type="button"
+        class="btn"
+        onclick=""
+        (click)="bedCreate()"
+        *ngIf="listBed"
+        style="position: absolute; right: 5%;"
+      >
+        <img
+          src="https://cdn3.iconfinder.com/data/icons/eightyshades/512/14_Add-512.png"
+          alt="button1"
+          style="width: 10%; height: 10%;"
+        />
+        <div class="card-inner"></div>
+      </button>
+      <button
+        type="button"
+        class="btn"
+        onclick=""
+        (click)="bedList()"
+        *ngIf="createBed || viewBed"
+        style="position: absolute; right: 5%;"
+      >
+        <img
+          src="https://cdn4.iconfinder.com/data/icons/essential-app-2/16/back-left-arrow-botton-512.png"
+          alt="button1"
+          style="width: 10%; height: 10%;"
+        />
+        <div class="card-inner"></div>
+      </button>
     </div>
     <!-- End horizontal navbar -->
 
     <!-- Page content holder -->
     <div class="page-content py-3" id="content">
-      <div class="container">
+      <div class="container" *ngIf="listBed">
         <!-- Table Haeder -->
         <div class="row">
           <div class="col-md-12">
@@ -133,7 +163,13 @@
                 class="col-md-2"
                 style="font-weight: bold; font-size: 20px; color: #ffffff;"
               >
-                NOTA
+                SALON
+              </div>
+              <div
+                class="col-md-2"
+                style="font-weight: bold; font-size: 20px; color: #ffffff;"
+              >
+                UCI
               </div>
               <div class="col-md-1"></div>
               <!-- End column title -->
@@ -154,7 +190,17 @@
                 data-sort-order="desc"
               >
                 <tbody>
-                  
+                  <tr *ngFor="let x of bed" (click)="bedView(x.id)">
+                    <td style="width: 27%;">
+                      {{ x.id }}
+                    </td>
+                    <td style="width: 32%;">
+                      {{ x.salon }}
+                    </td>
+                    <td>
+                      {{ x.uci }}
+                    </td>
+                  </tr>
                 </tbody>
               </table>
               <!-- End tables for the cleanliness -->

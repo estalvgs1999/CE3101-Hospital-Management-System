@@ -7,31 +7,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SalonManagementComponent implements OnInit {
 
-  editSalon = false;
+  viewSalon = false;
   createSalon = false;
   listSalon = true;
-  idBed = 0;
+  idSalon = 0;
+  salon: any;
 
-  constructor() { }
+  constructor( ) {
+    this.salon = [
+      { id: 1, nombre: 'salon1', capacidad: 7, especialidad: 'hombres', piso: 1 },
+      { id: 2, nombre: 'salon2', capacidad: 8, especialidad: 'mujeres', piso: 2 },
+      { id: 5, nombre: 'salon3', capacidad: 7, especialidad: 'niños', piso: 2 },
+      { id: 7, nombre: 'salon4', capacidad: 9, especialidad: 'mujeres', piso: 1 },
+    ];
+   }
 
   ngOnInit() {
   }
 
-  salonEdit(id: number) {
-    this.editSalon = true;
+  salonView(id: number) {
+    this.viewSalon = true;
     this.createSalon = false;
     this.listSalon = false;
-    this.idBed = id;
+    this.idSalon = id;
   }
 
   salonCreate() {
-    this.editSalon = false;
+    this.viewSalon = false;
     this.createSalon = true;
     this.listSalon = false;
   }
 
   salonList() {
-    this.editSalon = false;
+    this.viewSalon = false;
     this.createSalon = false;
     this.listSalon = true;
   }

@@ -112,7 +112,14 @@
         style="font-size: 30px; font-weight: bold;"
         >Gestión de Salones</span
       >
-      <button type="button" class="btn" onclick=""(click)="salonEdit()" *ngIf="listSalon" style="position: absolute; right: 5%;">
+      <button
+        type="button"
+        class="btn"
+        onclick=""
+        (click)="salonCreate()"
+        *ngIf="listSalon"
+        style="position: absolute; right: 5%;"
+      >
         <img
           src="https://cdn3.iconfinder.com/data/icons/eightyshades/512/14_Add-512.png"
           alt="button1"
@@ -120,7 +127,14 @@
         />
         <div class="card-inner"></div>
       </button>
-      <button type="button" class="btn" onclick="" (click)="salonList()" *ngIf="createSalon || editSalon" style="position: absolute; right: 5%;">
+      <button
+        type="button"
+        class="btn"
+        onclick=""
+        (click)="salonList()"
+        *ngIf="createSalon || viewSalon"
+        style="position: absolute; right: 5%;"
+      >
         <img
           src="https://cdn4.iconfinder.com/data/icons/essential-app-2/16/back-left-arrow-botton-512.png"
           alt="button1"
@@ -180,7 +194,25 @@
           <div class="scrollbar" id="style-2">
             <!-- Tables for the cleanliness -->
             <table class="table table-hover" data-sort-order="desc">
-              <tbody></tbody>
+              <tbody>
+                <tr *ngFor="let x of salon" (click)="salonView(x.id)">
+                  <td style="width: 25%;">
+                    {{ x.id }}
+                  </td>
+                  <td>
+                    {{ x.nombre }}
+                  </td>
+                  <td style="width: 20%;">
+                    {{ x.capacidad }}
+                  </td>
+                  <td style="width: 22%;">
+                    {{ x.especialidad }}
+                  </td>
+                  <td style="width: 8%;">
+                    {{ x.piso }}
+                  </td>
+                </tr>
+              </tbody>
             </table>
             <!-- End tables for the cleanliness -->
           </div>
