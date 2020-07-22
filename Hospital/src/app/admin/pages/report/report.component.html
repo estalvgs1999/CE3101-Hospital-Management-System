@@ -34,30 +34,32 @@
       <!-- Views -->
       <ul class="nav flex-column mb-0">
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="salon" class="nav-link">
             <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
             Gestión de Salones
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="procedure" class="nav-link">
             <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
             Gestión de Procedimientos Médicos
           </a>
+        </li>
+
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="equipment" class="nav-link">
             <i class="fa fa-cubes mr-3 text-primary fa-fw"></i>
             Gestión de Equipo Médico
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="bed" class="nav-link">
             <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
             Gestión de Camas
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="personal" class="nav-link">
             <i class="fa fa-area-chart mr-3 text-primary fa-fw"></i>
             Gestión de Personal
           </a>
@@ -73,39 +75,190 @@
         <img
           src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678121-cloud-sync-512.png"
           alt="button1"
-          style="width: 30%; height: 30%; display: block;margin-left: auto; margin-right: auto; margin-top: 20%;"
+          style="
+            width: 30%;
+            height: 30%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 20%;
+          "
           class="center"
         />
         <div class="card-inner"></div>
       </button>
-      <p class="font-weight-bold" style="font-size: 18px; left:48%; transform: translate(-50%, -50%); bottom: 0; text-align: center; font-weight: bold; position: absolute">
+      <p
+        class="font-weight-bold"
+        style="
+          font-size: 18px;
+          left: 48%;
+          transform: translate(-50%, -50%);
+          bottom: 0;
+          text-align: center;
+          font-weight: bold;
+          position: absolute;
+        "
+      >
         Copyright: ORBE
       </p>
       <!-- Views -->
     </div>
     <!-- End vertical navbar -->
 
+    <!-- Horizontal navbar -->
     <div class="horizontal-nav" id="sidebar">
-      <span class="navbar-brand mb-0 h1">Navbar</span>
+      <span
+        class="px-3 navbar-brand mb-0 h1"
+        style="font-size: 30px; font-weight: bold;"
+        >Reporte Áreas de Mejora</span
+      >
     </div>
-
+    <!-- End horizontal navbar -->
 
     <!-- Page content holder -->
-    <div class="page-content p-5" id="content">
+    <div class="page-content py-3" id="content">
+      <div class="container">
+        <!-- Table Haeder -->
+        <div class="row">
+          <div class="col-md-5">
+            <nav class="navbar" style="background-color: #255070;">
+              <!-- Column title -->
+              <div
+                class="col-md-1"
+                style="font-weight: bold; font-size: 20px; color: #ffffff;"
+              >
+                ID
+              </div>
+              <div
+                class="col-md-2"
+                style="font-weight: bold; font-size: 20px; color: #ffffff;"
+              >
+                NOTA
+              </div>
+              <div class="col-md-1"></div>
+              <!-- End column title -->
 
-      <!-- Demo content -->
-      <h2 class="display-4 text-white">Bootstrap vertical nav</h2>
-      <p class="lead text-white mb-0">
-        Build a fixed sidebar using Bootstrap 4 vertical navigation and media
-        objects.
-      </p>
-      <p class="lead text-white">
-        Snippet by
-        <a href="https://bootstrapious.com/snippets" class="text-white">
-          <u>Bootstrapious</u></a
-        >
-      </p>
-      <div class="separator"></div>
+              <div class="clearfix float-right">
+                <!-- Dropdown type report Button -->
+                <div class="dropdown">
+                  <button
+                    class="btn dropdown-toggle"
+                    type="button"
+                    data-toggle="dropdown"
+                    style="background-color: #5e8eb3;"
+                  >
+                    Tipo de Reporte
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li class="dropdown-item">
+                      <button
+                        class="dropdown-item"
+                        type="button"
+                        (click)="reportCleanliness()"
+                      >
+                        Aseo
+                      </button>
+                    </li>
+                    <li class="dropdown-item">
+                      <button
+                        class="dropdown-item"
+                        type="button"
+                        (click)="reportTreatment()"
+                      >
+                        Trato
+                      </button>
+                    </li>
+                    <li class="dropdown-item">
+                      <button
+                        class="dropdown-item"
+                        type="button"
+                        (click)="reportPuntuality()"
+                      >
+                        Puntualidad
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+                <!-- End dropdown type report Button -->
+              </div>
+            </nav>
+          </div>
+        </div>
+        <!-- End table Haeder -->
+
+        <!-- Tables for the reports -->
+        <div class="row">
+          <div class="col-md-5">
+            <div
+              class="scrollbar"
+              id="style-2"
+              style="background-color: white;"
+            >
+              <!-- Tables for the cleanliness -->
+              <table
+                class="table table-hover"
+                data-sort-order="desc"
+                *ngIf="showCleanlinessStatistics"
+              >
+                <tbody>
+                  <tr *ngFor="let x of aseo">
+                    <td style="width: 100px;">
+                      {{ x.id }}
+                    </td>
+                    <td>
+                      {{ x.nota }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- End tables for the cleanliness -->
+
+              <!-- Tables for the treatment -->
+              <table
+                class="table table-hover"
+                data-sort-order="desc"
+                *ngIf="showTreatmentStatistics"
+              >
+                <tbody>
+                  <tr *ngFor="let x of trato">
+                    <td style="width: 100px;">
+                      {{ x.id }}
+                    </td>
+                    <td>
+                      {{ x.nota }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- End tables for the treatment -->
+
+              <!-- Tables for the puntuality -->
+              <table
+                class="table table-hover"
+                data-sort-order="desc"
+                *ngIf="showPuntualityStatistics"
+              >
+                <tbody>
+                  <tr *ngFor="let x of puntualidad">
+                    <td style="width: 100px;">
+                      {{ x.id }}
+                    </td>
+                    <td>
+                      {{ x.nota }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- End tables for the puntuality -->
+            </div>
+          </div>
+          <!-- End tables for the reports -->
+          <div class="col-md-1"></div>
+          <div class="col-md-5"></div>
+        </div>
+      </div>
     </div>
+    <!-- End page content holder -->
   </body>
 </html>

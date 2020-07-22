@@ -24,39 +24,43 @@
 
 .page-content 
   width: calc(100% - 17rem)
-  width: calc(100% - 4rem)
+  height: calc(100% - 4rem)
   margin-left: 17rem
   margin-top: 4rem
   transition: all 0.4s
 
 #sidebar.active 
   margin-left: -17rem
+  margin-left: -4rem
 
 
 #content.active
   width: 100%
+  height: calc(100% - 4rem)
   margin: 0
 
 
 @media (max-width: 768px) 
   #sidebar 
     margin-left: -17rem
+    margin-top: -4rem
   
   #sidebar.active 
     margin-left: 0
   
   #content 
     width: 100%
+    height: calc(100% - 4rem)
     margin: 0
   
   #content.active 
     margin-left: 17rem
+    margin-top: 4rem
     width: calc(100% - 17rem)
+    height: calc(100% - 4rem)
   
 body 
-  background: #599fd9
-  background: -webkit-linear-gradient(to right, #599fd9, #c2e59c)
-  background: linear-gradient(to right, #599fd9, #c2e59c)
+  background: #E2E2E2
   min-height: 100vh
   overflow-x: hidden
   font-family: Roboto
@@ -78,4 +82,22 @@ li a:hover
 li a
   color: white
   background-color: #325F80
-  border-top: 2px solid #255070;
+  border-top: 2px solid #255070
+
+#style-2 
+  height: 470px
+
+
+#style-2::-webkit-scrollbar 
+  width: 3px
+  height: 3px
+
+
+#style-2::-webkit-scrollbar-thumb 
+  background-color: #9b9ba1
+  border-radius: 30px
+
+.scrollbar 
+  overflow-y: scroll
+  overflow-x: scroll
+  box-sizing: content-box
