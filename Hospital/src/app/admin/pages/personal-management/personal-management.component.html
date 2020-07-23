@@ -123,7 +123,7 @@
         <img
           src="https://cdn3.iconfinder.com/data/icons/eightyshades/512/14_Add-512.png"
           alt="button1"
-          style="width: 10%; height: 10%;"
+          style="width: 8%; height: 8%;"
         />
         <div class="card-inner"></div>
       </button>
@@ -138,7 +138,22 @@
         <img
           src="https://cdn4.iconfinder.com/data/icons/essential-app-2/16/back-left-arrow-botton-512.png"
           alt="button1"
-          style="width: 10%; height: 10%;"
+          style="width: 8%; height: 8%;"
+        />
+        <div class="card-inner"></div>
+      </button>
+      <button
+        type="button"
+        class="btn"
+        onclick=""
+        (click)="personalView()"
+        *ngIf="editPersonal"
+        style="position: absolute; right: 5%;"
+      >
+        <img
+          src="https://cdn4.iconfinder.com/data/icons/essential-app-2/16/back-left-arrow-botton-512.png"
+          alt="button1"
+          style="width: 8%; height: 8%;"
         />
         <div class="card-inner"></div>
       </button>
@@ -183,10 +198,9 @@
         </div>
         <!-- End table Haeder -->
 
-        <!-- Tables for the reports -->
+        <!-- Tables for the Personal -->
         <div class="col-md-12" style="background-color: white;">
           <div class="scrollbar" id="style-2">
-            <!-- Tables for the cleanliness -->
             <table class="table table-hover" data-sort-order="desc">
               <tbody>
                 <tr *ngFor="let x of personal" (click)="personalView(x.dni)">
@@ -205,11 +219,298 @@
                 </tr>
               </tbody>
             </table>
-            <!-- End tables for the cleanliness -->
           </div>
         </div>
-        <!-- End tables for the reports -->
+        <!-- End tables for the Personal -->
       </div>
+      <!-- Information Form -->
+      <div
+        class="container"
+        *ngIf="viewPersonal || createPersonal || editPersonal"
+        style="margin-left: 3%; margin-top: 3%;"
+      >
+        <div class="row">
+          <div
+            class="col-md-3"
+            style="
+              background-color: white;
+              border-top-left-radius: 20px;
+              border-bottom-left-radius: 20px;
+            "
+          >
+            <div>
+              <img
+                src="https://cdn0.iconfinder.com/data/icons/banking-and-money-13/32/banking_personal_manager-512.png"
+                class="col-md-12"
+                style="padding-top: 60px; padding-left: 20px;"
+              />
+            </div>
+            <br />
+            <br />
+            <div>
+              <button
+                type="button"
+                class="btn btn-info col-md-12"
+                *ngIf="viewPersonal"
+                (click)="personalEdit()"
+              >
+                Editar
+              </button>
+            </div>
+            <br />
+            <div>
+              <button
+                type="button"
+                class="btn btn-danger col-md-12"
+                *ngIf="viewPersonal"
+                (click)="personalDelete()"
+              >
+                Eliminar
+              </button>
+            </div>
+            <div>
+              <button
+                type="button"
+                class="btn btn-success col-md-12"
+                *ngIf="createPersonal"
+                (click)="personalCrear()"
+              >
+                Crear
+              </button>
+            </div>
+            <div>
+              <button
+                type="button"
+                class="btn btn-success col-md-12"
+                *ngIf="editPersonal"
+                (click)="personalEditar()"
+              >
+                Actualizar
+              </button>
+            </div>
+            <br />
+          </div>
+
+          <div
+            class="col-md-8 register-right scrollbar"
+            style="
+              background-color: white;
+              border-top-right-radius: 20px;
+              border-bottom-right-radius: 20px;
+            "
+            id="style-2"
+          >
+            <div class="tab-content" id="myTabContent">
+              <div
+                class="tab-pane fade show active"
+                id="home"
+                role="tabpanel"
+                aria-labelledby="home-tab"
+              >
+                <br />
+                <div class="row register-form">
+                  <!-- First internal column -->
+                  <div class="col-md-5" id="dataContainer">
+                    <div class="form-group">
+                      <h2 style="font-weight: bold;">Cedúla</h2>
+                      <h3 *ngIf="viewPersonal">{{ personalDNI.dni }}</h3>
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="Cedúla"
+                        *ngIf="createPersonal"
+                        aria-label="labelID"
+                      />
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="{{personalDNI.dni}}"
+                        *ngIf="editPersonal"
+                        aria-label="labelID"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group">
+                      <h2 style="font-weight: bold;">Nombre</h2>
+                      <h3 *ngIf="viewPersonal">{{ personalDNI.nombre }}</h3>
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="Nombre"
+                        *ngIf="createPersonal"
+                        aria-label="labelID"
+                      />
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="{{personalDNI.nombre}}"
+                        *ngIf="editPersonal"
+                        aria-label="labelID"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <h2 style="font-weight: bold;">Apellidos</h2>
+                      <h3 *ngIf="viewPersonal">{{ personalDNI.apellido }}</h3>
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="Apellidos"
+                        *ngIf="createPersonal"
+                        aria-label="labelID"
+                      />
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="{{personalDNI.apellido}}"
+                        *ngIf="editPersonal"
+                        aria-label="labelID"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <h2 style="font-weight: bold;">Teléfono</h2>
+                      <h3 *ngIf="viewPersonal">{{ personalDNI.telefono }}</h3>
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="Teléfono"
+                        *ngIf="createPersonal"
+                        aria-label="labelID"
+                      />
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="{{personalDNI.telefono}}"
+                        *ngIf="editPersonal"
+                        aria-label="labelID"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <h2 style="font-weight: bold;">Rol</h2>
+                      <h3 *ngIf="viewPersonal">{{ personalDNI.role }}</h3>
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="Rol"
+                        *ngIf="createPersonal"
+                        aria-label="labelID"
+                      />
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="{{personalDNI.role}}"
+                        *ngIf="editPersonal"
+                        aria-label="labelID"
+                      />
+                    </div>
+                    <div class="form-group"></div>
+                  </div>
+                  <!-- /First internal column -->
+
+                  <div class="col-md-1"></div>
+
+                  <!-- Second internal column -->
+                  <div class="col-md-5" style="padding-left: 10px;">
+                    <div class="form-group">
+                      <h2 style="font-weight: bold;">Fecha de Ingreso</h2>
+                      <h3 *ngIf="viewPersonal">{{ personalDNI.fecha }}</h3>
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="Fecha de Ingreso"
+                        *ngIf="createPersonal"
+                        aria-label="labelID"
+                      />
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="{{personalDNI.fecha}}"
+                        *ngIf="editPersonal"
+                        aria-label="labelID"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group">
+                      <h2 style="font-weight: bold;">Provincia</h2>
+                      <h3 *ngIf="viewPersonal">{{ personalDNI.provincia }}</h3>
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="Provincia"
+                        *ngIf="createPersonal"
+                        aria-label="labelID"
+                      />
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="{{personalDNI.provincia}}"
+                        *ngIf="editPersonal"
+                        aria-label="labelID"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <h2 style="font-weight: bold;">Cantón</h2>
+                      <h3 *ngIf="viewPersonal">{{ personalDNI.canton }}</h3>
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="Cantón"
+                        *ngIf="createPersonal"
+                        aria-label="labelID"
+                      />
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="{{personalDNI.canton}}"
+                        *ngIf="editPersonal"
+                        aria-label="labelID"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <h2 style="font-weight: bold;">Distrito</h2>
+                      <h3 *ngIf="viewPersonal">{{ personalDNI.distrito }}</h3>
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="Distrito"
+                        *ngIf="createPersonal"
+                        aria-label="labelID"
+                      />
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="{{personalDNI.distrito}}"
+                        *ngIf="editPersonal"
+                        aria-label="labelID"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <h2 style="font-weight: bold;">Otras señas</h2>
+                      <h3 *ngIf="viewPersonal">{{ personalDNI.otras }}</h3>
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="Otras señas"
+                        *ngIf="createPersonal"
+                        aria-label="labelID"
+                      />
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="{{personalDNI.otras}}"
+                        *ngIf="editPersonal"
+                        aria-label="labelID"
+                      />
+                    </div>
+                  </div>
+                  <!-- /Second internal column -->
+                </div>
+                <br />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Information Form -->
     </div>
     <!-- End page content holder -->
   </body>

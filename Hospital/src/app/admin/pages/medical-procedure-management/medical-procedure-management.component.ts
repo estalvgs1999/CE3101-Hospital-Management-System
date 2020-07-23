@@ -10,8 +10,10 @@ export class MedicalProcedureManagementComponent implements OnInit {
   viewProcedure = false;
   createProcedure = false;
   listProcedure = true;
+  editProcedure = false;
   nombreProcedure = '';
   procedure: any;
+  procedureNAME: any;
 
   constructor() {
     this.procedure = [
@@ -29,18 +31,46 @@ export class MedicalProcedureManagementComponent implements OnInit {
     this.viewProcedure = true;
     this.createProcedure = false;
     this.listProcedure = false;
+    this.editProcedure = false;
+    // BD
     this.nombreProcedure = name;
+    this.procedureNAME = { nombre: 'Cirugía para la lumbalgia', dias: 9 };
   }
 
   procedureCreate() {
     this.viewProcedure = false;
     this.createProcedure = true;
     this.listProcedure = false;
+    this.editProcedure = false;
   }
 
   procedureList() {
     this.viewProcedure = false;
     this.createProcedure = false;
     this.listProcedure = true;
+    this.editProcedure = false;
+  }
+
+  procedureEdit() {
+    this.viewProcedure = false;
+    this.createProcedure = false;
+    this.listProcedure = false;
+    this.editProcedure = true;
+  }
+
+  // BD
+  procedureCrear() {
+    this.viewProcedure = false;
+    this.createProcedure = false;
+    this.listProcedure = true;
+    this.editProcedure = false;
+  }
+
+  // BD
+  procedureEditar() {
+    this.viewProcedure = true;
+    this.createProcedure = false;
+    this.listProcedure = false;
+    this.editProcedure = false;
   }
 }

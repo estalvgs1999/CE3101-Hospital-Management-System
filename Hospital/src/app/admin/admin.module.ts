@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { ReportComponent } from './pages/report/report.component';
 import { AdminRoutingModule } from './admin-routing.module';
@@ -20,7 +21,8 @@ import { MedicalEquipmentManagementComponent } from './pages/medical-equipment-m
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    FormsModule
   ]
 })
 export class AdminModule { }

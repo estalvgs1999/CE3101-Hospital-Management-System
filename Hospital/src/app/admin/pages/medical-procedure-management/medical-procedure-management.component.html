@@ -123,7 +123,7 @@
         <img
           src="https://cdn3.iconfinder.com/data/icons/eightyshades/512/14_Add-512.png"
           alt="button1"
-          style="width: 10%; height: 10%;"
+          style="width: 8%; height: 8%;"
         />
         <div class="card-inner"></div>
       </button>
@@ -138,7 +138,22 @@
         <img
           src="https://cdn4.iconfinder.com/data/icons/essential-app-2/16/back-left-arrow-botton-512.png"
           alt="button1"
-          style="width: 10%; height: 10%;"
+          style="width: 8%; height: 8%;"
+        />
+        <div class="card-inner"></div>
+      </button>
+      <button
+        type="button"
+        class="btn"
+        onclick=""
+        (click)="procedureView()"
+        *ngIf="editProcedure"
+        style="position: absolute; right: 5%;"
+      >
+        <img
+          src="https://cdn4.iconfinder.com/data/icons/essential-app-2/16/back-left-arrow-botton-512.png"
+          alt="button1"
+          style="width: 8%; height: 8%;"
         />
         <div class="card-inner"></div>
       </button>
@@ -172,35 +187,164 @@
         </div>
         <!-- End table Haeder -->
 
-        <!-- Tables for the reports -->
-          <div class="col-md-12" style="background-color: white;"> 
-            <div
-              class="scrollbar"
-              id="style-2"
-            >
-              <!-- Tables for the cleanliness -->
-              <table
-                class="table table-hover"
-                data-sort-order="desc"
-              >
-                <tbody>
-                  <tr *ngFor="let x of procedure" (click)="procedureView(x.nombre)">
-                    <td style="width: 23%;">
-                      {{ x.nombre }}
-                    </td>
-                    <td style="width: 30%;">
-                      {{ x.dias }}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <!-- End tables for the cleanliness -->
+        <!-- Tables for the Procedure -->
+        <div class="col-md-12" style="background-color: white;">
+          <div class="scrollbar" id="style-2">
+            <table class="table table-hover" data-sort-order="desc">
+              <tbody>
+                <tr
+                  *ngFor="let x of procedure"
+                  (click)="procedureView(x.nombre)"
+                >
+                  <td style="width: 23%;">
+                    {{ x.nombre }}
+                  </td>
+                  <td style="width: 30%;">
+                    {{ x.dias }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- End tables for the Procedure -->
+      </div>
 
+      <!-- Information Form -->
+      <div
+        class="container"
+        *ngIf="viewProcedure || createProcedure || editProcedure"
+        style="margin-left: 5%; margin-top: 5%;"
+      >
+        <div class="row">
+          <div
+            class="col-md-3"
+            style="
+              background-color: white;
+              border-top-left-radius: 20px;
+              border-bottom-left-radius: 20px;
+            "
+          >
+            <div>
+              <img
+                src="https://cdn1.iconfinder.com/data/icons/medical-2-19/512/medical-healthcare-hospital-04-512.png"
+                class="col-md-12"
+                style="padding-top: 60px; padding-left: 20px;"
+              />
+            </div>
+            <br />
+            <br />
+            <div>
+              <button
+                type="button"
+                class="btn btn-info col-md-12"
+                *ngIf="viewProcedure"
+                (click)="procedureEdit()"
+              >
+                Editar
+              </button>
+            </div>
+            <br />
+            <div>
+              <button
+                type="button"
+                class="btn btn-success col-md-12"
+                *ngIf="createProcedure"
+                (click)="procedureCrear()"
+              >
+                Crear
+              </button>
+            </div>
+            <div>
+              <button
+                type="button"
+                class="btn btn-success col-md-12"
+                *ngIf="editProcedure"
+                (click)="procedureEditar()"
+              >
+                Actualizar
+              </button>
+            </div>
+            <br />
+          </div>
+
+          <div
+            class="col-md-8 register-right"
+            style="
+              background-color: white;
+              border-top-right-radius: 20px;
+              border-bottom-right-radius: 20px;
+            "
+          >
+            <div class="tab-content" id="myTabContent">
+              <div
+                class="tab-pane fade show active"
+                id="home"
+                role="tabpanel"
+                aria-labelledby="home-tab"
+              >
+                <br />
+                <div class="row register-form">
+                  <!-- First internal column -->
+                  <div class="col-md-5" id="dataContainer">
+                    <div class="form-group">
+                      <h2 style="font-weight: bold;">Nombre</h2>
+                      <h3 *ngIf="viewProcedure">{{ procedureNAME.nombre }}</h3>
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="Nombre"
+                        *ngIf="createProcedure"
+                        aria-label="labelID"
+                      />
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="{{ procedureNAME.nombre }}"
+                        *ngIf="editProcedure"
+                        aria-label="labelID"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group"></div>
+                  </div>
+                  <!-- /First internal column -->
+
+                  <div class="col-md-1"></div>
+
+                  <!-- Second internal column -->
+                  <div class="col-md-5" style="padding-left: 10px;">
+                    <div class="form-group">
+                      <h2 style="font-weight: bold;">Mínimo de Días en Recuperación</h2>
+                      <h3 *ngIf="viewProcedure">
+                        {{ procedureNAME.dias }}
+                      </h3>
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="Días en Recuperación"
+                        *ngIf="createProcedure"
+                        aria-label="labelID"
+                      />
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="{{ procedureNAME.dias }}"
+                        *ngIf="editProcedure"
+                        aria-label="labelID"
+                      />
+                    </div>
+                  </div>
+                  <!-- /Second internal column -->
+                </div>
+                <br />
+              </div>
             </div>
           </div>
-          <!-- End tables for the reports -->
         </div>
       </div>
+      <!-- End Information Form -->
+    </div>
     <!-- End page content holder -->
   </body>
 </html>

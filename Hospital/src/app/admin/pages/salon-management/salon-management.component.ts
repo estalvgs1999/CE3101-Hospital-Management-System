@@ -10,8 +10,10 @@ export class SalonManagementComponent implements OnInit {
   viewSalon = false;
   createSalon = false;
   listSalon = true;
+  editSalon = false;
   idSalon = 0;
   salon: any;
+  salonID: any;
 
   constructor( ) {
     this.salon = [
@@ -29,19 +31,54 @@ export class SalonManagementComponent implements OnInit {
     this.viewSalon = true;
     this.createSalon = false;
     this.listSalon = false;
+    this.editSalon = false;
+    // BD
     this.idSalon = id;
+    this.salonID = { id: 1, nombre: 'salon1', capacidad: 7, especialidad: 'hombres', piso: 1 };
   }
 
   salonCreate() {
     this.viewSalon = false;
     this.createSalon = true;
     this.listSalon = false;
+    this.editSalon = false;
   }
 
   salonList() {
     this.viewSalon = false;
     this.createSalon = false;
     this.listSalon = true;
+    this.editSalon = false;
   }
 
+  salonEdit() {
+    this.viewSalon = false;
+    this.createSalon = false;
+    this.listSalon = false;
+    this.editSalon = true;
+  }
+
+  // BD
+  salonDelete() {
+    this.viewSalon = false;
+    this.createSalon = false;
+    this.listSalon = true;
+    this.editSalon = false;
+  }
+
+  // BD
+  salonCrear() {
+    this.viewSalon = false;
+    this.createSalon = false;
+    this.listSalon = true;
+    this.editSalon = false;
+  }
+
+  // BD
+  salonEditar() {
+    this.viewSalon = true;
+    this.createSalon = false;
+    this.listSalon = false;
+    this.editSalon = false;
+  }
 }

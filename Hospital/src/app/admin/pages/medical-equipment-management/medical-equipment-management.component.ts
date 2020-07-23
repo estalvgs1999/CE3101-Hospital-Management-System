@@ -10,8 +10,10 @@ export class MedicalEquipmentManagementComponent implements OnInit {
   viewEquipment = false;
   createEquipment = false;
   listEquipment = true;
+  editEquipment = false;
   nameEquipment = '';
   equipment: any;
+  equipmentNAME: any;
 
   constructor() {
     this.equipment = [
@@ -29,18 +31,46 @@ export class MedicalEquipmentManagementComponent implements OnInit {
     this.viewEquipment = true;
     this.createEquipment = false;
     this.listEquipment = false;
+    this.editEquipment = false;
+    // BD
     this.nameEquipment = name;
+    this.equipmentNAME = { nombre: 'respiradores artificiales', proveedor: 'proveedor1', cantidad: 7 };
   }
 
   equipmentCreate() {
     this.viewEquipment = false;
     this.createEquipment = true;
     this.listEquipment = false;
+    this.editEquipment = false;
   }
 
   equipmentList() {
     this.viewEquipment = false;
     this.createEquipment = false;
     this.listEquipment = true;
+    this.editEquipment = false;
+  }
+
+  equipmentEdit() {
+    this.viewEquipment = false;
+    this.createEquipment = false;
+    this.listEquipment = false;
+    this.editEquipment = true;
+  }
+
+  // BD
+  equipmentCrear() {
+    this.viewEquipment = false;
+    this.createEquipment = false;
+    this.listEquipment = true;
+    this.editEquipment = false;
+  }
+
+  // BD
+  equipmentEditar() {
+    this.viewEquipment = true;
+    this.createEquipment = false;
+    this.listEquipment = false;
+    this.editEquipment = false;
   }
 }

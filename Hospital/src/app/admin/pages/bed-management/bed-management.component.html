@@ -123,7 +123,7 @@
         <img
           src="https://cdn3.iconfinder.com/data/icons/eightyshades/512/14_Add-512.png"
           alt="button1"
-          style="width: 10%; height: 10%;"
+          style="width: 8%; height: 8%;"
         />
         <div class="card-inner"></div>
       </button>
@@ -138,7 +138,22 @@
         <img
           src="https://cdn4.iconfinder.com/data/icons/essential-app-2/16/back-left-arrow-botton-512.png"
           alt="button1"
-          style="width: 10%; height: 10%;"
+          style="width: 8%; height: 8%;"
+        />
+        <div class="card-inner"></div>
+      </button>
+      <button
+        type="button"
+        class="btn"
+        onclick=""
+        (click)="bedView()"
+        *ngIf="editBed"
+        style="position: absolute; right: 5%;"
+      >
+        <img
+          src="https://cdn4.iconfinder.com/data/icons/essential-app-2/16/back-left-arrow-botton-512.png"
+          alt="button1"
+          style="width: 8%; height: 8%;"
         />
         <div class="card-inner"></div>
       </button>
@@ -178,38 +193,213 @@
         </div>
         <!-- End table Haeder -->
 
-        <!-- Tables for the reports -->
-          <div class="col-md-12" style="background-color: white;"> 
-            <div
-              class="scrollbar"
-              id="style-2"
-            >
-              <!-- Tables for the cleanliness -->
-              <table
-                class="table table-hover"
-                data-sort-order="desc"
+        <!-- Tables for the Bed -->
+        <div class="col-md-12" style="background-color: white;">
+          <div class="scrollbar" id="style-2">
+            <table class="table table-hover" data-sort-order="desc">
+              <tbody>
+                <tr *ngFor="let x of bed" (click)="bedView(x.id)">
+                  <td style="width: 27%;">
+                    {{ x.id }}
+                  </td>
+                  <td style="width: 32%;">
+                    {{ x.salon }}
+                  </td>
+                  <td>
+                    {{ x.uci }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- End tables for the Bed -->
+      </div>
+      <!-- Information Form -->
+      <div
+        class="container"
+        *ngIf="viewBed || createBed || editBed"
+        style="margin-left: 5%; margin-top: 5%;"
+      >
+        <div class="row">
+          <div
+            class="col-md-3"
+            style="
+              background-color: white;
+              border-top-left-radius: 20px;
+              border-bottom-left-radius: 20px;
+            "
+          >
+            <div>
+              <img
+                src="https://cdn2.iconfinder.com/data/icons/coronavirus-15/1024/hospital_bed-512.png"
+                class="col-md-12"
+                style="padding-top: 60px; padding-left: 20px;"
+              />
+            </div>
+            <br />
+            <br />
+            <div>
+              <button
+                type="button"
+                class="btn btn-info col-md-12"
+                *ngIf="viewBed"
+                (click)="bedEdit()"
               >
-                <tbody>
-                  <tr *ngFor="let x of bed" (click)="bedView(x.id)">
-                    <td style="width: 27%;">
-                      {{ x.id }}
-                    </td>
-                    <td style="width: 32%;">
-                      {{ x.salon }}
-                    </td>
-                    <td>
-                      {{ x.uci }}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <!-- End tables for the cleanliness -->
+                Editar
+              </button>
+            </div>
+            <br />
+            <div>
+              <button
+                type="button"
+                class="btn btn-success col-md-12"
+                *ngIf="createBed"
+                (click)="bedCrear()"
+              >
+                Crear
+              </button>
+            </div>
+            <div>
+              <button
+                type="button"
+                class="btn btn-success col-md-12"
+                *ngIf="editBed"
+                (click)="bedEditar()"
+              >
+                Actualizar
+              </button>
+            </div>
+            <br />
+          </div>
 
+          <div
+            class="col-md-8 register-right"
+            style="
+              background-color: white;
+              border-top-right-radius: 20px;
+              border-bottom-right-radius: 20px;
+            "
+          >
+            <div class="tab-content" id="myTabContent">
+              <div
+                class="tab-pane fade show active"
+                id="home"
+                role="tabpanel"
+                aria-labelledby="home-tab"
+              >
+                <br />
+                <div class="row register-form">
+                  <!-- First internal column -->
+                  <div class="col-md-5" id="dataContainer">
+                    <div class="form-group">
+                      <h2 style="font-weight: bold;">ID</h2>
+                      <h3 *ngIf="viewBed">{{ bedID.id }}</h3>
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="ID"
+                        *ngIf="createBed"
+                        aria-label="labelID"
+                      />
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="{{ bedID.id }}"
+                        *ngIf="editBed"
+                        aria-label="labelID"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group">
+                      <h2 style="font-weight: bold;">SALÓN</h2>
+                      <h3 *ngIf="viewBed">
+                        {{ bedID.salon }}
+                      </h3>
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="Salón"
+                        *ngIf="createBed"
+                        aria-label="labelID"
+                      />
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="{{ bedID.salon }}"
+                        *ngIf="editBed"
+                        aria-label="labelID"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <h2 style="font-weight: bold;">UCI</h2>
+                      <h3 *ngIf="viewBed">
+                        {{ bedID.uci }}
+                      </h3>
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="UCI"
+                        *ngIf="createBed"
+                        aria-label="labelID"
+                      />
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="{{ bedID.uci }}"
+                        *ngIf="editBed"
+                        aria-label="labelID"
+                      />
+                    </div>
+                    <div class="form-group"></div>
+                  </div>
+                  <!-- /First internal column -->
+
+                  <div class="col-md-1"></div>
+
+                  <!-- Second internal column -->
+                  <div class="col-md-5" style="padding-left: 10px;">
+                    <div class="form-group">
+                      <h2 style="font-weight: bold;">Equipo Médico</h2>
+                      <div class="scrollbar" id="style-1" *ngIf="viewBed || createBed || editBed">
+                        <table class="table table-hover" data-sort-order="desc">
+                          <tbody>
+                            <tr *ngFor="let k of bedEQUIP">
+                              <td class="align-middle">
+                                {{ k.name }}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="form-group" *ngIf="createBed || editBed">
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="Ingrese Nuevo Equipo Médico"
+                        aria-label="labelID"
+                      />
+                      <div>
+                        <button
+                          type="button"
+                          class="btn btn-success col-md-12"
+                        >
+                          Agregar
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /Second internal column -->
+                </div>
+                <br />
+              </div>
             </div>
           </div>
-          <!-- End tables for the reports -->
         </div>
       </div>
+      <!-- End Information Form -->
+    </div>
     <!-- End page content holder -->
   </body>
 </html>

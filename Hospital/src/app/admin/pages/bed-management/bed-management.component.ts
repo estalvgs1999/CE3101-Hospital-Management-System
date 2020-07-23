@@ -10,8 +10,11 @@ export class BedManagementComponent implements OnInit {
   viewBed = false;
   createBed = false;
   listBed = true;
+  editBed = false;
   idBed = 0;
   bed: any;
+  bedID: any;
+  bedEQUIP: any;
 
   constructor() {
     this.bed = [
@@ -29,19 +32,48 @@ export class BedManagementComponent implements OnInit {
     this.viewBed = true;
     this.createBed = false;
     this.listBed = false;
+    this.editBed = false;
+    // BD
     this.idBed = id;
+    this.bedID = { id: 7, salon: 9, uci: false };
+    this.bedEQUIP = [ { name: 'equipo1' }, { name: 'equipo2' }, { name: 'equipo3' }];
   }
 
   bedCreate() {
     this.viewBed = false;
     this.createBed = true;
     this.listBed = false;
+    this.editBed = false;
+    this.bedEQUIP = null;
   }
 
   bedList() {
     this.viewBed = false;
     this.createBed = false;
     this.listBed = true;
+    this.editBed = false;
   }
 
+  bedEdit() {
+    this.viewBed = false;
+    this.createBed = false;
+    this.listBed = false;
+    this.editBed = true;
+  }
+
+  // BD
+  bedCrear() {
+    this.viewBed = false;
+    this.createBed = false;
+    this.listBed = true;
+    this.editBed = false;
+  }
+
+  // BD
+  bedEditar() {
+    this.viewBed = true;
+    this.createBed = false;
+    this.listBed = false;
+    this.editBed = false;
+  }
 }
