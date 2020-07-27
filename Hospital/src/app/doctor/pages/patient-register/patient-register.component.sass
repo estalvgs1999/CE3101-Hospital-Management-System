@@ -1,0 +1,195 @@
+.vertical-nav 
+  min-width: 17rem
+  width: 17rem
+  height: 100vh
+  position: fixed
+  top: 0
+  left: 0
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1)
+  transition: all 0.4s
+  background-color: #255070
+  color: #FFFFFF
+
+.horizontal-nav 
+  min-width: 17rem
+  width: 100%
+  height: 4rem
+  position: fixed
+  top: 0
+  left: 17rem
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1)
+  transition: all 0.4s
+  background-color: #FFFFFF
+  color: #000
+
+.page-content 
+  width: calc(100% - 17rem)
+  height: calc(100% - 4rem)
+  margin-left: 17rem
+  margin-top: 5rem
+  transition: all 0.4s
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif 
+
+#sidebar.active 
+  margin-left: -17rem
+  margin-left: -4rem
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif 
+
+
+#content.active
+  width: 100%
+  height: calc(100% - 4rem)
+  margin: 0
+
+
+@media (max-width: 768px) 
+  #sidebar 
+    margin-left: -17rem
+    margin-top: -4rem
+  
+  #sidebar.active 
+    margin-left: 0
+  
+  #content 
+    width: 100%
+    height: calc(100% - 4rem)
+    margin: 0
+  
+  #content.active 
+    margin-left: 17rem
+    margin-top: 4rem
+    width: calc(100% - 17rem)
+    height: calc(100% - 4rem)
+  
+body 
+  background: #E2E2E2
+  min-height: 100vh
+  overflow-x: hidden
+  font-family: Roboto
+  font-size: 15px
+
+
+.separator 
+  margin: 3rem 0
+  border-bottom: 1px dashed #fff
+
+
+.text-uppercase 
+  letter-spacing: 0.1em
+
+
+li a:hover 
+  background-color: #5E8EB3
+
+li a
+  color: white
+  background-color: #325F80
+  border-top: 2px solid #255070
+
+
+    
+
+
+
+.register-left img
+    margin-top: 15%
+    margin-bottom: 5%
+    width: 25%
+    -webkit-animation: mover 2s infinite  alternate
+    animation: mover 1s infinite  alternate
+
+@-webkit-keyframes mover 
+    0% { transform: translateY(0) }
+    100% { transform: translateY(-20px) }
+
+@keyframes mover 
+    0% { transform: translateY(0) }
+    100% { transform: translateY(-20px) }
+
+.register-left p
+    font-weight: lighter
+    padding: 12%
+    margin-top: -9%
+
+.register .register-form
+    padding: 10%
+    margin-top: 10%
+
+.btnRegister
+    float: right
+    margin-top: 10%
+    border: none
+    border-radius: 1.5rem
+    padding: 2%
+    background: #4BC581
+    color: #fff
+    font-weight: 600
+    width: 50%
+    cursor: pointer
+
+.btnAdd
+    float: right
+    margin-top: 2%
+    border: none
+    border-radius: 1.5rem
+    padding: 2%
+    background: #4BC581
+    color: #fff
+    font-weight: 600
+    width: 30%
+    cursor: pointer
+
+.register .nav-tabs
+    margin-top: 3%
+    border: none
+    background: #0062cc
+    border-radius: 1.5rem
+    width: 28%
+    float: right
+
+.register .nav-tabs .nav-link
+    padding: 2%
+    height: 34px
+    font-weight: 600
+    color: #fff
+    border-top-right-radius: 1.5rem
+    border-bottom-right-radius: 1.5rem
+
+.register .nav-tabs .nav-link:hover
+    border: none
+
+.register .nav-tabs .nav-link.active
+    width: 100px
+    color: #0062cc
+    border: 2px solid #0062cc
+    border-top-left-radius: 1.5rem
+    border-bottom-left-radius: 1.5rem
+
+.register-heading
+    text-align: center
+    margin-top: 8%
+    margin-bottom: -15%
+    color: #495057
+
+
+
+//Scroll
+.scrollbar 
+  overflow-y: scroll
+  overflow-x: scroll
+  box-sizing: content-box
+
+
+//Style of first scroll {
+#style-1 
+  height: 200px
+
+
+#style-1::-webkit-scrollbar 
+  width: 3px
+  height: 3px
+
+
+#style-1::-webkit-scrollbar-thumb 
+  background-color: #9b9ba1
+  border-radius: 30px
