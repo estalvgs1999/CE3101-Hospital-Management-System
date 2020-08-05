@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterLinkWithHref } from '@angular/router';
 
 @Component({
   selector: 'app-evaluation',
@@ -11,5 +12,10 @@ export class EvaluationComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  send() {
+
+  }
+
 
 }
