@@ -24,10 +24,11 @@ export class EvaluationComponent implements OnInit {
       Number(this.ranking3)
     );
     const evaluation: Evaluation = {
-      cleanHospital: this.ranking2,
-      personalRelation: this.ranking1,
-      puntuality: this.ranking3,
+      clean_hospital:  Number(this.ranking2),
+      personal_relation:  Number(this.ranking1),
+      punctuality:  Number(this.ranking3),
     };
+    console.log('eva', evaluation);
     this.evaluationServices.createEvaluation(evaluation).subscribe(Response => {
       console.log(Response);
     });
