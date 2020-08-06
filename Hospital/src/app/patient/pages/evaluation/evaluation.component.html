@@ -143,11 +143,10 @@
               </div>
             </div>
             <br />
-            <br />
             <div style="background-color: white; border-radius: 2rem;">
               <div class="col-md-12" style="padding-top: 2rem;">
                 <h4 style="text-align: center;">
-                  ¿Qué tan aseadas se encunetra las instalaciones?
+                  ¿Cómo fue el trato del personal?
                 </h4>
               </div>
               <div class="col-md-12" style="text-align: center;">
@@ -157,9 +156,8 @@
                     name="rating"
                     class="example-margin" 
                     id="r1"
-                    value="1"
-                    ngModel
-                    #rating="ngModel"
+                    value="5"
+                    [(ngModel)]="ranking1"
                   />
                   <label for="r1"></label>
 
@@ -168,9 +166,8 @@
                     name="rating"
                     class="example-margin" 
                     id="r2"
-                    value="2"
-                    ngModel
-                    #rating="ngModel"
+                    value="4"
+                    [(ngModel)]="ranking1"
                   />
                   <label for="r2"></label>
 
@@ -180,8 +177,7 @@
                     class="example-margin" 
                     id="r3"
                     value="3"
-                    ngModel
-                    #rating="ngModel"
+                    [(ngModel)]="ranking1"
                   />
                   <label for="r3"></label>
 
@@ -190,9 +186,8 @@
                     name="rating"
                     class="example-margin" 
                     id="r4"
-                    value="4"
-                    ngModel
-                    #rating="ngModel"
+                    value="2"
+                    [(ngModel)]="ranking1"
                   />
                   <label for="r4"></label>
 
@@ -201,32 +196,131 @@
                     class="example-margin" 
                     name="rating"
                     id="r5"
-                    value="5"
-                    ngModel
-                    #rating="ngModel"
+                    value="1"
+                    [(ngModel)]="ranking1"
                   />
                   <label for="r5"></label>
                 </label>
               </div>
+              <br>
+              <div class="col-md-12" style="padding-top: 2rem;">
+                <h4 style="text-align: center;">
+                  ¿Qué tan aseadas se encunetra las instalaciones?
+                </h4>
+              </div>
+              <div class="col-md-12" style="text-align: center;">
+                <label class="rating" style="text-align: center;">
+                  <input
+                    type="radio"
+                    name="rating2"
+                    class="example-margin" 
+                    id="r12"
+                    value="5"
+                    [(ngModel)]="ranking2"
+                  />
+                  <label for="r12"></label>
 
-              <mat-radio-group [(ngModel)]="labelPosition" class="rating" style="text-align: center;">
-                
-          
-                
-                <mat-radio-button class="example-margin" id="r11" name="rating" value="1"></mat-radio-button>
-                <label for="r11"></label>
-                <mat-radio-button class="example-margin" id="r21" name="rating" value="2"><label for="r21"></label></mat-radio-button>
-                
-                <mat-radio-button class="example-margin" id="r31" name="rating" value="3"><label for="r31"></label></mat-radio-button>
-                
-                <mat-radio-button class="example-margin" id="r41" name="rating" value="4"><label for="r41"></label></mat-radio-button>
-                
-                <mat-radio-button class="example-margin" id="r51" name="rating" value="5"><label for="r51"></label></mat-radio-button>
-                
-                
-              </mat-radio-group>
+                  <input
+                    type="radio"
+                    name="rating2"
+                    class="example-margin" 
+                    id="r22"
+                    value="4"
+                    [(ngModel)]="ranking2"
+                  />
+                  <label for="r22"></label>
 
-              
+                  <input
+                    type="radio"
+                    name="rating2"
+                    class="example-margin" 
+                    id="r32"
+                    value="3"
+                    [(ngModel)]="ranking2"
+                  />
+                  <label for="r32"></label>
+
+                  <input
+                    type="radio"
+                    name="rating2"
+                    class="example-margin" 
+                    id="r42"
+                    value="2"
+                    [(ngModel)]="ranking2"
+                  />
+                  <label for="r42"></label>
+
+                  <input
+                    type="radio"
+                    class="example-margin" 
+                    name="rating2"
+                    id="r52"
+                    value="1"
+                    [(ngModel)]="ranking2"
+                  />
+                  <label for="r52"></label>
+                </label>
+              </div>
+              <br>
+              <div class="col-md-12" style="padding-top: 2rem;">
+                <h4 style="text-align: center;">
+                  ¿Qué tan buena es la puntalidad respecto a su cita?
+                </h4>
+              </div>
+              <div class="col-md-12" style="text-align: center;">
+                <label class="rating" style="text-align: center;">
+                  <input
+                    type="radio"
+                    name="rating3"
+                    class="example-margin" 
+                    id="r13"
+                    value="5"
+                    [(ngModel)]="ranking3"
+                  />
+                  <label for="r13"></label>
+
+                  <input
+                    type="radio"
+                    name="rating3"
+                    class="example-margin" 
+                    id="r23"
+                    value="4"
+                    [(ngModel)]="ranking3"
+                  />
+                  <label for="r23"></label>
+
+                  <input
+                    type="radio"
+                    name="rating3"
+                    class="example-margin" 
+                    id="r33"
+                    value="3"
+                    [(ngModel)]="ranking3"
+                  />
+                  <label for="r33"></label>
+
+                  <input
+                    type="radio"
+                    name="rating3"
+                    class="example-margin" 
+                    id="r43"
+                    value="2"
+                    [(ngModel)]="ranking3"
+                  />
+                  <label for="r43"></label>
+
+                  <input
+                    type="radio"
+                    class="example-margin" 
+                    name="rating3"
+                    id="r53"
+                    value="1"
+                    [(ngModel)]="ranking3"
+                  />
+                  <label for="r53"></label>
+                </label>
+              </div>
+
               <div class="text-center" style="padding-bottom: 3rem;">
                 <button
                   type="button"
