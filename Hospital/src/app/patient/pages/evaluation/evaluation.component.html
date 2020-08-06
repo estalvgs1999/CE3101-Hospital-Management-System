@@ -69,7 +69,7 @@
       <!-- Views -->
     </div>
     <!-- End vertical navbar -->
-    
+
     <!-- Horizontal navbar -->
     <div class="horizontal-nav" id="sidebar">
       <span
@@ -152,79 +152,111 @@
               </div>
               <div class="col-md-12" style="text-align: center;">
                 <label class="rating" style="text-align: center;">
-                  <input type="radio" name="rating" id="r1" value="1" ngModel #rating="ngModel"/>
+                  <input
+                    type="radio"
+                    name="rating"
+                    class="example-margin" 
+                    id="r1"
+                    value="1"
+                    ngModel
+                    #rating="ngModel"
+                  />
                   <label for="r1"></label>
 
-                  <input type="radio" name="rating" id="r2" value="2" />
+                  <input
+                    type="radio"
+                    name="rating"
+                    class="example-margin" 
+                    id="r2"
+                    value="2"
+                    ngModel
+                    #rating="ngModel"
+                  />
                   <label for="r2"></label>
 
-                  <input type="radio" name="rating" id="r3" value="3" />
+                  <input
+                    type="radio"
+                    name="rating"
+                    class="example-margin" 
+                    id="r3"
+                    value="3"
+                    ngModel
+                    #rating="ngModel"
+                  />
                   <label for="r3"></label>
 
-                  <input type="radio" name="rating" id="r4" value="4" />
+                  <input
+                    type="radio"
+                    name="rating"
+                    class="example-margin" 
+                    id="r4"
+                    value="4"
+                    ngModel
+                    #rating="ngModel"
+                  />
                   <label for="r4"></label>
 
-                  <input type="radio" name="rating" id="r5" value="5" />
+                  <input
+                    type="radio"
+                    class="example-margin" 
+                    name="rating"
+                    id="r5"
+                    value="5"
+                    ngModel
+                    #rating="ngModel"
+                  />
                   <label for="r5"></label>
                 </label>
               </div>
-              <div class="col-md-12">
-                <h4 style="text-align: center;">
-                  ¿Qué tan aseadas se encunetra las instalaciones?
-                </h4>
-              </div>
-              <div class="col-md-12" style="text-align: center;">
-                <label class="rating" style="text-align: center;">
-                  <input type="radio" name="rating1" id="r11" value="1" ngModel #rating1="ngModel"/>
-                  <label for="r11"></label>
 
-                  <input type="radio" name="rating1" id="r12" value="2" />
-                  <label for="r12"></label>
+              <mat-radio-group [(ngModel)]="labelPosition" class="rating" style="text-align: center;">
+                
+          
+                
+                <mat-radio-button class="example-margin" id="r11" name="rating" value="1"></mat-radio-button>
+                <label for="r11"></label>
+                <mat-radio-button class="example-margin" id="r21" name="rating" value="2"><label for="r21"></label></mat-radio-button>
+                
+                <mat-radio-button class="example-margin" id="r31" name="rating" value="3"><label for="r31"></label></mat-radio-button>
+                
+                <mat-radio-button class="example-margin" id="r41" name="rating" value="4"><label for="r41"></label></mat-radio-button>
+                
+                <mat-radio-button class="example-margin" id="r51" name="rating" value="5"><label for="r51"></label></mat-radio-button>
+                
+                
+              </mat-radio-group>
 
-                  <input type="radio" name="rating1" id="r13" value="3"/>
-                  <label for="r13"></label>
-
-                  <input type="radio" name="rating1" id="r14" value="4"/>
-                  <label for="r14"></label>
-
-                  <input type="radio" name="rating1" id="r15" value="5"/>
-                  <label for="r15"></label>
-                </label>
-              </div>
-              <div class="col-md-12">
-                <h4 style="text-align: center;">
-                  ¿Qué tan buena es la puntalidad respecto a su cita?
-                </h4>
-              </div>
-              <div class="col-md-12" style="text-align: center;">
-                <label class="rating" style="text-align: center;">
-                  <input type="radio" name="rating3" id="r21" value="1" ngModel #rating2="ngModel"/>
-                  <label for="r21"></label>
-
-                  <input type="radio" name="rating3" id="r22" value="2"/>
-                  <label for="r22"></label>
-
-                  <input type="radio" name="rating3" id="r23" value="3"/>
-                  <label for="r23"></label>
-
-                  <input type="radio" name="rating3" id="r24" value="4"/>
-                  <label for="r24"></label>
-
-                  <input type="radio" name="rating3" id="r25" value="5"/>
-                  <label for="r25"></label>
-                </label>
-              </div>
+              
               <div class="text-center" style="padding-bottom: 3rem;">
-                <button type="button" class="btn btn-success" style="width: 25%;" (click)="send()">Guardar</button>
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  style="width: 25%;"
+                  (click)="send()"
+                >
+                  Guardar
+                </button>
               </div>
             </div>
-              <br>
-              <br>
-              <div style="background-color: white; border-radius: 2rem; text-align: center;">
-                <h4 style="text-align: center; padding-top: 1rem; padding-bottom: 1rem;">
-                  Gracias por ayudarnos a mejorar 
-                </h4>
-              </div>
+            <br />
+            <br />
+            <div
+              style="
+                background-color: white;
+                border-radius: 2rem;
+                text-align: center;
+              "
+            >
+              <h4
+                style="
+                  text-align: center;
+                  padding-top: 1rem;
+                  padding-bottom: 1rem;
+                "
+              >
+                Gracias por ayudarnos a mejorar
+              </h4>
+            </div>
             <!-- Evaluation Information -->
           </div>
         </div>

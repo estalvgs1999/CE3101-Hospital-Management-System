@@ -10,11 +10,13 @@ export class EvaluationComponent implements OnInit {
 
   constructor() { }
 
+  labelPosition = 0;
+
   ngOnInit() {
   }
 
   send() {
-
+    console.log(this.labelPosition);
   }
 
 
