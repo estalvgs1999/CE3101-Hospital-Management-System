@@ -1,0 +1,146 @@
+.vertical-nav 
+  min-width: 17rem
+  width: 17rem
+  height: 100vh
+  position: fixed
+  top: 0
+  left: 0
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1)
+  transition: all 0.4s
+  background-color: #255070
+  color: #FFFFFF
+
+.horizontal-nav 
+  min-width: 17rem
+  width: 100%
+  height: 4rem
+  position: fixed
+  top: 0
+  left: 17rem
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1)
+  transition: all 0.4s
+  background-color: #FFFFFF
+  color: #000
+
+.page-content 
+  width: calc(100% - 17rem)
+  height: calc(100% - 4rem)
+  margin-left: 17rem
+  margin-top: 8rem
+  transition: all 0.4s
+
+#sidebar.active 
+  margin-left: -17rem
+  margin-left: -4rem
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif 
+
+
+#content.active
+  width: 100%
+  height: calc(100% - 4rem)
+  margin: 0
+
+
+@media (max-width: 768px) 
+  #sidebar 
+    margin-left: -17rem
+    margin-top: -4rem
+  
+  #sidebar.active 
+    margin-left: 0
+  
+  #content 
+    width: 100%
+    height: calc(100% - 4rem)
+    margin: 0
+  
+  #content.active 
+    margin-left: 17rem
+    margin-top: 4rem
+    width: calc(100% - 17rem)
+    height: calc(100% - 4rem)
+  
+body 
+  background: #E2E2E2
+  min-height: 100vh
+  overflow-x: hidden
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif 
+  font-size: 15px
+
+
+.separator 
+  margin: 3rem 0
+  border-bottom: 1px dashed #fff
+
+
+.text-uppercase 
+  letter-spacing: 0.1em
+
+
+li a:hover 
+  background-color: #5E8EB3
+
+li a
+  color: white
+  background-color: #325F80
+  border-top: 2px solid #255070
+
+//Procedure History scrollbar {
+#style-3 
+  height: 35rem
+
+
+#style-3::-webkit-scrollbar 
+  width: 3px
+  height: 3px
+
+
+#style-3::-webkit-scrollbar-thumb 
+  background-color: #9b9ba1
+  border-radius: 30px
+// }
+
+//Procedure list scrollbar {
+#style-1 
+  height: 10rem
+
+
+#style-1::-webkit-scrollbar 
+  width: 3px
+  height: 3px
+
+
+#style-1::-webkit-scrollbar-thumb 
+  background-color: #9b9ba1
+  border-radius: 30px
+// }
+
+//Procedure Select list scrollbar {
+#style-2 
+  height: 8rem
+
+
+#style-2::-webkit-scrollbar 
+  width: 3px
+  height: 3px
+
+
+#style-2::-webkit-scrollbar-thumb 
+  background-color: #9b9ba1
+  border-radius: 30px
+// }
+
+.scrollbar 
+  overflow-y: scroll
+  overflow-x: scroll
+  box-sizing: content-box
+
+// Patient image
+#image1
+  padding-left: 2rem
+  padding-top: 2rem
+
+.table
+    width: 100%
+    height: 100%
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif 

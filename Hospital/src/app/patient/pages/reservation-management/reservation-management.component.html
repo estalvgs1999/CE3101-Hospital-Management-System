@@ -1,3 +1,474 @@
-<p>
-  reservation-management works!
-</p>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hospital Tecnológico</title>
+  </head>
+  <body>
+    <!-- Vertical navbar -->
+    <div class="vertical-nav" id="sidebar">
+      <!-- Logo -->
+      <div class="py-4 px-3 mb-4">
+        <div class="media d-flex align-items-center">
+          <img
+            src="https://res.cloudinary.com/mhmd/image/upload/v1556074849/avatar-1_tcnd60.png"
+            alt="..."
+            width="65"
+            class="mr-3 shadow-sm"
+          />
+          <div class="media-body">
+            <button type="button" class="btn" onclick="">
+              <img
+                src="https://cdn4.iconfinder.com/data/icons/internet-security-flat-2/32/Internet_Security_entrance_exit_log_out_arrow-512.png"
+                alt="button1"
+                style="width: 35%; height: 35%;"
+              />
+              <div class="card-inner"></div>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- End Logo -->
+
+      <!-- Views -->
+      <ul class="nav flex-column mb-0">
+        <li class="nav-item">
+          <a href="patient" class="nav-link">
+            <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+            Historial Clínico
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="patient/reservation" class="nav-link">
+            <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+            Gestión de Reservaciones
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="patient/evaluation" class="nav-link">
+            <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+            Evaluación del servicio
+          </a>
+        </li>
+      </ul>
+      <p
+        class="font-weight-bold"
+        style="
+          font-size: 18px;
+          left: 48%;
+          transform: translate(-50%, -50%);
+          bottom: 0;
+          text-align: center;
+          font-weight: bold;
+          position: absolute;
+        "
+      >
+        Copyright: ORBE
+      </p>
+      <!-- Views -->
+    </div>
+    <!-- End vertical navbar -->
+
+    <!-- Horizontal navbar -->
+    <div class="horizontal-nav" id="sidebar">
+      <span
+        class="px-3 navbar-brand mb-0 h1"
+        style="font-size: 35px; font-weight: bold;"
+        *ngIf="!add && !edit"
+        >Gestión de Reservaciones
+      </span>
+      <span
+        class="px-3 navbar-brand mb-0 h1"
+        style="font-size: 35px; font-weight: bold;"
+        *ngIf="edit"
+        >Editar Reservación
+      </span>
+      <span class="px-3 navbar-brand my-2 my-sm-0" *ngIf="patientInformation">
+        <button
+          class="btn btn-outline"
+          type="submit"
+          (click)="changeAddMedicalHistory()"
+        >
+          <img src="https://img.icons8.com/ios/50/000000/add-property.png" />
+        </button>
+      </span>
+    </div>
+    <!-- End horizontal navbar -->
+
+    <!-- Page content holder -->
+    <div class="page-content py-3" id="content">
+      <div class="container">
+        <!-- Tables for the reports -->
+        <div class="row">
+          <div class="col-md-12">
+            <!-- Reservation for information -->
+            <div style="background-color: white;" *ngIf="!edit && !add">
+              <div class="scrollbar" id="style-3">
+                <!-- Tables for information -->
+                <table class="table table-striped table-hover text-center">
+                  <thead style="background-color: #325f80;">
+                    <tr style="color: white;">
+                      <th scope="col">Fecha de Ingreso</th>
+                      <th scope="col">Fecha de Salida</th>
+                      <th scope="col">Procedimientos</th>
+                      <th scope="col"></th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let procedure of procedureList">
+                      <td>
+                        {{ procedure.arrivalDate }}
+                      </td>
+                      <td>
+                        {{ procedure.departureDate }}
+                      </td>
+                      <td>
+                        <!-- Tables for procedure -->
+                        <table
+                          class="table table-striped table-hover text-center"
+                        >
+                          <tbody>
+                            <tr *ngFor="let name of procedure.procedures">
+                              <td>
+                                {{ name }}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <!-- /Tables for procedure -->
+                      </td>
+                      <td>
+                        <button
+                          type="button"
+                          class="btn btn-info"
+                          (click)="editProcedure()"
+                        >
+                          Modificar
+                        </button>
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-danger">
+                          Eliminar
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- /Tables for information -->
+              </div>
+            </div>
+            <!-- /Reservation information -->
+
+            <!-- Edit Reservation for information -->
+            <div
+              style="background-color: white; border-radius: 3rem;"
+              *ngIf="edit"
+            >
+              <div class="row">
+                <!-- First column -->
+                <div class="col-md-3">
+                  <div>
+                    <img
+                      src="https://cdn4.iconfinder.com/data/icons/medical-14/512/8-512.png"
+                      class="col-md-12"
+                      id="image1"
+                    />
+                  </div>
+                  <br />
+                  <br />
+                </div>
+                <!-- /First column -->
+
+                <!-- Second column -->
+                <div class="col-md-9 register-right">
+                  <div class="tab-content" id="myTabContent">
+                    <div
+                      class="tab-pane fade show active"
+                      id="home"
+                      role="tabpanel"
+                      aria-labelledby="home-tab"
+                    >
+                      <br />
+                      <div class="row register-form">
+                        <!-- First internal column -->
+                        <div class="col-md-5">
+                          <div class="form-group">
+                            <h3 style="font-weight: bold;">
+                              {{ patient.name }} {{ patient.lastName }}
+                            </h3>
+                          </div>
+                          <div class="form-group">
+                            <h4 style="color: gray;">
+                              Fecha de ingreso
+                            </h4>
+                            <div>
+                              <input
+                                required
+                                type="date"
+                                name="startDate"
+                                ngModel
+                                #startDate="ngModel"
+                                max="3000-12-31"
+                                min="1000-01-01"
+                                class="form-control"
+                                id="startDate"
+                              />
+                              <div
+                                class="alert alert-danger"
+                                *ngIf="startDate.touched && !startDate.valid"
+                              >
+                                Debe ingresar una fecha válida.
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <h4 style="color: gray;">Fecha de salida</h4>
+                            <div>
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Fecha calculada"
+                                required
+                                departureDate="departureDate"
+                                ngModel
+                                #departureDate="ngModel"
+                                id="departureDate"
+                                disabled
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <!-- /First internal column -->
+
+                        <div class="col-md-1"></div>
+
+                        <!-- Second internal column -->
+                        <div
+                          class="col-md-5"
+                          id="dataContainer"
+                          style="padding-left: 10px;"
+                        >
+                          <!-- Pathology Tables inputs  -->
+                          <div class="form-group">
+                            <h4 style="color: gray;">Procedimientos</h4>
+                            <select
+                              id="style-2"
+                              class="form-control"
+                              multiple="true"
+                            >
+                              <option
+                                *ngFor="let procedure of proceduresNameList"
+                                (click)="getProcedureValue(procedure)"
+                              >
+                                {{ procedure.name }}
+                              </option>
+                            </select>
+                            <br>
+                            <h4 style="color: gray;">Procedimientos Selecionados</h4>
+                            <div class="scrollbar" id="style-1">
+                              <table
+                                class="table table-striped table-hover text-center"
+                                data-sort-order="desc"
+                              >
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Nombre</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr
+                                    class="align-middle"
+                                    *ngFor="let procedure of procedureNameSelectList"
+                                  >
+                                    <td
+                                      class="align-middle"
+                                      (click)="deleteProcedure(procedure)"
+                                    >
+                                      {{ procedure.name }}
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                            <br>
+                            <div class="text-center">
+                              <button type="button" class="btn btn-success" style="width: 60%;">Guardar</button>
+                            </div>
+                            <br>
+                            <div class="text-center">
+                              <button type="button" class="btn btn-secondary" (click)="back()" style="width: 60%;">Cancelar</button>
+                            </div>
+                          </div>
+                          <!-- Pathology Tables inputs  -->
+                        </div>
+                        <!-- /Second internal column -->
+                      </div>
+                      <br />
+                    </div>
+                  </div>
+                </div>
+                <!-- /Second column -->
+              </div>
+            </div>
+            <!-- /Edit Reservation for information -->
+
+             <!-- Add Reservation for information -->
+             <div
+             style="background-color: white; border-radius: 3rem;"
+             *ngIf="add"
+           >
+             <div class="row">
+               <!-- First column -->
+               <div class="col-md-3">
+                 <div>
+                   <img
+                     src="https://cdn4.iconfinder.com/data/icons/medical-14/512/8-512.png"
+                     class="col-md-12"
+                     id="image1"
+                   />
+                 </div>
+                 <br />
+                 <br />
+               </div>
+               <!-- /First column -->
+
+               <!-- Second column -->
+               <div class="col-md-9 register-right">
+                 <div class="tab-content" id="myTabContent">
+                   <div
+                     class="tab-pane fade show active"
+                     id="home"
+                     role="tabpanel"
+                     aria-labelledby="home-tab"
+                   >
+                     <br />
+                     <div class="row register-form">
+                       <!-- First internal column -->
+                       <div class="col-md-5">
+                         <div class="form-group">
+                           <h3 style="font-weight: bold;">
+                             {{ patient.name }} {{ patient.lastName }}
+                           </h3>
+                         </div>
+                         <div class="form-group">
+                           <h4 style="color: gray;">
+                             Fecha de ingreso
+                           </h4>
+                           <div>
+                             <input
+                               required
+                               type="date"
+                               name="startDate"
+                               ngModel
+                               #startDate="ngModel"
+                               max="3000-12-31"
+                               min="1000-01-01"
+                               class="form-control"
+                               id="startDate"
+                             />
+                             <div
+                               class="alert alert-danger"
+                               *ngIf="startDate.touched && !startDate.valid"
+                             >
+                               Debe ingresar una fecha válida.
+                             </div>
+                           </div>
+                         </div>
+                         <div class="form-group">
+                           <h4 style="color: gray;">Fecha de salida</h4>
+                           <div>
+                             <input
+                               type="text"
+                               class="form-control"
+                               placeholder="Fecha calculada"
+                               required
+                               departureDate="departureDate"
+                               ngModel
+                               #departureDate="ngModel"
+                               id="departureDate"
+                               disabled
+                             />
+                           </div>
+                         </div>
+                       </div>
+                       <!-- /First internal column -->
+
+                       <div class="col-md-1"></div>
+
+                       <!-- Second internal column -->
+                       <div
+                         class="col-md-5"
+                         id="dataContainer"
+                         style="padding-left: 10px;"
+                       >
+                         <!-- Pathology Tables inputs  -->
+                         <div class="form-group">
+                           <h4 style="color: gray;">Procedimientos</h4>
+                           <select
+                             id="style-2"
+                             class="form-control"
+                             multiple="true"
+                           >
+                             <option
+                               *ngFor="let procedure of proceduresNameList"
+                               (click)="getProcedureValue(procedure)"
+                             >
+                               {{ procedure.name }}
+                             </option>
+                           </select>
+                           <br>
+                           <h4 style="color: gray;">Procedimientos Selecionados</h4>
+                           <div class="scrollbar" id="style-1">
+                             <table
+                               class="table table-striped table-hover text-center"
+                               data-sort-order="desc"
+                             >
+                               <thead>
+                                 <tr>
+                                   <th scope="col">Nombre</th>
+                                 </tr>
+                               </thead>
+                               <tbody>
+                                 <tr
+                                   class="align-middle"
+                                   *ngFor="let procedure of procedureNameSelectList"
+                                 >
+                                   <td
+                                     class="align-middle"
+                                     (click)="deleteProcedure(procedure)"
+                                   >
+                                     {{ procedure.name }}
+                                   </td>
+                                 </tr>
+                               </tbody>
+                             </table>
+                           </div>
+                           <br>
+                           <div class="text-center">
+                             <button type="button" class="btn btn-success" style="width: 60%;">Guardar</button>
+                           </div>
+                           <br>
+                           <div class="text-center">
+                             <button type="button" class="btn btn-secondary" (click)="back()" style="width: 60%;">Cancelar</button>
+                           </div>
+                         </div>
+                         <!-- Pathology Tables inputs  -->
+                       </div>
+                       <!-- /Second internal column -->
+                     </div>
+                     <br />
+                   </div>
+                 </div>
+               </div>
+               <!-- /Second column -->
+             </div>
+           </div>
+           <!-- /Add Reservation for information -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
