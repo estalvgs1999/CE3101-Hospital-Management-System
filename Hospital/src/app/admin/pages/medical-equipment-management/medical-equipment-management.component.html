@@ -200,16 +200,16 @@
               <tbody>
                 <tr
                   *ngFor="let x of equipment"
-                  (click)="equipmentView(x.nombre)"
+                  (click)="equipmentView(x)"
                 >
                   <td style="width: 26%;">
-                    {{ x.nombre }}
+                    {{ x.name }}
                   </td>
                   <td style="width: 33%;">
-                    {{ x.proveedor }}
+                    {{ x.provider }}
                   </td>
                   <td>
-                    {{ x.cantidad }}
+                    {{ x.qty }}
                   </td>
                 </tr>
               </tbody>
@@ -297,10 +297,11 @@
                   <div class="col-md-5" id="dataContainer">
                     <div class="form-group">
                       <h2 style="font-weight: bold;">Nombre</h2>
-                      <h3 *ngIf="viewEquipment">{{ equipmentNAME.nombre }}</h3>
+                      <h3 *ngIf="viewEquipment">{{ equipmentNAME.name }}</h3>
                       <input
                         class="form-control mr-sm-2"
                         type="text"
+                        id="NameNewData"
                         placeholder="Nombre"
                         *ngIf="createEquipment"
                         aria-label="labelID"
@@ -308,7 +309,8 @@
                       <input
                         class="form-control mr-sm-2"
                         type="text"
-                        placeholder="{{ equipmentNAME.nombre }}"
+                        id="NameData"
+                        value="{{ equipmentNAME.name }}"
                         *ngIf="editEquipment"
                         aria-label="labelID"
                         disabled
@@ -317,11 +319,12 @@
                     <div class="form-group">
                       <h2 style="font-weight: bold;">Proveedor</h2>
                       <h3 *ngIf="viewEquipment">
-                        {{ equipmentNAME.proveedor }}
+                        {{ equipmentNAME.provider }}
                       </h3>
                       <input
                         class="form-control mr-sm-2"
                         type="text"
+                        id="ProNewData"
                         placeholder="Proveedor"
                         *ngIf="createEquipment"
                         aria-label="labelID"
@@ -329,7 +332,8 @@
                       <input
                         class="form-control mr-sm-2"
                         type="text"
-                        placeholder="{{ equipmentNAME.proveedor }}"
+                        id="ProData"
+                        value="{{ equipmentNAME.provider }}"
                         *ngIf="editEquipment"
                         aria-label="labelID"
                       />
@@ -345,11 +349,12 @@
                     <div class="form-group">
                       <h2 style="font-weight: bold;">Cantidad Disponibles</h2>
                       <h3 *ngIf="viewEquipment">
-                        {{ equipmentNAME.cantidad }}
+                        {{ equipmentNAME.qty }}
                       </h3>
                       <input
                         class="form-control mr-sm-2"
                         type="text"
+                        id="CanNewData"
                         placeholder="Cantidad Disponible"
                         *ngIf="createEquipment"
                         aria-label="labelID"
@@ -357,7 +362,8 @@
                       <input
                         class="form-control mr-sm-2"
                         type="text"
-                        placeholder="{{ equipmentNAME.cantidad }}"
+                        id="CanData"
+                        value="{{ equipmentNAME.qty }}"
                         *ngIf="editEquipment"
                         aria-label="labelID"
                       />

@@ -8,7 +8,10 @@ import { environment } from 'src/environments/environment';
 export class PathologyService {
 
   constructor(private http: HttpClient) { }
-
+  /**
+   * Get the pathology
+   * @param dniPatient of the patient
+   */
   getOnePathology(dniPatient: string) {
     return this.http.get(`${environment.API.HOSPITAL}/pathology/${dniPatient}`, {observe: 'response'});
   }

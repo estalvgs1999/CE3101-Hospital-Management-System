@@ -209,21 +209,21 @@
           <div class="scrollbar" id="style-2">
             <table class="table table-hover" data-sort-order="desc">
               <tbody>
-                <tr *ngFor="let x of salon" (click)="salonView(x.id)">
+                <tr *ngFor="let x of salon" (click)="salonView(x)">
                   <td style="width: 25%;">
                     {{ x.id }}
                   </td>
                   <td>
-                    {{ x.nombre }}
+                    {{ x.name }}
                   </td>
                   <td style="width: 20%;">
-                    {{ x.capacidad }}
+                    {{ x.beds_qty }}
                   </td>
                   <td style="width: 22%;">
-                    {{ x.especialidad }}
+                    {{ x.type }}
                   </td>
                   <td style="width: 8%;">
-                    {{ x.piso }}
+                    {{ x.floor }}
                   </td>
                 </tr>
               </tbody>
@@ -325,6 +325,7 @@
                       <input
                         class="form-control mr-sm-2"
                         type="text"
+                        id="IdNewData"
                         placeholder="Número del salón"
                         *ngIf="createSalon"
                         aria-label="labelID"
@@ -332,7 +333,8 @@
                       <input
                         class="form-control mr-sm-2"
                         type="text"
-                        placeholder="{{salonID.id}}"
+                        id="IdData"
+                        value="{{salonID.id}}"
                         *ngIf="editSalon"
                         aria-label="labelID"
                         disabled
@@ -340,10 +342,11 @@
                     </div>
                     <div class="form-group">
                       <h2 style="font-weight: bold;">Nombre del salón</h2>
-                      <h3 *ngIf="viewSalon">{{ salonID.nombre }}</h3>
+                      <h3 *ngIf="viewSalon">{{ salonID.name }}</h3>
                       <input
                         class="form-control mr-sm-2"
                         type="text"
+                        id="NameNewData"
                         placeholder="Nombre del salón"
                         *ngIf="createSalon"
                         aria-label="labelID"
@@ -351,17 +354,19 @@
                       <input
                         class="form-control mr-sm-2"
                         type="text"
-                        placeholder="{{salonID.nombre}}"
+                        id="NameData"
+                        value="{{salonID.name}}"
                         *ngIf="editSalon"
                         aria-label="labelID"
                       />
                     </div>
                     <div class="form-group">
                       <h2 style="font-weight: bold;">Capacidad de camas</h2>
-                      <h3 *ngIf="viewSalon">{{ salonID.capacidad }}</h3>
+                      <h3 *ngIf="viewSalon">{{ salonID.beds_qty }}</h3>
                       <input
                         class="form-control mr-sm-2"
                         type="text"
+                        id="BedsNewData"
                         placeholder="Capacidad de camas"
                         *ngIf="createSalon"
                         aria-label="labelID"
@@ -369,7 +374,8 @@
                       <input
                         class="form-control mr-sm-2"
                         type="text"
-                        placeholder="{{salonID.capacidad}}"
+                        id="BedsData"
+                        value="{{salonID.beds_qty}}"
                         *ngIf="editSalon"
                         aria-label="labelID"
                       />
@@ -384,10 +390,11 @@
                   <div class="col-md-5" style="padding-left: 10px;">
                     <div class="form-group">
                       <h2 style="font-weight: bold;">Especialidad</h2>
-                      <h3 *ngIf="viewSalon">{{ salonID.especialidad }}</h3>
+                      <h3 *ngIf="viewSalon">{{ salonID.type }}</h3>
                       <input
                         class="form-control mr-sm-2"
                         type="text"
+                        id="TypeNewData"
                         placeholder="Especialidad"
                         *ngIf="createSalon"
                         aria-label="labelID"
@@ -395,17 +402,19 @@
                       <input
                         class="form-control mr-sm-2"
                         type="text"
-                        placeholder="{{salonID.especialidad}}"
+                        id="TypeData"
+                        value="{{salonID.type}}"
                         *ngIf="editSalon"
                         aria-label="labelID"
                       />
                     </div>
                     <div class="form-group">
                       <h2 style="font-weight: bold;">Piso</h2>
-                      <h3 *ngIf="viewSalon">{{ salonID.piso }}</h3>
+                      <h3 *ngIf="viewSalon">{{ salonID.floor }}</h3>
                       <input
                         class="form-control mr-sm-2"
                         type="text"
+                        id="FloorNewData"
                         placeholder="Piso"
                         *ngIf="createSalon"
                         aria-label="labelID"
@@ -413,7 +422,8 @@
                       <input
                         class="form-control mr-sm-2"
                         type="text"
-                        placeholder="{{salonID.piso}}"
+                        id="FloorData"
+                        value="{{salonID.floor}}"
                         *ngIf="editSalon"
                         aria-label="labelID"
                       />
