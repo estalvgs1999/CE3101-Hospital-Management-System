@@ -14,6 +14,7 @@ export class ReservationManagementComponent implements OnInit {
   patient = {dni: 209876, name: 'Olman', lastName: 'Castro Hernández', age: 56, sex: 'Masculino'};
   proceduresNameList: any;
   procedureNameSelectList: any[] = [];
+  patientInformation: boolean = true;
 
   constructor() {
     this.procedureList = [
