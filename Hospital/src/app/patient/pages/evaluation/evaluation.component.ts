@@ -14,7 +14,8 @@ export class EvaluationComponent implements OnInit {
   ranking1 = 0;
   ranking2 = 0;
   ranking3 = 0;
-
+  add: boolean;
+  edit: boolean;
   ngOnInit() {}
 
   send() {

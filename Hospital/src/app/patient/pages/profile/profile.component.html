@@ -77,15 +77,6 @@
         style="font-size: 35px; font-weight: bold;"
         >Historial Clínico
       </span>
-      <span class="px-3 navbar-brand my-2 my-sm-0" *ngIf="patientInformation">
-        <button
-          class="btn btn-outline"
-          type="submit"
-          (click)="changeAddMedicalHistory()"
-        >
-          <img src="https://img.icons8.com/ios/50/000000/add-property.png" />
-        </button>
-      </span>
     </div>
     <!-- End horizontal navbar -->
 
@@ -126,22 +117,22 @@
                         <div class="col-md-5">
                           <div class="form-group">
                             <h3 style="font-weight: bold;">
-                              {{ patient.name }} {{ patient.lastName }}
+                              {{ patient['name'] }} {{ patient['lastName'] }}
                             </h3>
                           </div>
                           <div class="form-group">
                             <h4 style="color: gray;">
                               Número de identificación
                             </h4>
-                            <h3>{{ patient.dni }}</h3>
+                            <h3>{{ patient['dni'] }}</h3>
                           </div>
                           <div class="form-group">
                             <h4 style="color: gray;">Edad</h4>
-                            <h3>{{ patient.age }}</h3>
+                            <h3>{{ patient['age'] }}</h3>
                           </div>
                           <div class="form-group">
                             <h4 style="color: gray;">Sexo</h4>
-                            <h3>{{ patient.sex }}</h3>
+                            <h3>{{ patient['sex'] }}</h3>
                           </div>
                         </div>
                         <!-- /First internal column -->
@@ -170,10 +161,10 @@
                                 <tbody>
                                   <tr *ngFor="let type of pathology">
                                     <td class="align-middle">
-                                      {{ type.name }}
+                                      {{ type['name'] }}
                                     </td>
                                     <td class="align-middle">
-                                      {{ type.medication }}
+                                      {{ type['treatment'] }}
                                     </td>
                                   </tr>
                                 </tbody>
@@ -211,13 +202,13 @@
               <tbody>
                 <tr *ngFor="let procedure of procedureList">
                   <td>
-                    {{ procedure.date }}
+                    {{ procedure['date'] }}
                   </td>
                   <td>
-                    {{ procedure.name }}
+                    {{ procedure['name'] }}
                   </td>
                   <td>
-                    {{ procedure.treatment }}
+                    {{ procedure['treatment'] }}
                   </td>
                 </tr>
               </tbody>
