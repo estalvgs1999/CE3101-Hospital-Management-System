@@ -361,7 +361,18 @@
                   <div class="col-md-5" style="padding-left: 10px;">
                     <div class="form-group">
                       <h2 style="font-weight: bold;">Equipo Médico</h2>
-                      <div class="scrollbar" id="style-1" *ngIf="viewBed || createBed || editBed">
+                      <div class="scrollbar" id="style-1" *ngIf="createBed || editBed">
+                        <table class="table table-hover" data-sort-order="desc">
+                          <tbody>
+                            <tr *ngFor="let k of bedEQUIP">
+                              <td class="align-middle" (click)="eliminar(k.name)">
+                                {{ k.name }}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="scrollbar" id="style-1" *ngIf="viewBed">
                         <table class="table table-hover" data-sort-order="desc">
                           <tbody>
                             <tr *ngFor="let k of bedEQUIP">
@@ -377,6 +388,7 @@
                       <input
                         class="form-control mr-sm-2"
                         type="text"
+                        #Data
                         placeholder="Ingrese Nuevo Equipo Médico"
                         aria-label="labelID"
                       />
@@ -384,6 +396,7 @@
                         <button
                           type="button"
                           class="btn btn-success col-md-12"
+                          (click)= "agregar(Data)"
                         >
                           Agregar
                         </button>

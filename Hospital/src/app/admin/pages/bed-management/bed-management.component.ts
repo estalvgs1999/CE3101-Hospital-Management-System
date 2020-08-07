@@ -44,7 +44,7 @@ export class BedManagementComponent implements OnInit {
     this.createBed = true;
     this.listBed = false;
     this.editBed = false;
-    this.bedEQUIP = null;
+    this.bedEQUIP = [];
   }
 
   bedList() {
@@ -75,5 +75,18 @@ export class BedManagementComponent implements OnInit {
     this.createBed = false;
     this.listBed = false;
     this.editBed = false;
+  }
+
+  agregar(data) {
+    this.bedEQUIP.push({name: data.value});
+    data.value = '';
+  }
+
+  eliminar(data) {
+    for (let index = 0; index <= this.bedEQUIP.length; index++) {
+      if (this.bedEQUIP[index].name === data) {
+        this.bedEQUIP.splice(index, 1);
+      }
+    }
   }
 }
