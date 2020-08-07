@@ -65,7 +65,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="report" class="nav-link">
             <i class="fa fa-bar-chart mr-3 text-primary fa-fw"></i>
             Reporte Áreas de Mejora
           </a>
@@ -202,12 +202,12 @@
                 *ngIf="showCleanlinessStatistics"
               >
                 <tbody>
-                  <tr *ngFor="let x of aseo">
+                  <tr *ngFor="let x of all">
                     <td style="width: 20%; text-align: center;">
                       {{ x.id }}
                     </td>
                     <td>
-                      {{ x.nota }}
+                      {{ x.clean_hospital }}
                     </td>
                   </tr>
                 </tbody>
@@ -221,12 +221,12 @@
                 *ngIf="showTreatmentStatistics"
               >
                 <tbody>
-                  <tr *ngFor="let x of trato">
+                  <tr *ngFor="let x of all">
                     <td style="width: 20%; text-align: center;">
                       {{ x.id }}
                     </td>
                     <td>
-                      {{ x.nota }}
+                      {{ x.personal_relation }}
                     </td>
                   </tr>
                 </tbody>
@@ -240,12 +240,12 @@
                 *ngIf="showPuntualityStatistics"
               >
                 <tbody>
-                  <tr *ngFor="let x of puntualidad">
+                  <tr *ngFor="let x of all">
                     <td style="width: 20%; text-align: center;">
                       {{ x.id }}
                     </td>
                     <td>
-                      {{ x.nota }}
+                      {{ x.punctuality }}
                     </td>
                   </tr>
                 </tbody>

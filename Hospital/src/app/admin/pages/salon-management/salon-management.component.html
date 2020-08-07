@@ -65,7 +65,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="report" class="nav-link">
             <i class="fa fa-bar-chart mr-3 text-primary fa-fw"></i>
             Reporte Áreas de Mejora
           </a>
@@ -391,22 +391,12 @@
                     <div class="form-group">
                       <h2 style="font-weight: bold;">Especialidad</h2>
                       <h3 *ngIf="viewSalon">{{ salonID.type }}</h3>
-                      <input
-                        class="form-control mr-sm-2"
-                        type="text"
-                        id="TypeNewData"
-                        placeholder="Especialidad"
-                        *ngIf="createSalon"
-                        aria-label="labelID"
-                      />
-                      <input
-                        class="form-control mr-sm-2"
-                        type="text"
-                        id="TypeData"
-                        value="{{salonID.type}}"
-                        *ngIf="editSalon"
-                        aria-label="labelID"
-                      />
+                      <select class="mr-sm-2" id="TypeNewData" *ngIf="createSalon">
+                        <option *ngFor="let u of types" value="{{u}}"> {{u}} </option>
+                    </select>
+                    <select class="mr-sm-2" id="TypeData" *ngIf="editSalon">
+                      <option *ngFor="let u of types" value="{{u}}"> {{u}} </option>
+                  </select>
                     </div>
                     <div class="form-group">
                       <h2 style="font-weight: bold;">Piso</h2>

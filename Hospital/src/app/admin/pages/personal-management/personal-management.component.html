@@ -65,7 +65,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="report" class="nav-link">
             <i class="fa fa-bar-chart mr-3 text-primary fa-fw"></i>
             Reporte Áreas de Mejora
           </a>
@@ -203,15 +203,15 @@
           <div class="scrollbar" id="style-2">
             <table class="table table-hover" data-sort-order="desc">
               <tbody>
-                <tr *ngFor="let x of personal" (click)="personalView(x.dni)">
+                <tr *ngFor="let x of personal" (click)="personalView(x)">
                   <td style="width: 23%;">
                     {{ x.dni }}
                   </td>
                   <td style="width: 30%;">
-                    {{ x.nombre }}
+                    {{ x.name }}
                   </td>
                   <td style="width: 31%;">
-                    {{ x.apellido }}
+                    {{ x.lastname }}
                   </td>
                   <td>
                     {{ x.role }}
@@ -317,6 +317,7 @@
                       <input
                         class="form-control mr-sm-2"
                         type="text"
+                        id="DniNewData"
                         placeholder="Cedúla"
                         *ngIf="createPersonal"
                         aria-label="labelID"
@@ -324,7 +325,8 @@
                       <input
                         class="form-control mr-sm-2"
                         type="text"
-                        placeholder="{{personalDNI.dni}}"
+                        id="DniData"
+                        value="{{personalDNI.dni}}"
                         *ngIf="editPersonal"
                         aria-label="labelID"
                         disabled
@@ -332,10 +334,11 @@
                     </div>
                     <div class="form-group">
                       <h2 style="font-weight: bold;">Nombre</h2>
-                      <h3 *ngIf="viewPersonal">{{ personalDNI.nombre }}</h3>
+                      <h3 *ngIf="viewPersonal">{{ personalDNI.name }}</h3>
                       <input
                         class="form-control mr-sm-2"
                         type="text"
+                        id="NameNewData"
                         placeholder="Nombre"
                         *ngIf="createPersonal"
                         aria-label="labelID"
@@ -343,17 +346,19 @@
                       <input
                         class="form-control mr-sm-2"
                         type="text"
-                        placeholder="{{personalDNI.nombre}}"
+                        id="NameData"
+                        value="{{personalDNI.name}}"
                         *ngIf="editPersonal"
                         aria-label="labelID"
                       />
                     </div>
                     <div class="form-group">
                       <h2 style="font-weight: bold;">Apellidos</h2>
-                      <h3 *ngIf="viewPersonal">{{ personalDNI.apellido }}</h3>
+                      <h3 *ngIf="viewPersonal">{{ personalDNI.lastname }}</h3>
                       <input
                         class="form-control mr-sm-2"
                         type="text"
+                        id="LastNewData"
                         placeholder="Apellidos"
                         *ngIf="createPersonal"
                         aria-label="labelID"
@@ -361,17 +366,19 @@
                       <input
                         class="form-control mr-sm-2"
                         type="text"
-                        placeholder="{{personalDNI.apellido}}"
+                        id="LastData"
+                        value="{{personalDNI.lastname}}"
                         *ngIf="editPersonal"
                         aria-label="labelID"
                       />
                     </div>
                     <div class="form-group">
                       <h2 style="font-weight: bold;">Teléfono</h2>
-                      <h3 *ngIf="viewPersonal">{{ personalDNI.telefono }}</h3>
+                      <h3 *ngIf="viewPersonal">{{ personalDNI.phone }}</h3>
                       <input
                         class="form-control mr-sm-2"
                         type="text"
+                        id="PhoneNewData"
                         placeholder="Teléfono"
                         *ngIf="createPersonal"
                         aria-label="labelID"
@@ -379,7 +386,8 @@
                       <input
                         class="form-control mr-sm-2"
                         type="text"
-                        placeholder="{{personalDNI.telefono}}"
+                        id="PhoneData"
+                        value="{{personalDNI.phone}}"
                         *ngIf="editPersonal"
                         aria-label="labelID"
                       />
@@ -390,6 +398,7 @@
                       <input
                         class="form-control mr-sm-2"
                         type="text"
+                        id="RoleNewData"
                         placeholder="Rol"
                         *ngIf="createPersonal"
                         aria-label="labelID"
@@ -397,9 +406,32 @@
                       <input
                         class="form-control mr-sm-2"
                         type="text"
-                        placeholder="{{personalDNI.role}}"
+                        id="RoleData"
+                        value="{{personalDNI.role}}"
                         *ngIf="editPersonal"
                         aria-label="labelID"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <h2 style="font-weight: bold;" *ngIf="viewPersonal || editPersonal">Edad</h2>
+                      <h2 style="font-weight: bold;" *ngIf="createPersonal">Fecha de Nacimiento</h2>
+                      <h3 *ngIf="viewPersonal">{{ personalDNI.age }}</h3>
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        id="DobNewData"
+                        placeholder="Fecha de Nacimiento"
+                        *ngIf="createPersonal"
+                        aria-label="labelID"
+                      />
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        id="AgeData"
+                        value="{{personalDNI.age}}"
+                        *ngIf="editPersonal"
+                        aria-label="labelID"
+                        disabled
                       />
                     </div>
                     <div class="form-group"></div>
@@ -412,10 +444,11 @@
                   <div class="col-md-5" style="padding-left: 10px;">
                     <div class="form-group">
                       <h2 style="font-weight: bold;">Fecha de Ingreso</h2>
-                      <h3 *ngIf="viewPersonal">{{ personalDNI.fecha }}</h3>
+                      <h3 *ngIf="viewPersonal">{{ personalDNI.start_date }}</h3>
                       <input
                         class="form-control mr-sm-2"
                         type="text"
+                        id="DateNewData"
                         placeholder="Fecha de Ingreso"
                         *ngIf="createPersonal"
                         aria-label="labelID"
@@ -423,7 +456,8 @@
                       <input
                         class="form-control mr-sm-2"
                         type="text"
-                        placeholder="{{personalDNI.fecha}}"
+                        id="DateData"
+                        value="{{personalDNI.start_date}}"
                         *ngIf="editPersonal"
                         aria-label="labelID"
                         disabled
@@ -431,10 +465,11 @@
                     </div>
                     <div class="form-group">
                       <h2 style="font-weight: bold;">Provincia</h2>
-                      <h3 *ngIf="viewPersonal">{{ personalDNI.provincia }}</h3>
+                      <h3 *ngIf="viewPersonal">{{ personalDNI.province }}</h3>
                       <input
                         class="form-control mr-sm-2"
                         type="text"
+                        id="ProNewData"
                         placeholder="Provincia"
                         *ngIf="createPersonal"
                         aria-label="labelID"
@@ -442,9 +477,11 @@
                       <input
                         class="form-control mr-sm-2"
                         type="text"
-                        placeholder="{{personalDNI.provincia}}"
+                        id="ProData"
+                        value="{{personalDNI.province}}"
                         *ngIf="editPersonal"
                         aria-label="labelID"
+                        disabled
                       />
                     </div>
                     <div class="form-group">
@@ -453,6 +490,7 @@
                       <input
                         class="form-control mr-sm-2"
                         type="text"
+                        id="CantonNewData"
                         placeholder="Cantón"
                         *ngIf="createPersonal"
                         aria-label="labelID"
@@ -460,17 +498,20 @@
                       <input
                         class="form-control mr-sm-2"
                         type="text"
-                        placeholder="{{personalDNI.canton}}"
+                        id="CantonData"
+                        value="{{personalDNI.canton}}"
                         *ngIf="editPersonal"
                         aria-label="labelID"
+                        disabled
                       />
                     </div>
                     <div class="form-group">
                       <h2 style="font-weight: bold;">Distrito</h2>
-                      <h3 *ngIf="viewPersonal">{{ personalDNI.distrito }}</h3>
+                      <h3 *ngIf="viewPersonal">{{ personalDNI.district }}</h3>
                       <input
                         class="form-control mr-sm-2"
                         type="text"
+                        id="DisNewData"
                         placeholder="Distrito"
                         *ngIf="createPersonal"
                         aria-label="labelID"
@@ -478,17 +519,20 @@
                       <input
                         class="form-control mr-sm-2"
                         type="text"
-                        placeholder="{{personalDNI.distrito}}"
+                        id="DisData"
+                        value="{{personalDNI.district}}"
                         *ngIf="editPersonal"
                         aria-label="labelID"
+                        disabled
                       />
                     </div>
                     <div class="form-group">
                       <h2 style="font-weight: bold;">Otras señas</h2>
-                      <h3 *ngIf="viewPersonal">{{ personalDNI.otras }}</h3>
+                      <h3 *ngIf="viewPersonal">{{ personalDNI.other_signs }}</h3>
                       <input
                         class="form-control mr-sm-2"
                         type="text"
+                        id="OtherNewData"
                         placeholder="Otras señas"
                         *ngIf="createPersonal"
                         aria-label="labelID"
@@ -496,8 +540,41 @@
                       <input
                         class="form-control mr-sm-2"
                         type="text"
-                        placeholder="{{personalDNI.otras}}"
+                        id="OtherData"
+                        value="{{personalDNI.other_signs}}"
                         *ngIf="editPersonal"
+                        aria-label="labelID"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group">
+                      <h2 style="font-weight: bold;">UserName</h2>
+                      <h3 *ngIf="viewPersonal">{{ personalDNI.username }}</h3>
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        id="UserNewData"
+                        placeholder="UserName"
+                        *ngIf="createPersonal"
+                        aria-label="labelID"
+                      />
+                      <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        id="UserData"
+                        value="{{personalDNI.username}}"
+                        *ngIf="editPersonal"
+                        aria-label="labelID"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <h2 style="font-weight: bold;" *ngIf="createPersonal">Contraseña</h2>
+                      <input
+                        class="form-control mr-sm-2"
+                        type="password"
+                        id="PassNewData"
+                        placeholder="Contraseña"
+                        *ngIf="createPersonal"
                         aria-label="labelID"
                       />
                     </div>

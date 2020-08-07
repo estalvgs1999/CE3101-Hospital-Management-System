@@ -15,6 +15,12 @@ export class BedService {
     return this.http.get(`${environment.API.HOSPITAL}/beds`, {observe: 'response'});
   }
   /**
+   * get all the equipment by bed
+   */
+  getAllEquipmentByBeds(id: string) {
+    return this.http.get(`${environment.API.HOSPITAL}/beds/eq/${id}`, {observe: 'response'});
+  }
+  /**
    * Create a new bed
    * @param data of the bed
    */

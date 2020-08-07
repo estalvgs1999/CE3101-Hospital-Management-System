@@ -36,4 +36,11 @@ export class StaffService {
   editMember(data: object, id: string) {
     return this.http.patch(`${environment.API.HOSPITAL}/staff/edit/${id}`, data, {observe: 'response'});
   }
+  /**
+   * get one member of the staff
+   * @param id of the member
+   */
+  getMember(id:string){
+    return this.http.get(`${environment.API.HOSPITAL}/staff/${id}`, {observe: 'response'});
+  }
 }

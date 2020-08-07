@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { EvaluationService } from 'src/app/patient/services/evaluation.service';
+
 declare var require: any;
 
 @Component({
@@ -15,6 +17,7 @@ export class ReportComponent implements OnInit {
   aseo: any;
   trato: any;
   puntualidad: any;
+  all: any;
   cleanlinessData = [0, 0, 0, 0, 0];
   treatmentData = [0, 0, 0, 0, 0];
   puntualityData = [0, 0, 0, 0, 0];
@@ -24,7 +27,7 @@ export class ReportComponent implements OnInit {
   twostar: any;
   onestar: any;
 
-  constructor() {
+  constructor( private evaluationSevice: EvaluationService ) {
     this.aseo = [
       { id: 1, nota: 2 },
       { id: 2, nota: 1 },
@@ -46,58 +49,60 @@ export class ReportComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.aseo.forEach(element => {
-      if (element.nota === 5) {
+    this.evaluationSevice.getAll().subscribe(
+      response => {
+        console.log('response', response);
+        this.all = response.body;
+      }
+    );
+    this.all.forEach(element => {
+      if (element.clean_hospital === 5) {
         this.cleanlinessData[0]++;
       }
       // tslint:disable-next-line: one-line
-      else if (element.nota === 4) {
+      else if (element.clean_hospital === 4) {
         this.cleanlinessData[1]++;
       }
       // tslint:disable-next-line: one-line
-      else if (element.nota === 3) {
+      else if (element.clean_hospital === 3) {
         this.cleanlinessData[2]++;
       }
       // tslint:disable-next-line: one-line
-      else if (element.nota === 2) {
+      else if (element.clean_hospital === 2) {
         this.cleanlinessData[3]++;
       } else {
         this.cleanlinessData[4]++;
       }
-    });
-    this.trato.forEach(element => {
-      if (element.nota === 5) {
+      if (element.personal_relation === 5) {
         this.treatmentData[0]++;
       }
       // tslint:disable-next-line: one-line
-      else if (element.nota === 4) {
+      else if (element.personal_relation === 4) {
         this.treatmentData[1]++;
       }
       // tslint:disable-next-line: one-line
-      else if (element.nota === 3) {
+      else if (element.personal_relation === 3) {
         this.treatmentData[2]++;
       }
       // tslint:disable-next-line: one-line
-      else if (element.nota === 2) {
+      else if (element.personal_relation === 2) {
         this.treatmentData[3]++;
       } else {
         this.treatmentData[4]++;
       }
-    });
-    this.puntualidad.forEach(element => {
-      if (element.nota === 5) {
+      if (element.punctuality === 5) {
         this.puntualityData[0]++;
       }
       // tslint:disable-next-line: one-line
-      else if (element.nota === 4) {
+      else if (element.punctuality === 4) {
         this.puntualityData[1]++;
       }
       // tslint:disable-next-line: one-line
-      else if (element.nota === 3) {
+      else if (element.punctuality === 3) {
         this.puntualityData[2]++;
       }
       // tslint:disable-next-line: one-line
-      else if (element.nota === 2) {
+      else if (element.punctuality === 2) {
         this.puntualityData[3]++;
       } else {
         this.puntualityData[4]++;

@@ -16,6 +16,7 @@ export class SalonManagementComponent implements OnInit {
   idSalon = 0;
   salon: any;
   salonID: any;
+  types = ['women', 'man', 'children'];
 
   constructor( private salonService: SalonService) {
     this.salon = [
@@ -41,6 +42,12 @@ export class SalonManagementComponent implements OnInit {
     this.listSalon = false;
     this.editSalon = false;
     this.salonID = id;
+    for (let aux = 0; aux <= this.types.length; aux++) {
+      if (this.types[aux] === this.salonID.type) {
+        [this.types[0], this.types[aux]] = [this.types[aux], this.types[0]];
+        break;
+      }
+    }
   }
 
   salonCreate() {

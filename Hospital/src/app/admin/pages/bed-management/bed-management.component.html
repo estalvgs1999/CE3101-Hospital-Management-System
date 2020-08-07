@@ -65,7 +65,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="report" class="nav-link">
             <i class="fa fa-bar-chart mr-3 text-primary fa-fw"></i>
             Reporte Áreas de Mejora
           </a>
@@ -198,12 +198,12 @@
           <div class="scrollbar" id="style-2">
             <table class="table table-hover" data-sort-order="desc">
               <tbody>
-                <tr *ngFor="let x of bed" (click)="bedView(x.id)">
+                <tr *ngFor="let x of bed" (click)="bedView(x)">
                   <td style="width: 27%;">
                     {{ x.id }}
                   </td>
                   <td style="width: 32%;">
-                    {{ x.salon }}
+                    {{ x.room_id }}
                   </td>
                   <td>
                     {{ x.uci }}
@@ -293,19 +293,13 @@
                   <!-- First internal column -->
                   <div class="col-md-5" id="dataContainer">
                     <div class="form-group">
-                      <h2 style="font-weight: bold;">ID</h2>
+                      <h2 style="font-weight: bold;" *ngIf="editBed || viewBed">ID</h2>
                       <h3 *ngIf="viewBed">{{ bedID.id }}</h3>
                       <input
                         class="form-control mr-sm-2"
                         type="text"
-                        placeholder="ID"
-                        *ngIf="createBed"
-                        aria-label="labelID"
-                      />
-                      <input
-                        class="form-control mr-sm-2"
-                        type="text"
-                        placeholder="{{ bedID.id }}"
+                        id="IdData"
+                        value="{{ bedID.id }}"
                         *ngIf="editBed"
                         aria-label="labelID"
                         disabled
@@ -314,22 +308,14 @@
                     <div class="form-group">
                       <h2 style="font-weight: bold;">SALÓN</h2>
                       <h3 *ngIf="viewBed">
-                        {{ bedID.salon }}
+                        {{ bedID.room_id }}
                       </h3>
-                      <input
-                        class="form-control mr-sm-2"
-                        type="text"
-                        placeholder="Salón"
-                        *ngIf="createBed"
-                        aria-label="labelID"
-                      />
-                      <input
-                        class="form-control mr-sm-2"
-                        type="text"
-                        placeholder="{{ bedID.salon }}"
-                        *ngIf="editBed"
-                        aria-label="labelID"
-                      />
+                      <select class="mr-sm-2" *ngIf="createBed" id="RoomNewData">
+                        <option *ngFor="let p of salon" value="{{p.id}}"> {{p.id}} </option>
+                      </select>
+                      <select class="mr-sm-2" *ngIf="editBed" id="RoomData">
+                        <option *ngFor="let p of salon" value="{{p.id}}"> {{p.id}} </option>
+                      </select>
                     </div>
                     <div class="form-group">
                       <h2 style="font-weight: bold;">UCI</h2>
@@ -339,6 +325,7 @@
                       <input
                         class="form-control mr-sm-2"
                         type="text"
+                        id="UciNewData"
                         placeholder="UCI"
                         *ngIf="createBed"
                         aria-label="labelID"
@@ -346,7 +333,8 @@
                       <input
                         class="form-control mr-sm-2"
                         type="text"
-                        placeholder="{{ bedID.uci }}"
+                        id="UciData"
+                        value="{{ bedID.uci }}"
                         *ngIf="editBed"
                         aria-label="labelID"
                       />
@@ -385,13 +373,9 @@
                       </div>
                     </div>
                     <div class="form-group" *ngIf="createBed || editBed">
-                      <input
-                        class="form-control mr-sm-2"
-                        type="text"
-                        #Data
-                        placeholder="Ingrese Nuevo Equipo Médico"
-                        aria-label="labelID"
-                      />
+                      <select class="mr-sm-2" name="Data" id="Data" #Data>
+                        <option *ngFor="let z of Equip" value="{{z.name}}"> {{z.name}} </option>
+                      </select>
                       <div>
                         <button
                           type="button"
