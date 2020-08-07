@@ -777,6 +777,47 @@ http://www.tooplate.com/view/2098-health
     color: #ffffff;
   }
 
+  /*---------------------------------------
+      Register             
+  -----------------------------------------*/
+
+  #register {
+    padding-top: 100px;
+  }
+
+  #register label {
+    color: #393939;
+    font-weight: 500;
+  }
+
+  #register .form-control {
+    background: #f9f9f9;
+    border: none;
+    border-radius: 3px;
+    box-shadow: none;
+    font-size: 14px;
+    font-weight: normal;
+    margin-bottom: 15px;
+    transition: all ease-in-out 0.4s;
+  }
+
+  #register input,
+  #register select {
+    height: 45px;
+  }
+
+  #register button#cf-submit2 {
+    background: #a5c422;
+    color: #ffffff;
+    font-weight: 600;
+    height: 55px;
+  }
+
+  #register button#cf-submit2:hover {
+    background: #393939;
+    color: #ffffff;
+  }
+
 
   /*---------------------------------------
      FOOTER              
