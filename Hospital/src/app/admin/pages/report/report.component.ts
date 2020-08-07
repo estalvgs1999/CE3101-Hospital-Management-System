@@ -17,7 +17,7 @@ export class ReportComponent implements OnInit {
   aseo: any;
   trato: any;
   puntualidad: any;
-  all: any;
+  all: any = [];
   cleanlinessData = [0, 0, 0, 0, 0];
   treatmentData = [0, 0, 0, 0, 0];
   puntualityData = [0, 0, 0, 0, 0];
@@ -53,62 +53,63 @@ export class ReportComponent implements OnInit {
       response => {
         console.log('response', response);
         this.all = response.body;
+        this.all.forEach(element => {
+          console.log(element);
+          if (element.clean_hospital === 5) {
+            this.cleanlinessData[0]++;
+          }
+          // tslint:disable-next-line: one-line
+          else if (element.clean_hospital === 4) {
+            this.cleanlinessData[1]++;
+          }
+          // tslint:disable-next-line: one-line
+          else if (element.clean_hospital === 3) {
+            this.cleanlinessData[2]++;
+          }
+          // tslint:disable-next-line: one-line
+          else if (element.clean_hospital === 2) {
+            this.cleanlinessData[3]++;
+          } else {
+            this.cleanlinessData[4]++;
+          }
+          if (element.personal_relation === 5) {
+            this.treatmentData[0]++;
+          }
+          // tslint:disable-next-line: one-line
+          else if (element.personal_relation === 4) {
+            this.treatmentData[1]++;
+          }
+          // tslint:disable-next-line: one-line
+          else if (element.personal_relation === 3) {
+            this.treatmentData[2]++;
+          }
+          // tslint:disable-next-line: one-line
+          else if (element.personal_relation === 2) {
+            this.treatmentData[3]++;
+          } else {
+            this.treatmentData[4]++;
+          }
+          if (element.punctuality === 5) {
+            this.puntualityData[0]++;
+          }
+          // tslint:disable-next-line: one-line
+          else if (element.punctuality === 4) {
+            this.puntualityData[1]++;
+          }
+          // tslint:disable-next-line: one-line
+          else if (element.punctuality === 3) {
+            this.puntualityData[2]++;
+          }
+          // tslint:disable-next-line: one-line
+          else if (element.punctuality === 2) {
+            this.puntualityData[3]++;
+          } else {
+            this.puntualityData[4]++;
+          }
+        });
+        this.createDoughnut();
       }
     );
-    this.all.forEach(element => {
-      if (element.clean_hospital === 5) {
-        this.cleanlinessData[0]++;
-      }
-      // tslint:disable-next-line: one-line
-      else if (element.clean_hospital === 4) {
-        this.cleanlinessData[1]++;
-      }
-      // tslint:disable-next-line: one-line
-      else if (element.clean_hospital === 3) {
-        this.cleanlinessData[2]++;
-      }
-      // tslint:disable-next-line: one-line
-      else if (element.clean_hospital === 2) {
-        this.cleanlinessData[3]++;
-      } else {
-        this.cleanlinessData[4]++;
-      }
-      if (element.personal_relation === 5) {
-        this.treatmentData[0]++;
-      }
-      // tslint:disable-next-line: one-line
-      else if (element.personal_relation === 4) {
-        this.treatmentData[1]++;
-      }
-      // tslint:disable-next-line: one-line
-      else if (element.personal_relation === 3) {
-        this.treatmentData[2]++;
-      }
-      // tslint:disable-next-line: one-line
-      else if (element.personal_relation === 2) {
-        this.treatmentData[3]++;
-      } else {
-        this.treatmentData[4]++;
-      }
-      if (element.punctuality === 5) {
-        this.puntualityData[0]++;
-      }
-      // tslint:disable-next-line: one-line
-      else if (element.punctuality === 4) {
-        this.puntualityData[1]++;
-      }
-      // tslint:disable-next-line: one-line
-      else if (element.punctuality === 3) {
-        this.puntualityData[2]++;
-      }
-      // tslint:disable-next-line: one-line
-      else if (element.punctuality === 2) {
-        this.puntualityData[3]++;
-      } else {
-        this.puntualityData[4]++;
-      }
-    });
-    this.createDoughnut();
   }
 
   reportCleanliness() {

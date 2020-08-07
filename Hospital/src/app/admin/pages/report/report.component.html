@@ -124,16 +124,16 @@
             <nav class="navbar" style="background-color: #255070;">
               <!-- Column title -->
               <div
-                class="col-md-1"
-                style="font-weight: bold; font-size: 20px; color: #ffffff;"
-              >
-                ID
-              </div>
-              <div
                 class="col-md-2"
                 style="font-weight: bold; font-size: 20px; color: #ffffff;"
               >
                 NOTA
+              </div>
+              <div
+                class="col-md-1"
+                style="font-weight: bold; font-size: 20px; color: #ffffff;"
+              >
+                ID
               </div>
               <div class="col-md-1"></div>
               <!-- End column title -->
@@ -203,11 +203,11 @@
               >
                 <tbody>
                   <tr *ngFor="let x of all">
-                    <td style="width: 20%; text-align: center;">
-                      {{ x.id }}
-                    </td>
                     <td>
                       {{ x.clean_hospital }}
+                    </td>
+                    <td style="width: 20%; text-align: center;">
+                      {{ x.id }}
                     </td>
                   </tr>
                 </tbody>
@@ -222,11 +222,11 @@
               >
                 <tbody>
                   <tr *ngFor="let x of all">
-                    <td style="width: 20%; text-align: center;">
-                      {{ x.id }}
-                    </td>
                     <td>
                       {{ x.personal_relation }}
+                    </td>
+                    <td style="width: 20%; text-align: center;">
+                      {{ x.id }}
                     </td>
                   </tr>
                 </tbody>
@@ -241,11 +241,11 @@
               >
                 <tbody>
                   <tr *ngFor="let x of all">
-                    <td style="width: 20%; text-align: center;">
-                      {{ x.id }}
-                    </td>
                     <td>
                       {{ x.punctuality }}
+                    </td>
+                    <td style="width: 20%; text-align: center;">
+                      {{ x.id }}
                     </td>
                   </tr>
                 </tbody>
