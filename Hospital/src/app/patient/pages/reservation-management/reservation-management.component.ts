@@ -14,7 +14,7 @@ export class ReservationManagementComponent implements OnInit {
   patient = {dni: 209876, name: 'Olman', lastName: 'Castro Hernández', age: 56, sex: 'Masculino'};
   proceduresNameList: any;
   procedureNameSelectList: any[] = [];
-  patientInformation: boolean = true;
+  patientInformation = true;
 
   constructor() {
     this.procedureList = [
@@ -38,11 +38,22 @@ export class ReservationManagementComponent implements OnInit {
 
   editProcedure() {
     this.edit = true;
+    this.patientInformation = false;
   }
 
   back() {
     this.edit = false;
     this.add = false;
+    this.patientInformation = true;
+  }
+
+  changeAddMedicalHistory() {
+    this.add = true;
+    this.patientInformation = false;
+  }
+
+  sendNewReservation(date: string) {
+    console.log(date, this.procedureNameSelectList);
   }
 
   // Add a procedure in the list for send to Data Base
