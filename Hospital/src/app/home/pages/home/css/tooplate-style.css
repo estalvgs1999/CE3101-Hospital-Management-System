@@ -818,6 +818,18 @@ http://www.tooplate.com/view/2098-health
     color: #ffffff;
   }
 
+  #register button#cf-submit3 {
+    background: #a5c422;
+    color: #ffffff;
+    font-weight: 600;
+    height: 55px;
+  }
+
+  #register button#cf-submit3:hover {
+    background: #393939;
+    color: #ffffff;
+  }
+
 
   /*---------------------------------------
      FOOTER              

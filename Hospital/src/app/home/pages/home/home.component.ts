@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LocationService } from '../../services/location.service';
+import { Pathology } from '../../interfaces/pathology';
 
 
 @Component({
@@ -17,6 +18,8 @@ export class HomeComponent implements OnInit {
   provincesKey: string;
   cantons: any;
   distrits: any;
+  pathology: Pathology;
+  pathologyList: any[] = [];
 
   // tslint:disable-next-line: variable-name
   constructor(private _http: LocationService) {}
@@ -25,6 +28,27 @@ export class HomeComponent implements OnInit {
     this._http.getProvince().subscribe(data => {
       this.provinces = data;
     });
+  }
+
+  // Add a pathology to the list
+  addPathology(pathologyname: string, medicine: string) {
+
+    this.pathology = {name: pathologyname, treatment: medicine};
+
+    const i = this.pathologyList.indexOf(this.pathology);
+
+    if (i === -1) {
+      this.pathologyList.push(this.pathology);
+    }
+  }
+
+  // Delete a medicine for the list
+  deletePathology(value: Pathology): void {
+    const i = this.pathologyList.indexOf(value);
+
+    if (i !== -1) {
+      this.pathologyList.splice(i, 1);
+    }
   }
 
   send(name: string, lastName: string, dni: number, password: string,

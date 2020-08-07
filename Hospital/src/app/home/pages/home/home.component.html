@@ -149,7 +149,7 @@ http://www.tooplate.com/view/2098-health
                 <p style="text-align: justify;">
                   Una biopsia de seno es un procedimiento en el que se extrae
                   una pequeña muestra de tejido mamario para hacer pruebas. El
-                  tejido se examina con un microscopio para detectar cáncer de
+                  tejido es examinado con el fin de detectar cáncer de
                   seno.
                 </p>
               </div>
@@ -521,17 +521,20 @@ http://www.tooplate.com/view/2098-health
                               >
                                 Debe ingresar datos para poder agregar.
                               </div>
-                              <input
-                                type="submit"
-                                class="btnAdd"
-                                value="Añadir"
+                              
+                              <button
+                              type="submit"
+                              class="form-control"
+                              id="cf-submit3"
+                              name="submit"
+                              style="height: 70%; width: 30%;"
                                 [disabled]="
                                   !(pathology.valid && medicine.valid)
                                 "
                                 (click)="
                                   addPathology(pathology.value, medicine.value)
                                 "
-                              />
+                              >Añandir</button>
                             </div>
                             <!-- /Pathology Input-->
 
