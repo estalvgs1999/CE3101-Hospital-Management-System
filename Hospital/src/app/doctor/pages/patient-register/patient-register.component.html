@@ -179,6 +179,27 @@
                             </div>
                             <!--/Dni Input-->
 
+                            <!--Password Input-->
+                            <div class="form-group">
+                              <h5 style="color: gray;">Contraseña</h5>
+                              <input
+                                type="text"
+                                required
+                                ngModel
+                                name="password"
+                                #password="ngModel"
+                                class="form-control"
+                                placeholder="Contraseña *"
+                              />
+                              <div
+                                class="alert alert-danger"
+                                *ngIf="password.touched && !password.valid"
+                              >
+                                Debe ingresar una contraseña válida.
+                              </div>
+                            </div>
+                            <!--/Password Input-->
+
                             <!-- Date Input-->
                             <div class="form-group">
                               <h5 style="color: gray;">Fecha de nacimiento</h5>
@@ -235,9 +256,10 @@
                                 name="province"
                                 ngModel
                                 #province="ngModel"
+                                (click)="getCanton(province.value)"
                               >
-                                <option *ngFor="let procedure of procedures">
-                                  {{ procedure }}
+                                <option *ngFor="let province of provinces | keyvalue">
+                                  {{ province.value }}
                                 </option>
                               </select>
                               <div
@@ -258,9 +280,10 @@
                                 name="canton"
                                 ngModel
                                 #canton="ngModel"
+                                (click)="getDistrit(canton.value)"
                               >
-                                <option *ngFor="let procedure of procedures">
-                                  {{ procedure }}
+                                <option *ngFor="let canton of cantons | keyvalue">
+                                  {{ canton.value }}
                                 </option>
                               </select>
                               <div
@@ -282,8 +305,8 @@
                                 ngModel
                                 #distrit="ngModel"
                               >
-                                <option *ngFor="let procedure of procedures">
-                                  {{ procedure }}
+                                <option *ngFor="let distrit of distrits | keyvalue">
+                                  {{ distrit.value }}
                                 </option>
                               </select>
                               <div
@@ -402,6 +425,8 @@
                               type="submit"
                               class="btnRegister"
                               value="Registrar"
+                              (click)="send(name.value, lastName.value, dni.value, password.value,
+                            date.value, phone.value, province.value, canton.value, distrit.value, address.value)"
                             />
                           </div>
                         </div>
