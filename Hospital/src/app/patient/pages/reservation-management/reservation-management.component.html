@@ -245,6 +245,22 @@
                               />
                             </div>
                           </div>
+                          <div class="form-group">
+                            <h4 style="color: gray;">Número de cama</h4>
+                            <div>
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Número de cama"
+                                required
+                                departureDate="bed"
+                                ngModel
+                                #bed="ngModel"
+                                id="bed"
+                                disabled
+                              />
+                            </div>
+                          </div>
                         </div>
                         <!-- /First internal column -->
 
@@ -382,6 +398,33 @@
                              </div>
                            </div>
                          </div>
+
+                         <!-- Bed -->
+                         <div class="form-group">
+                          <h5 style="color: gray;">Número de cámara</h5>
+                          <select
+                            required
+                            class="form-control"
+                            name="bed"
+                            ngModel
+                            #bed ="ngModel"
+
+                          >
+                            <option *ngFor="let bed of beds | keyvalue">
+                              
+                                {{ bed.id }}
+                              
+                            </option>
+                          </select>
+                          <div
+                            class="alert alert-danger"
+                            *ngIf="bed.touched && !bed.valid"
+                          >
+                            Debe ingresar una cama.
+                          </div>
+                        </div>
+                        <!-- /Bed -->
+
                          <div class="form-group">
                            <h4 style="color: gray;">Fecha de salida</h4>
                            <div>
