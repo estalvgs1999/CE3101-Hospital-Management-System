@@ -7,6 +7,7 @@ import { AdminModule } from './admin/admin.module';
 import { DoctorModule } from './doctor/doctor.module';
 import { PatientModule } from './patient/patient.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeModule } from './home/home.module';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -20,8 +21,9 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     DoctorModule,
     PatientModule,
-    FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HomeModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

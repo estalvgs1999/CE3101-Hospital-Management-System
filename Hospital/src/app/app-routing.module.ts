@@ -12,7 +12,11 @@ const routes: Routes = [
   {
     path: 'patient', loadChildren: () => import('./patient/patient.module').then(m => m.PatientModule)
   },
-  { path: '', redirectTo: 'patient', pathMatch: 'full' }
+  { path: '', redirectTo: 'patient', pathMatch: 'full' },
+  {
+    path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+  },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({
