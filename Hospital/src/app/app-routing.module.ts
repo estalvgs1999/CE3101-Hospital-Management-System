@@ -8,11 +8,9 @@ const routes: Routes = [
   {
     path: 'doctor', loadChildren: () => import('./doctor/doctor.module').then(m => m.DoctorModule)
   },
-  { path: '', redirectTo: 'doctor', pathMatch: 'full' },
   {
     path: 'patient', loadChildren: () => import('./patient/patient.module').then(m => m.PatientModule)
   },
-  { path: '', redirectTo: 'patient', pathMatch: 'full' },
   {
     path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
   },

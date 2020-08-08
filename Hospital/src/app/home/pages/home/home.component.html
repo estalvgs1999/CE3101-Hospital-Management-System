@@ -328,6 +328,28 @@ http://www.tooplate.com/view/2098-health
                             </div>
                             <!--/Dni Input-->
 
+                            <!-- Sex Input-->
+                            <div class="form-group">
+                              <h5 style="color: gray;">Sexo</h5>
+                              <select
+                                required
+                                class="form-control"
+                                name="sex"
+                                ngModel
+                                #sex="ngModel"
+                              >
+                                <option >Masculino</option>
+                                <option >Femenino</option>
+                              </select>
+                              <div
+                                class="alert alert-danger"
+                                *ngIf="sex.touched && !sex.valid"
+                              >
+                                Debe ingresar un sexo.
+                              </div>
+                            </div>
+                            <!-- /Sex Input-->
+
                             <!--Password Input-->
                             <div class="form-group">
                               <h5 style="color: gray;">Contraseña</h5>
@@ -581,7 +603,7 @@ http://www.tooplate.com/view/2098-health
                             id="cf-submit2"
                             name="submit"
 
-                            (click)="send(name.value, lastName.value, dni.value, password.value,
+                            (click)="send(name.value, lastName.value, dni.value, sex.value, password.value,
                             date.value, phone.value, province.value, canton.value, distrit.value, address.value)"
                             >
                     Ingresar

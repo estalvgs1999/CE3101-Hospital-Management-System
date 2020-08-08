@@ -9,6 +9,7 @@ import { PersonalManagementComponent } from './pages/personal-management/persona
 import { SalonManagementComponent } from './pages/salon-management/salon-management.component';
 
 const routes: Routes = [
+    {path: '', component: PersonalManagementComponent},
     { path : 'report', component: ReportComponent},
     { path : 'bed', component : BedManagementComponent },
     { path : 'procedure', component: MedicalProcedureManagementComponent},

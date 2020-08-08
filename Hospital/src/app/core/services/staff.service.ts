@@ -43,4 +43,11 @@ export class StaffService {
   getMember(id:string){
     return this.http.get(`${environment.API.HOSPITAL}/staff/${id}`, {observe: 'response'});
   }
+  /**
+   * Login of the staff
+   * @param credentials of the user
+   */
+  login(credentials: object){
+    return this.http.post(`${environment.API.HOSPITAL}/staff/login`, credentials, {observe: 'response'});
+  }
 }
