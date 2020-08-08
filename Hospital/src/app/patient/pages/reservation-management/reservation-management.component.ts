@@ -29,11 +29,11 @@ export class ReservationManagementComponent implements OnInit {
     private procedureService: ProcedureService,
     private router: Router) {
     this.ReservationList = [
-      {arrival_date: '23-04-2020', departure_date: '05-05-2020', procedures: ['uno', 'dos', 'tres', 'cuatro']},
-      {arrival_date: '23-04-2020', departure_date: '05-05-2020', procedures: ['uno', 'dos', 'tres', 'cuatro']},
-      {arrival_date: '23-04-2020', departure_date: '05-05-2020', procedures: ['uno', 'dos', 'tres', 'cuatro']},
-      {arrival_date: '23-04-2020', departure_date: '05-05-2020', procedures: ['uno', 'dos', 'tres', 'cuatro']},
-      {arrival_date: '23-04-2020', departure_date: '05-05-2020', procedures: ['uno', 'dos', 'tres', 'cuatro']},
+      {arrival_date: '23-04-2020', departure_date: '05-05-2020', bed_id: '2',procedures: [{name: 'uno'},  {name: 'dos'},  {name: 'dos'},  {name: 'cuatro'}]},
+      {arrival_date: '23-04-2020', departure_date: '05-05-2020', bed_id: '2',procedures: [{name: 'uno'},  {name: 'dos'},  {name: 'dos'},  {name: 'cuatro'}]},
+      {arrival_date: '23-04-2020', departure_date: '05-05-2020', bed_id: '2',procedures: [{name: 'uno'},  {name: 'dos'},  {name: 'dos'},  {name: 'cuatro'}]},
+      {arrival_date: '23-04-2020', departure_date: '05-05-2020', bed_id: '2',procedures: [{name: 'uno'},  {name: 'dos'},  {name: 'dos'},  {name: 'cuatro'}]},
+      {arrival_date: '23-04-2020', departure_date: '05-05-2020', bed_id: '2',procedures: [ {name: 'uno'},  {name: 'dos'},  {name: 'dos'},  {name: 'cuatro'}]},
     ];
     this.proceduresNameList = [
       {name: 'jndjcd'},
@@ -69,8 +69,10 @@ export class ReservationManagementComponent implements OnInit {
   }
 
   editProcedure(reservation: object, procedureList: object[]) {
+    
     this.editReservation = reservation;
     this.procedureNameSelectList = procedureList;
+    console.log('edit', this.editReservation, 'procedure',this.procedureNameSelectList);
     this.edit = true;
     this.patientInformation = false;
   }
@@ -133,9 +135,16 @@ export class ReservationManagementComponent implements OnInit {
       window.location.reload();
     });
   }
-  updateReservation(data: object, id: string) {
+  updateReservation(newDate: string, id: string) {
+    const data = {
+      ArrivalDate: newDate,
+      PatientDni: this.patient.dni,
+      Procedures: this.procedureNameSelectList
+    }
+    console.log('data', data);
     this.reservationService.updateReservation(id, data).subscribe( upRess => {
       console.log('update res', upRess);
+      window.location.reload();
     });
   }
 }

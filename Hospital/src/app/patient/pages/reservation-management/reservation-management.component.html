@@ -139,7 +139,7 @@
           </div>
           <!-- /Reservation information -->
 
-          <!-- Edit Reservation for information -->
+          <!-- Add Reservation for information -->
           <div style="background-color: white; border-radius: 3rem;" *ngIf="add">
             <div class="row">
               <!-- First column -->
@@ -261,9 +261,9 @@
               <!-- /Second column -->
             </div>
           </div>
-          <!-- /Edit Reservation for information -->
+          <!-- /Add Reservation for information -->
 
-          <!-- Add Reservation for information -->
+          <!-- Edit Reservation for information -->
           <div style="background-color: white; border-radius: 3rem;" *ngIf="edit">
             <div class="row">
               <!-- First column -->
@@ -295,9 +295,9 @@
                             Fecha de ingreso
                           </h4>
                           <div>
-                            <input required type="date" name="startDate" ngModel #startDate="ngModel" [(ngModel)] = "editReservation.arrival_date" max="3000-12-31"
+                            <input required type="date" name="startDate" ngModel #startDate="ngModel" [(ngModel)]="editReservation.arrival_date" value="editReservation.arrival_date"  max="3000-12-31"
                               min="1000-01-01" class="form-control" id="startDate" />
-                            <div class="alert alert-danger" *ngIf="startDate.touched && !startDate.valid">
+                            <div class="alert alert-danger" *ngIf="!startDate.valid">
                               Debe ingresar una fecha válida.
                             </div>
                           </div>
@@ -306,7 +306,7 @@
                           <h4 style="color: gray;">Fecha de salida</h4>
                           <div>
                             <input type="text" class="form-control" placeholder="Fecha calculada" required
-                              departureDate="departureDate" ngModel #departureDate="ngModel" [(ngModel)] = "editReservation.departure_date" id="departureDate"
+                              departureDate="departureDate" ngModel #departureDate="ngModel" [(ngModel)] = "editReservation.departure_date"  value="{{editReservation.departure_date}}" id="departureDate"
                               disabled />
                           </div>
                         </div>
@@ -314,7 +314,7 @@
                           <h4 style="color: gray;">Número de cama</h4>
                           <div>
                             <input type="text" class="form-control" placeholder="Número de cama" required
-                              departureDate="bed" ngModel #bed="ngModel" [(ngModel)] = "editReservation.bedId" id="bed" disabled />
+                              departureDate="bed" ngModel #bed="ngModel" [(ngModel)] = "editReservation.bed_id" value="{{editReservation.bed_id}}" id="bed" disabled />
                           </div>
                         </div>
                       </div>
@@ -353,7 +353,7 @@
                           </div>
                           <br>
                           <div class="text-center">
-                            <button type="button" class="btn btn-success" style="width: 60%;">Guardar</button>
+                            <button type="button" class="btn btn-success" style="width: 60%;" (click)="updateReservation(startDate.value)" >Guardar</button>
                           </div>
                           <br>
                           <div class="text-center">
@@ -372,7 +372,7 @@
               <!-- /Second column -->
             </div>
           </div>
-          <!-- /Add Reservation for information -->
+          <!-- /Edit Reservation for information -->
         </div>
       </div>
     </div>

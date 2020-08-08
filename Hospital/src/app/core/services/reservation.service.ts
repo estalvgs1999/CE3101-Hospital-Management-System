@@ -9,6 +9,9 @@ export class ReservationService {
 
   constructor(private http: HttpClient) {
   }
+    /**
+     * 
+     */
     getAllReservation() {
       return this.http.get(`${environment.API.HOSPITAL}/reservation`, {observe: 'response'});
     }
