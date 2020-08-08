@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Pathology } from '../../interfaces/Pathology';
 import { LocationService } from '../../services/location.service';
 import { Router } from '@angular/router';
+import { PathologyService } from 'src/app/core/services/pathology.service';
+import { PatientService } from 'src/app/core/services/patient.service';
 
 @Component({
   selector: 'app-patient-register',
@@ -18,7 +20,7 @@ export class PatientRegisterComponent implements OnInit {
   distrits: any;
 
   // tslint:disable-next-line: variable-name
-  constructor(private _http: LocationService) { }
+  constructor(private _http: LocationService, private patientService: PatientService) { }
 
   ngOnInit() {
     this._http.getProvince().subscribe(data => {
@@ -29,7 +31,7 @@ export class PatientRegisterComponent implements OnInit {
   // Add a pathology to the list
   addPathology(pathologyname: string, medicine: string) {
 
-    this.pathology = {name: pathologyname, treatment: medicine};
+    this.pathology = { name: pathologyname, treatment: medicine };
 
     const i = this.pathologyList.indexOf(this.pathology);
 
@@ -47,37 +49,59 @@ export class PatientRegisterComponent implements OnInit {
     }
   }
 
-send(name: string, lastName: string, dni: number, password: string,
-     date: string, phone: string, province: string, canton: string, distrit: string, address: string) {
+  send(name: string, lastName: string, dni: number, sex: string, password: string,
+    date: string, phone: string, province: string, canton: string, district: string, address: string) {
+    let sendSex;
+    if (sex === 'Masculino') {
+      sendSex = 'male';
+    } else {
+      sendSex = 'female';
+    }
+    const dataP = {
+      dni: dni.toString(),
+      password,
+      name,
+      lastname: lastName,
+      dob: date,
+      sex: sendSex,
+      phone: phone.toString(),
+      province,
+      canton,
+      district,
+      other_signs: address,
+      pathologies: this.pathologyList
+    };
+    console.log('data', dataP);
+    this.patientService.createPatient(dataP).subscribe(res => {
+      console.log('res create', res);
+    });
+  }
 
- console.log(name, lastName, dni, password, date, phone, province, canton, distrit, address);
-}
+  getCanton(cantonId: string) {
+    // tslint:disable-next-line: forin
+    for (const key in this.provinces) {
+      const value = this.provinces[key];
+      if (value === cantonId) {
+        this.provincesKey = key;
+        this._http.getCanton(key).subscribe(data => {
+          this.cantons = data;
+        });
+      }
 
-getCanton(cantonId: string) {
- // tslint:disable-next-line: forin
- for (const key in this.provinces) {
-   const value = this.provinces[key];
-   if (value === cantonId) {
-     this.provincesKey = key;
-     this._http.getCanton(key).subscribe(data => {
-       this.cantons = data;
-     });
-   }
+    }
+  }
 
-}
-}
+  getDistrit(distritId: string) {
 
-getDistrit(distritId: string) {
-
- // tslint:disable-next-line: forin
- for (const key in this.cantons) {
-   const value = this.cantons[key];
-   if (value === distritId) {
-     this._http.getDistrit(this.provincesKey, key).subscribe(data => {
-       this.distrits = data;
-     });
-   }
- }
-}
+    // tslint:disable-next-line: forin
+    for (const key in this.cantons) {
+      const value = this.cantons[key];
+      if (value === distritId) {
+        this._http.getDistrit(this.provincesKey, key).subscribe(data => {
+          this.distrits = data;
+        });
+      }
+    }
+  }
 
 }

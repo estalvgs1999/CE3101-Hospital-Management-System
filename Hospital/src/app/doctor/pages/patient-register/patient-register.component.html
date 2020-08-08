@@ -71,15 +71,6 @@
         style="font-size: 35px; font-weight: bold;"
         >Agregar paciente
       </span>
-      <span class="px-3 navbar-brand my-2 my-sm-0" *ngIf="patientInformation">
-        <button
-          class="btn btn-outline"
-          type="submit"
-          (click)="changeAddMedicalHistory()"
-        >
-          <img src="https://img.icons8.com/ios/50/000000/add-property.png" />
-        </button>
-      </span>
     </div>
     <!-- /Horizontal navbar -->
 
@@ -178,6 +169,28 @@
                               </div>
                             </div>
                             <!--/Dni Input-->
+
+                            <!-- Province Input-->
+                            <div class="form-group">
+                              <h5 style="color: gray;">Sexo</h5>
+                              <select
+                                required
+                                class="form-control"
+                                name="sex"
+                                ngModel
+                                #sex="ngModel"
+                              >
+                                <option >Masculino</option>
+                                <option >Femenino</option>
+                              </select>
+                              <div
+                                class="alert alert-danger"
+                                *ngIf="sex.touched && !sex.valid"
+                              >
+                                Debe ingresar un sexo.
+                              </div>
+                            </div>
+                            <!-- /Province Input-->
 
                             <!--Password Input-->
                             <div class="form-group">
@@ -425,7 +438,7 @@
                               type="submit"
                               class="btnRegister"
                               value="Registrar"
-                              (click)="send(name.value, lastName.value, dni.value, password.value,
+                              (click)="send(name.value, lastName.value, dni.value, sex.value, password.value,
                             date.value, phone.value, province.value, canton.value, distrit.value, address.value)"
                             />
                           </div>

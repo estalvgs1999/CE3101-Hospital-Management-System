@@ -15,4 +15,19 @@ export class ClinicalRecordsService {
   getRecordByPatientDni(dniPatient){
     return this.http.get(`${environment.API.HOSPITAL}/clinical-records/patient/${dniPatient}`, {observe: 'response'});
   }
+  /**
+   * Create a new record
+   * @param data of the new record
+   */
+  createRecord(data:object){
+    return this.http.post(`${environment.API.HOSPITAL}/clinical-records`, data, {observe: 'response'});
+  }
+  /**
+   * Update the treatment of the clinical record
+   * @param data of the clinical records
+   * @param id of the clinical record
+   */
+  updateRecord(data:object, id:string){
+    return this.http.patch(`${environment.API.HOSPITAL}/clinical-records/edit/${id}`, data, {observe: 'response'});
+  }
 }

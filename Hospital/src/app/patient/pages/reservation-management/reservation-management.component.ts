@@ -135,14 +135,14 @@ export class ReservationManagementComponent implements OnInit {
       window.location.reload();
     });
   }
-  updateReservation(newDate: string, id: string) {
+  updateReservation(newDate: string) {
     const data = {
       ArrivalDate: newDate,
       PatientDni: this.patient.dni,
       Procedures: this.procedureNameSelectList
     }
-    console.log('data', data);
-    this.reservationService.updateReservation(id, data).subscribe( upRess => {
+    console.log('data', data, 'id', this.editReservation['id']);
+    this.reservationService.updateReservation(this.editReservation['id'], data).subscribe( upRess => {
       console.log('update res', upRess);
       window.location.reload();
     });

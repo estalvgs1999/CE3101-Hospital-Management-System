@@ -26,6 +26,6 @@ export class PatientService {
    * @param data of the patient
    */
   createPatient(data) {
-    return this.http.post(`${environment.API.HOSPITAL}/patient`, {observe: 'response'});
+    return this.http.post(`${environment.API.HOSPITAL}/patient`, data, {observe: 'response'});
   }
 }

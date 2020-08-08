@@ -98,7 +98,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Cédula</th>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Primer Apellido</th>
+                    <th scope="col">Apellidos</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -111,7 +111,7 @@
                       {{ patient.name }}
                     </td>
                     <td (click)="changePage(patient.dni)">
-                      {{ patient.lastName }}
+                      {{ patient.lastname }}
                     </td>
                   </tr>
                 </tbody>
@@ -153,7 +153,7 @@
                         <div class="col-md-5">
                           <div class="form-group">
                             <h3 style="font-weight: bold;">
-                              {{ patient.name }} {{ patient.lastName }}
+                              {{ patient.name }} {{ patient.lastname }}
                             </h3>
                           </div>
                           <div class="form-group">
@@ -235,21 +235,21 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let patient of patientList">
+                    <tr *ngFor="let patientProcedure of patientProcedureList">
                       <td>
-                        {{ patient.dni }}
+                        {{ patientProcedure.date }}
                       </td>
                       <td>
-                        {{ patient.name }}
+                        {{ patientProcedure.procedure }}
                       </td>
                       <td>
-                        {{ patient.lastName }}
+                        {{ patientProcedure.treatment }}
                       </td>
                       <td>
                         <button
                           type="button"
                           class="btn btn-info"
-                          (click)="changeEditMedicalHistory()"
+                          (click)="changeEditMedicalHistory(patientProcedure)"
                           
                         >
                           Modificar
@@ -312,8 +312,8 @@
                     ngModel
                     #inputProcedure="ngModel"
                   >
-                    <option *ngFor="let procedure of procedures">
-                      {{ procedure }}
+                    <option *ngFor="let procedure of procedures" [value]="procedure.id">
+                      {{ procedure.name }}
                     </option>
                   </select>
                   <div
@@ -353,13 +353,7 @@
                     type="button"
                     class="btn btn-success"
                     id="button"
-                    [disabled]="
-                      !(
-                        startDate.valid &&
-                        inputProcedure.valid &&
-                        treatment.valid
-                      )
-                    "
+                    (click)="sendNewRecord(startDate.value, inputProcedure.value, treatment.value)"
                   >
                     <h4>Añadir</h4>
                   </button>
@@ -399,47 +393,37 @@
                 <div class="col-4 text-center">
                   <input
                     required
-                    type="date"
-                    name="startDate"
+                    type="text"
+                    name="startDate2"
                     ngModel
-                    #startDate="ngModel"
+                    #startDate2="ngModel"
+                    [(ngModel)] = "patientProcedure.date"
                     max="3000-12-31"
                     min="1000-01-01"
                     class="form-control"
-                    id="startDate"
+                    id="startDate2"
+                    disabled
                   />
-                  <div
-                    class="alert alert-danger"
-                    *ngIf="startDate.touched && !startDate.valid"
-                  >
-                    Debe ingresar una fecha válida.
-                  </div>
                 </div>
               </div>
               <div class="row" id="padding">
                 <div class="col-6 text-center">
-                  <h3>Procedimeinto Realizado</h3>
+                  <h3>Procedimiento Realizado</h3>
                 </div>
                 <div class="col-4 text-center">
-                  <select
+                  <input
                     required
-                    id="inputProcedure"
-                    placeholder="Seleccionar"
-                    class="form-control"
-                    name="inputProcedure"
+                    type="text"
+                    name="procedure2"
                     ngModel
-                    #inputProcedure="ngModel"
-                  >
-                    <option *ngFor="let procedure of procedures">
-                      {{ procedure }}
-                    </option>
-                  </select>
-                  <div
-                    class="alert alert-danger"
-                    *ngIf="inputProcedure.touched && !inputProcedure.valid"
-                  >
-                    Debe ingresar un procedimiento.
-                  </div>
+                    #procedure2="ngModel"
+                    [(ngModel)] = "patientProcedure.procedure"
+                    max="3000-12-31"
+                    min="1000-01-01"
+                    class="form-control"
+                    id="procedure2"
+                    disabled
+                  />
                 </div>
               </div>
               <div class="row" id="padding">
@@ -452,10 +436,12 @@
                     class="form-control"
                     placeholder="Ingrese Texto Aquí"
                     required
-                    treatment="treatment"
+                    name="treatment2"
+                    treatment="treatment2"
+                    [(ngModel)] = "patientProcedure.treatment"
                     ngModel
-                    #treatment="ngModel"
-                    id="treatment"
+                    #treatment2="ngModel"
+                    id="treatment2"
                   ></textarea>
                   <div
                     class="alert alert-danger"
@@ -471,13 +457,7 @@
                     type="button"
                     class="btn btn-success"
                     id="button"
-                    [disabled]="
-                      !(
-                        startDate.valid &&
-                        inputProcedure.valid &&
-                        treatment.valid
-                      )
-                    "
+                    (click)="sendEditRecord(treatment2.value)"
                   >
                     <h4>Modificar</h4>
                   </button>

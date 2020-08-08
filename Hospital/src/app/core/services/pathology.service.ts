@@ -15,4 +15,7 @@ export class PathologyService {
   getOnePathology(dniPatient: string) {
     return this.http.get(`${environment.API.HOSPITAL}/pathology/${dniPatient}`, {observe: 'response'});
   }
+  createPathologies(data: object) {
+    return this.http.post(`${environment.API.HOSPITAL}/pathology`, data, {observe: 'response'});
+  }
 }
