@@ -1,24 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hospital Tecnológico</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <!-- Vertical navbar -->
     <div class="vertical-nav" id="sidebar">
-      <!-- Logo -->
-      <div class="py-4 px-3 mb-4">
-        <div class="media d-flex align-items-center">
-          <img
-            src="https://res.cloudinary.com/mhmd/image/upload/v1556074849/avatar-1_tcnd60.png"
-            alt="..."
-            width="65"
-            class="mr-3 shadow-sm"
-          />
-          <div class="media-body">
-            <button type="button" class="btn" onclick="">
+        <!-- Logo -->
+        <div class="py-4 px-3 mb-4">
+            <div class="media d-flex align-items-center">
+                <img src="../../../../assets/images/logo.png" alt="..." width="100" class="mr-3 shadow-sm" />
+                <div class="media-body">
+                    <button type="button" class="btn" (click)="logout()">
               <img
                 src="https://cdn4.iconfinder.com/data/icons/internet-security-flat-2/32/Internet_Security_entrance_exit_log_out_arrow-512.png"
                 alt="button1"
@@ -26,131 +23,117 @@
               />
               <div class="card-inner"></div>
             </button>
-          </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <!-- End Logo -->
+        <!-- End Logo -->
 
-      <!-- Views -->
-      <ul class="nav flex-column mb-0">
-        <li class="nav-item">
-          <a href="patient" class="nav-link">
-            <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
-            Historial Clínico
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="patient/reservation" class="nav-link">
-            <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
-            Gestión de Reservaciones
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="patient/evaluation" class="nav-link">
-            <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
-            Evaluación del servicio
-          </a>
-        </li>
-      </ul>
-      <p
-        class="font-weight-bold"
-        style="
+        <!-- Views -->
+        <ul class="nav flex-column mb-0">
+            <li class="nav-item">
+                <a (click)="changeClinical()" class="nav-link">
+                    <i class="fa fa-th-large mr-3 text-primary fa-fw"></i> Historial Clínico
+                </a>
+            </li>
+            <li class="nav-item">
+                <a (click)="changeReservation()" class="nav-link">
+                    <i class="fa fa-address-card mr-3 text-primary fa-fw"></i> Gestión de Reservaciones
+                </a>
+            </li>
+            <li class="nav-item">
+                <a (click)="changeEvaluation()" class="nav-link">
+                    <i class="fa fa-address-card mr-3 text-primary fa-fw"></i> Evaluación del servicio
+                </a>
+            </li>
+        </ul>
+        <a class="font-weight-bold" href="https://github.com/BerthaBrenes/HospitalTecnologico-frontend" style="
           font-size: 18px;
           left: 48%;
           transform: translate(-50%, -50%);
           bottom: 0;
+          color: white;
           text-align: center;
           font-weight: bold;
           position: absolute;
-        "
-      >
-        Copyright: ORBE
-      </p>
-      <!-- Views -->
+        ">
+            Copyright: ORBE
+    </a>
+        <!-- Views -->
     </div>
     <!-- End vertical navbar -->
 
+
     <!-- Horizontal navbar -->
     <div class="horizontal-nav" id="sidebar">
-      <span
-        class="px-3 navbar-brand mb-0 h1"
-        style="font-size: 35px; font-weight: bold;"
-        *ngIf="!add && !edit"
-        >Danos tu Opinión
+        <span class="px-3 navbar-brand mb-0 h1" style="font-size: 35px; font-weight: bold;" *ngIf="!add && !edit">Danos tu Opinión
       </span>
     </div>
     <!-- End horizontal navbar -->
 
     <!-- Page content holder -->
     <div class="page-content py-3" id="content">
-      <div class="container">
-        <!-- Tables for the reports -->
-        <div class="row">
-          <div class="col-md-12">
-            <!-- Evaluation Information -->
-            <div style="background-color: white; border-radius: 2rem;">
-              <p style="padding-top: 1rem;">
-                Nuestro trabajo es proporcionar una ambiente de confianza y
-                respeto en el cual las personas se sientan comodas para realizar
-                sus procesos medicos. Por esto queremos que nos califiques tus
-                experiencias durante tu visita, para poder mejorar como nuestros
-                servicios.
-              </p>
-              <div
-                class="row"
-                style="text-align: center; font-size: 25px; font-weight: bold;"
-              >
-                <div class="col">
-                  <div>Insatisfecho</div>
-                  <div>
-                    <label class="start">★</label>
-                  </div>
-                </div>
-                <div class="col">
-                  <div>Mejorable</div>
-                  <div>
-                    <label class="start">★</label>
-                    <label class="start">★</label>
-                  </div>
-                </div>
-                <div class="col">
-                  <div>Regular</div>
-                  <div>
-                    <label class="start">★</label>
-                    <label class="start">★</label>
-                    <label class="start">★</label>
-                  </div>
-                </div>
-                <div class="col">
-                  <div>Aceptable</div>
-                  <div>
-                    <label class="start">★</label>
-                    <label class="start">★</label>
-                    <label class="start">★</label>
-                    <label class="start">★</label>
-                  </div>
-                </div>
-                <div class="col">
-                  <div>Exelente</div>
-                  <div>
-                    <label class="start">★</label>
-                    <label class="start">★</label>
-                    <label class="start">★</label>
-                    <label class="start">★</label>
-                    <label class="start">★</label>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <br />
-            <div style="background-color: white; border-radius: 2rem;">
-              <div class="col-md-12" style="padding-top: 2rem;">
-                <h4 style="text-align: center;">
-                  ¿Cómo fue el trato del personal?
-                </h4>
-              </div>
-              <div class="col-md-12" style="text-align: center;">
-                <label class="rating" style="text-align: center;">
+        <div class="container">
+            <!-- Tables for the reports -->
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Evaluation Information -->
+                    <div style="background-color: white; border-radius: 2rem;">
+                        <p style="padding-top: 1rem;">
+                            Nuestro trabajo es proporcionar una ambiente de confianza y respeto en el cual las personas se sientan comodas para realizar sus procesos medicos. Por esto queremos que nos califiques tus experiencias durante tu visita, para poder mejorar como nuestros
+                            servicios.
+                        </p>
+                        <div class="row" style="text-align: center; font-size: 25px; font-weight: bold;">
+                            <div class="col">
+                                <div>Insatisfecho</div>
+                                <div>
+                                    <label class="start">★</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div>Mejorable</div>
+                                <div>
+                                    <label class="start">★</label>
+                                    <label class="start">★</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div>Regular</div>
+                                <div>
+                                    <label class="start">★</label>
+                                    <label class="start">★</label>
+                                    <label class="start">★</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div>Aceptable</div>
+                                <div>
+                                    <label class="start">★</label>
+                                    <label class="start">★</label>
+                                    <label class="start">★</label>
+                                    <label class="start">★</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div>Exelente</div>
+                                <div>
+                                    <label class="start">★</label>
+                                    <label class="start">★</label>
+                                    <label class="start">★</label>
+                                    <label class="start">★</label>
+                                    <label class="start">★</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div style="background-color: white; border-radius: 2rem;">
+                        <div class="col-md-12" style="padding-top: 2rem;">
+                            <h4 style="text-align: center;">
+                                ¿Cómo fue el trato del personal?
+                            </h4>
+                        </div>
+                        <div class="col-md-12" style="text-align: center;">
+                            <label class="rating" style="text-align: center;">
                   <input
                     type="radio"
                     name="rating"
@@ -161,55 +144,27 @@
                   />
                   <label for="r1"></label>
 
-                  <input
-                    type="radio"
-                    name="rating"
-                    class="example-margin" 
-                    id="r2"
-                    value="4"
-                    [(ngModel)]="ranking1"
-                  />
-                  <label for="r2"></label>
+                            <input type="radio" name="rating" class="example-margin" id="r2" value="4" [(ngModel)]="ranking1" />
+                            <label for="r2"></label>
 
-                  <input
-                    type="radio"
-                    name="rating"
-                    class="example-margin" 
-                    id="r3"
-                    value="3"
-                    [(ngModel)]="ranking1"
-                  />
-                  <label for="r3"></label>
+                            <input type="radio" name="rating" class="example-margin" id="r3" value="3" [(ngModel)]="ranking1" />
+                            <label for="r3"></label>
 
-                  <input
-                    type="radio"
-                    name="rating"
-                    class="example-margin" 
-                    id="r4"
-                    value="2"
-                    [(ngModel)]="ranking1"
-                  />
-                  <label for="r4"></label>
+                            <input type="radio" name="rating" class="example-margin" id="r4" value="2" [(ngModel)]="ranking1" />
+                            <label for="r4"></label>
 
-                  <input
-                    type="radio"
-                    class="example-margin" 
-                    name="rating"
-                    id="r5"
-                    value="1"
-                    [(ngModel)]="ranking1"
-                  />
-                  <label for="r5"></label>
-                </label>
-              </div>
-              <br>
-              <div class="col-md-12" style="padding-top: 2rem;">
-                <h4 style="text-align: center;">
-                  ¿Qué tan aseadas se encunetra las instalaciones?
-                </h4>
-              </div>
-              <div class="col-md-12" style="text-align: center;">
-                <label class="rating" style="text-align: center;">
+                            <input type="radio" class="example-margin" name="rating" id="r5" value="1" [(ngModel)]="ranking1" />
+                            <label for="r5"></label>
+                            </label>
+                        </div>
+                        <br>
+                        <div class="col-md-12" style="padding-top: 2rem;">
+                            <h4 style="text-align: center;">
+                                ¿Qué tan aseadas se encunetra las instalaciones?
+                            </h4>
+                        </div>
+                        <div class="col-md-12" style="text-align: center;">
+                            <label class="rating" style="text-align: center;">
                   <input
                     type="radio"
                     name="rating2"
@@ -220,55 +175,27 @@
                   />
                   <label for="r12"></label>
 
-                  <input
-                    type="radio"
-                    name="rating2"
-                    class="example-margin" 
-                    id="r22"
-                    value="4"
-                    [(ngModel)]="ranking2"
-                  />
-                  <label for="r22"></label>
+                            <input type="radio" name="rating2" class="example-margin" id="r22" value="4" [(ngModel)]="ranking2" />
+                            <label for="r22"></label>
 
-                  <input
-                    type="radio"
-                    name="rating2"
-                    class="example-margin" 
-                    id="r32"
-                    value="3"
-                    [(ngModel)]="ranking2"
-                  />
-                  <label for="r32"></label>
+                            <input type="radio" name="rating2" class="example-margin" id="r32" value="3" [(ngModel)]="ranking2" />
+                            <label for="r32"></label>
 
-                  <input
-                    type="radio"
-                    name="rating2"
-                    class="example-margin" 
-                    id="r42"
-                    value="2"
-                    [(ngModel)]="ranking2"
-                  />
-                  <label for="r42"></label>
+                            <input type="radio" name="rating2" class="example-margin" id="r42" value="2" [(ngModel)]="ranking2" />
+                            <label for="r42"></label>
 
-                  <input
-                    type="radio"
-                    class="example-margin" 
-                    name="rating2"
-                    id="r52"
-                    value="1"
-                    [(ngModel)]="ranking2"
-                  />
-                  <label for="r52"></label>
-                </label>
-              </div>
-              <br>
-              <div class="col-md-12" style="padding-top: 2rem;">
-                <h4 style="text-align: center;">
-                  ¿Qué tan buena es la puntalidad respecto a su cita?
-                </h4>
-              </div>
-              <div class="col-md-12" style="text-align: center;">
-                <label class="rating" style="text-align: center;">
+                            <input type="radio" class="example-margin" name="rating2" id="r52" value="1" [(ngModel)]="ranking2" />
+                            <label for="r52"></label>
+                            </label>
+                        </div>
+                        <br>
+                        <div class="col-md-12" style="padding-top: 2rem;">
+                            <h4 style="text-align: center;">
+                                ¿Qué tan buena es la puntalidad respecto a su cita?
+                            </h4>
+                        </div>
+                        <div class="col-md-12" style="text-align: center;">
+                            <label class="rating" style="text-align: center;">
                   <input
                     type="radio"
                     name="rating3"
@@ -279,84 +206,51 @@
                   />
                   <label for="r13"></label>
 
-                  <input
-                    type="radio"
-                    name="rating3"
-                    class="example-margin" 
-                    id="r23"
-                    value="4"
-                    [(ngModel)]="ranking3"
-                  />
-                  <label for="r23"></label>
+                            <input type="radio" name="rating3" class="example-margin" id="r23" value="4" [(ngModel)]="ranking3" />
+                            <label for="r23"></label>
 
-                  <input
-                    type="radio"
-                    name="rating3"
-                    class="example-margin" 
-                    id="r33"
-                    value="3"
-                    [(ngModel)]="ranking3"
-                  />
-                  <label for="r33"></label>
+                            <input type="radio" name="rating3" class="example-margin" id="r33" value="3" [(ngModel)]="ranking3" />
+                            <label for="r33"></label>
 
-                  <input
-                    type="radio"
-                    name="rating3"
-                    class="example-margin" 
-                    id="r43"
-                    value="2"
-                    [(ngModel)]="ranking3"
-                  />
-                  <label for="r43"></label>
+                            <input type="radio" name="rating3" class="example-margin" id="r43" value="2" [(ngModel)]="ranking3" />
+                            <label for="r43"></label>
 
-                  <input
-                    type="radio"
-                    class="example-margin" 
-                    name="rating3"
-                    id="r53"
-                    value="1"
-                    [(ngModel)]="ranking3"
-                  />
-                  <label for="r53"></label>
-                </label>
-              </div>
+                            <input type="radio" class="example-margin" name="rating3" id="r53" value="1" [(ngModel)]="ranking3" />
+                            <label for="r53"></label>
+                            </label>
+                        </div>
 
-              <div class="text-center" style="padding-bottom: 3rem;">
-                <button
-                  type="button"
-                  class="btn btn-success"
-                  style="width: 25%;"
-                  (click)="send()"
-                >
+                        <div class="text-center" style="padding-bottom: 3rem;">
+                            <button type="button" class="btn btn-success" style="width: 25%;" (click)="send()">
                   Guardar
                 </button>
-              </div>
-            </div>
-            <br />
-            <br />
-            <div
-              style="
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div style="
                 background-color: white;
                 border-radius: 2rem;
                 text-align: center;
-              "
-            >
-              <h4
-                style="
+              ">
+                        <h4 style="
                   text-align: center;
                   padding-top: 1rem;
                   padding-bottom: 1rem;
-                "
-              >
-                Gracias por ayudarnos a mejorar
-              </h4>
+                ">
+                            Gracias por ayudarnos a mejorar
+                        </h4>
+
+                    </div>
+
+                    <!-- Evaluation Information -->
+                </div>
             </div>
-            <!-- Evaluation Information -->
-          </div>
+            <!-- /Tables for the reports -->
         </div>
-        <!-- /Tables for the reports -->
-      </div>
     </div>
+
     <!-- /Page content holder -->
-  </body>
-</html>
+</body>
+
+</html>register-right scrollbar

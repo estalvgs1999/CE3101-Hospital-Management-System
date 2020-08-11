@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { SalonService } from 'src/app/core/services/salon.service';
+import { Router } from '@angular/router';
+import { PatientService } from 'src/app/core/services/patient.service';
 
 @Component({
   selector: 'app-salon-management',
@@ -9,6 +11,7 @@ import { SalonService } from 'src/app/core/services/salon.service';
 })
 export class SalonManagementComponent implements OnInit {
 
+  // Variable
   viewSalon = false;
   createSalon = false;
   listSalon = true;
@@ -18,15 +21,10 @@ export class SalonManagementComponent implements OnInit {
   salonID: any;
   types = ['women', 'man', 'children'];
 
-  constructor( private salonService: SalonService) {
-    this.salon = [
-      { id: 1, nombre: 'salon1', capacidad: 7, especialidad: 'hombres', piso: 1 },
-      { id: 2, nombre: 'salon2', capacidad: 8, especialidad: 'mujeres', piso: 2 },
-      { id: 5, nombre: 'salon3', capacidad: 7, especialidad: 'niños', piso: 2 },
-      { id: 7, nombre: 'salon4', capacidad: 9, especialidad: 'mujeres', piso: 1 },
-    ];
+  constructor( private salonService: SalonService, private router: Router, private patientService: PatientService ) {
    }
 
+   // BD
   ngOnInit() {
     this.salonService.getAllRooms().subscribe(
       Response => {
@@ -36,12 +34,13 @@ export class SalonManagementComponent implements OnInit {
     );
   }
 
-  salonView(id) {
+  // Funcion que cambia la vista la opcion de ver informacion y recibe el salon.
+  salonView(salon) {
     this.viewSalon = true;
     this.createSalon = false;
     this.listSalon = false;
     this.editSalon = false;
-    this.salonID = id;
+    this.salonID = salon;
     for (let aux = 0; aux <= this.types.length; aux++) {
       if (this.types[aux] === this.salonID.type) {
         [this.types[0], this.types[aux]] = [this.types[aux], this.types[0]];
@@ -50,6 +49,7 @@ export class SalonManagementComponent implements OnInit {
     }
   }
 
+  // Funcion que cambia la vista la opcion de crear.
   salonCreate() {
     this.viewSalon = false;
     this.createSalon = true;
@@ -57,13 +57,16 @@ export class SalonManagementComponent implements OnInit {
     this.editSalon = false;
   }
 
+  // Funcion que cambia la vista la opcion de lista.
   salonList() {
     this.viewSalon = false;
     this.createSalon = false;
     this.listSalon = true;
     this.editSalon = false;
+    window.location.reload();
   }
 
+  // Funcion que cambia la vista la opcion de editar.
   salonEdit() {
     this.viewSalon = false;
     this.createSalon = false;
@@ -72,6 +75,7 @@ export class SalonManagementComponent implements OnInit {
   }
 
   // BD
+  // Funcion que elimina un salon.
   salonDelete() {
     this.viewSalon = false;
     this.createSalon = false;
@@ -82,7 +86,18 @@ export class SalonManagementComponent implements OnInit {
     });
   }
 
+  // Funcion que se encarga de cerrar de sesion.
+  logout() {
+    this.router.navigateByUrl('/home');
+  }
+
+  // Funcion que se encarga de sincronizar con la BD de CoTEC
+  sincro() {
+    this.patientService.syncCotec().subscribe();
+  }
+
   // BD
+  // Funcion que cambia la vista la opcion de lista y crea un salon.
   salonCrear() {
     const data = {
       // tslint:disable-next-line: no-angle-bracket-type-assertion
@@ -113,6 +128,7 @@ export class SalonManagementComponent implements OnInit {
   }
 
   // BD
+  // Funcion que cambia la vista la opcion de ver informacion y edita la informacion.
   salonEditar() {
     const data = {
       // tslint:disable-next-line: no-angle-bracket-type-assertion

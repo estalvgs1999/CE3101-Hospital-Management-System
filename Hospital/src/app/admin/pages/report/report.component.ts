@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { EvaluationService } from 'src/app/patient/services/evaluation.service';
+import { PatientService } from 'src/app/core/services/patient.service';
 
 declare var require: any;
 
@@ -27,27 +29,10 @@ export class ReportComponent implements OnInit {
   twostar: any;
   onestar: any;
 
-  constructor( private evaluationSevice: EvaluationService ) {
-    this.aseo = [
-      { id: 1, nota: 2 },
-      { id: 2, nota: 1 },
-      { id: 5, nota: 4 },
-      { id: 7, nota: 3 },
-    ];
-    this.trato = [
-      { id: 1, nota: 5 },
-      { id: 2, nota: 3 },
-      { id: 5, nota: 5 },
-      { id: 7, nota: 3 },
-    ];
-    this.puntualidad = [
-      { id: 1, nota: 4 },
-      { id: 2, nota: 5 },
-      { id: 5, nota: 5 },
-      { id: 7, nota: 3 },
-    ];
+  constructor( private evaluationSevice: EvaluationService, private router: Router, private patientService: PatientService) {
   }
 
+  // BD
   ngOnInit() {
     this.evaluationSevice.getAll().subscribe(
       response => {
@@ -112,24 +97,38 @@ export class ReportComponent implements OnInit {
     );
   }
 
+  // Funcion que cambia la informacion de reporte la opcion de Aseo.
   reportCleanliness() {
     this.showCleanlinessStatistics = true;
     this.showTreatmentStatistics = false;
     this.showPuntualityStatistics = false;
   }
 
+  // Funcion que cambia la informacion de reporte la opcion de Trato.
   reportTreatment() {
     this.showCleanlinessStatistics = false;
     this.showTreatmentStatistics = true;
     this.showPuntualityStatistics = false;
   }
 
+  // Funcion que cambia la informacion de reporte la opcion de Puntualidad.
   reportPuntuality() {
     this.showCleanlinessStatistics = false;
     this.showTreatmentStatistics = false;
     this.showPuntualityStatistics = true;
   }
 
+  // Funcion que se encarga de realizar el cierre de sesion.
+  logout() {
+    this.router.navigateByUrl('/home');
+  }
+
+  // Funcion que se encarga de sincronizar con la BD de CoTEC
+  sincro() {
+    this.patientService.syncCotec().subscribe();
+  }
+
+  // Funcion que crea el grafico.
   createDoughnut() {
     // Create a graphic with the cases
     // tslint:disable-next-line: prefer-const

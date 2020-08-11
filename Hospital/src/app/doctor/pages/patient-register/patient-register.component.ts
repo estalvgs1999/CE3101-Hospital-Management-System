@@ -20,7 +20,7 @@ export class PatientRegisterComponent implements OnInit {
   distrits: any;
 
   // tslint:disable-next-line: variable-name
-  constructor(private _http: LocationService, private patientService: PatientService) { }
+  constructor(private _http: LocationService, private patientService: PatientService, private router: Router ) { }
 
   ngOnInit() {
     this._http.getProvince().subscribe(data => {
@@ -49,8 +49,9 @@ export class PatientRegisterComponent implements OnInit {
     }
   }
 
+  // Send new patient
   send(name: string, lastName: string, dni: number, sex: string, password: string,
-    date: string, phone: string, province: string, canton: string, district: string, address: string) {
+       date: string, phone: string, province: string, canton: string, district: string, address: string) {
     let sendSex;
     if (sex === 'Masculino') {
       sendSex = 'male';
@@ -77,6 +78,12 @@ export class PatientRegisterComponent implements OnInit {
     });
   }
 
+  // Funcion que se encarga se realizar el cierre de sesion.
+  logout() {
+    this.router.navigateByUrl('/home');
+  }
+
+  // Get a canto for province
   getCanton(cantonId: string) {
     // tslint:disable-next-line: forin
     for (const key in this.provinces) {
@@ -91,6 +98,7 @@ export class PatientRegisterComponent implements OnInit {
     }
   }
 
+  // get a distrit for canton
   getDistrit(distritId: string) {
 
     // tslint:disable-next-line: forin

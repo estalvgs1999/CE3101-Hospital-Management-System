@@ -1,24 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hospital Tecnológico</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <!-- Vertical navbar -->
     <div class="vertical-nav" id="sidebar">
-      <!-- Logo -->
-      <div class="py-4 px-3 mb-4">
-        <div class="media d-flex align-items-center">
-          <img
-            src="https://res.cloudinary.com/mhmd/image/upload/v1556074849/avatar-1_tcnd60.png"
-            alt="..."
-            width="65"
-            class="mr-3 shadow-sm"
-          />
-          <div class="media-body">
-            <button type="button" class="btn" onclick="">
+        <!-- Logo -->
+        <div class="py-4 px-3 mb-4">
+            <div class="media d-flex align-items-center">
+                <img src="../../../../assets/images/logo.png" alt="..." width="100" class="mr-3 shadow-sm" />
+                <div class="media-body">
+                    <button type="button" class="btn" (click)="logout()">
               <img
                 src="https://cdn4.iconfinder.com/data/icons/internet-security-flat-2/32/Internet_Security_entrance_exit_log_out_arrow-512.png"
                 alt="button1"
@@ -26,54 +23,47 @@
               />
               <div class="card-inner"></div>
             </button>
-          </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <!-- End Logo -->
+        <!-- End Logo -->
 
-      <!-- Views -->
-      <ul class="nav flex-column mb-0">
-        <li class="nav-item">
-          <a href="register" class="nav-link">
-            <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
-            Agregar Pacientes
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="doctor" class="nav-link">
-            <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
-            Gestión de Historiales Clínicos
-          </a>
-        </li>
-      </ul>
-      <p
-        class="font-weight-bold"
-        style="
+        <!-- Views -->
+        <ul class="nav flex-column mb-0">
+            <li class="nav-item">
+                <a href="register" class="nav-link">
+                    <i class="fa fa-th-large mr-3 text-primary fa-fw"></i> Agregar Pacientes
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="doctor" class="nav-link">
+                    <i class="fa fa-address-card mr-3 text-primary fa-fw"></i> Gestión de Historiales Clínicos
+                </a>
+            </li>
+        </ul>
+        <a class="font-weight-bold" href="https://github.com/BerthaBrenes/HospitalTecnologico-frontend" style="
           font-size: 18px;
           left: 48%;
           transform: translate(-50%, -50%);
           bottom: 0;
+          color: white;
           text-align: center;
           font-weight: bold;
           position: absolute;
-        "
-      >
-        Copyright: ORBE
-      </p>
-      <!-- Views -->
+        ">
+            Copyright: ORBE
+    </a>
+        <!-- Views -->
     </div>
     <!-- End vertical navbar -->
 
     <!-- Horizontal navbar -->
     <div class="horizontal-nav" id="sidebar">
-      <span
-        class="px-3 navbar-brand mb-0 h1"
-        style="font-size: 35px; font-weight: bold;"
-        >Gestión de Historiales Clínicos
+        <span class="px-3 navbar-brand mb-0 h1" style="font-size: 35px; font-weight: bold;">Gestión de Historiales Clínicos
       </span>
-      <span class="px-3 navbar-brand my-2 my-sm-0" *ngIf="patientInformation">
-        <button class="btn btn-outline" type="submit" (click)="changeAddMedicalHistory()">
-          <img src="https://img.icons8.com/ios/50/000000/add-property.png" />
+        <span class="px-3 navbar-brand my-2 my-sm-0" *ngIf="patientInformation">
+        <button class="btn btn-outline" type="submit" (click)="changeAddMedicalHistory()" style="position: absolute; right: 20%; top:0%">
+          <img src="https://img.icons8.com/ios/50/000000/add-property.png" alt="button1" />
         </button>
       </span>
     </div>
@@ -81,408 +71,278 @@
 
     <!-- Page content holder -->
     <div class="page-content py-3" id="content">
-      <div class="container">
-        <!-- Tables for the reports -->
-        <div class="row">
-          <div class="col-md-12">
-            <div
-              class="scrollbar"
-              id="style-2"
-              style="background-color: white;"
-              *ngIf="patientTable"
-            >
-              <!-- Tables for information -->
-              <table class="table table-striped table-hover text-center">
-                <thead style="background-color: #325f80;">
-                  <tr style="color: white;">
-                    <th scope="col">#</th>
-                    <th scope="col">Cédula</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellidos</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let patient of patientList; let count = index">
-                    <th scope="row" (click)="changePage(patient.dni)">
-                      {{ count + 1 }}
-                    </th>
-                    <td (click)="changePage(patient.dni)">{{ patient.dni }}</td>
-                    <td (click)="changePage(patient.dni)">
-                      {{ patient.name }}
-                    </td>
-                    <td (click)="changePage(patient.dni)">
-                      {{ patient.lastname }}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <!-- End tables information -->
-            </div>
-
-            <div
-              style="background-color: white; border-radius: 3rem;"
-              *ngIf="patientInformation"
-            >
-              <div class="row">
-                <!-- First column -->
-                <div class="col-md-3">
-                  <div>
-                    <img
-                      src="https://cdn4.iconfinder.com/data/icons/medical-14/512/8-512.png"
-                      class="col-md-12"
-                      id="image1"
-                    />
-                  </div>
-                  <br />
-                  <br />
-                </div>
-                <!-- /First column -->
-
-                <!-- Second column -->
-                <div class="col-md-9 register-right">
-                  <div class="tab-content" id="myTabContent">
-                    <div
-                      class="tab-pane fade show active"
-                      id="home"
-                      role="tabpanel"
-                      aria-labelledby="home-tab"
-                    >
-                      <br />
-                      <div class="row register-form">
-                        <!-- First internal column -->
-                        <div class="col-md-5">
-                          <div class="form-group">
-                            <h3 style="font-weight: bold;">
-                              {{ patient.name }} {{ patient.lastname }}
-                            </h3>
-                          </div>
-                          <div class="form-group">
-                            <h4 style="color: gray;">
-                              Número de identificación
-                            </h4>
-                            <h3>{{ patient.dni }}</h3>
-                          </div>
-                          <div class="form-group">
-                            <h4 style="color: gray;">Edad</h4>
-                            <h3>{{ patient.age }}</h3>
-                          </div>
-                          <div class="form-group">
-                            <h4 style="color: gray;">Sexo</h4>
-                            <h3>{{ patient.sex }}</h3>
-                          </div>
-                        </div>
-                        <!-- /First internal column -->
-
-                        <div class="col-md-1"></div>
-
-                        <!-- Second internal column -->
-                        <div
-                          class="col-md-5"
-                          id="dataContainer"
-                          style="padding-left: 10px;"
-                        >
-                          <div class="form-group">
-                            <h4 style="color: gray;">Patologías</h4>
-                            <div class="scrollbar" id="style-1">
-                              <table
-                                class="table table-hover"
-                                data-sort-order="desc"
-                              >
-                                <thead>
-                                  <tr>
+        <div class="container">
+            <!-- Tables for the reports -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="scrollbar" id="style-2" style="background-color: white;" *ngIf="patientTable">
+                        <!-- Tables for information -->
+                        <table class="table table-striped table-hover text-center">
+                            <thead style="background-color: #325f80;">
+                                <tr style="color: white;">
+                                    <th scope="col">#</th>
+                                    <th scope="col">Cédula</th>
                                     <th scope="col">Nombre</th>
-                                    <th scope="col">Medicación</th>
-                                  </tr>
+                                    <th scope="col">Apellidos</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let patient of patientList; let count = index">
+                                    <th scope="row" (click)="changePage(patient.dni)">
+                                        {{ count + 1 }}
+                                    </th>
+                                    <td (click)="changePage(patient.dni)">{{ patient.dni }}</td>
+                                    <td (click)="changePage(patient.dni)">
+                                        {{ patient.name }}
+                                    </td>
+                                    <td (click)="changePage(patient.dni)">
+                                        {{ patient.lastname }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- End tables information -->
+                    </div>
+
+                    <div style="background-color: white; border-radius: 3rem;" *ngIf="patientInformation">
+                        <div class="row">
+                            <!-- First column -->
+                            <div class="col-md-3">
+                                <div>
+                                    <img src="https://cdn4.iconfinder.com/data/icons/medical-14/512/8-512.png" class="col-md-12" id="image1" />
+                                </div>
+                                <br />
+                                <br />
+                            </div>
+                            <!-- /First column -->
+
+                            <!-- Second column -->
+                            <div class="col-md-9 register-right">
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <br />
+                                        <div class="row register-form">
+                                            <!-- First internal column -->
+                                            <div class="col-md-5">
+                                                <div class="form-group">
+                                                    <h3 style="font-weight: bold;">
+                                                        {{ patient.name }} {{ patient.lastname }}
+                                                    </h3>
+                                                </div>
+                                                <div class="form-group">
+                                                    <h4 style="color: gray;">
+                                                        Número de identificación
+                                                    </h4>
+                                                    <h3>{{ patient.dni }}</h3>
+                                                </div>
+                                                <div class="form-group">
+                                                    <h4 style="color: gray;">Edad</h4>
+                                                    <h3>{{ patient.age }}</h3>
+                                                </div>
+                                                <div class="form-group">
+                                                    <h4 style="color: gray;">Sexo</h4>
+                                                    <h3>{{ patient.sex }}</h3>
+                                                </div>
+                                            </div>
+                                            <!-- /First internal column -->
+
+                                            <div class="col-md-1"></div>
+
+                                            <!-- Second internal column -->
+                                            <div class="col-md-5" id="dataContainer" style="padding-left: 10px;">
+                                                <div class="form-group">
+                                                    <h4 style="color: gray;">Patologías</h4>
+                                                    <div class="scrollbar" id="style-1">
+                                                        <table class="table table-hover" data-sort-order="desc">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">Nombre</th>
+                                                                    <th scope="col">Medicación</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngFor="let type of pathology">
+                                                                    <td class="align-middle">
+                                                                        {{ type.name }}
+                                                                    </td>
+                                                                    <td class="align-middle">
+                                                                        {{ type.medication }}
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /Second internal column -->
+                                        </div>
+                                        <br />
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Second column -->
+                        </div>
+                    </div>
+
+                    <br />
+                    <br />
+
+                    <!--Medical history table-->
+                    <div style="background-color: white;" *ngIf="patientInformation">
+                        <div class="scrollbar" id="style-3">
+                            <!-- Tables for information -->
+                            <table class="table table-striped table-hover text-center">
+                                <thead style="background-color: #325f80;">
+                                    <tr style="color: white;">
+                                        <th scope="col">Fecha</th>
+                                        <th scope="col">Procedimeinto</th>
+                                        <th scope="col">Tratamiento prescrito</th>
+                                        <th scope="col"></th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                  <tr *ngFor="let type of pathology">
-                                    <td class="align-middle">
-                                      {{ type.name }}
-                                    </td>
-                                    <td class="align-middle">
-                                      {{ type.medication }}
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- /Second internal column -->
-                      </div>
-                      <br />
-                    </div>
-                  </div>
-                </div>
-                <!-- /Second column -->
-              </div>
-            </div>
-
-            <br />
-            <br />
-
-            <!--Medical history table-->
-            <div style="background-color: white;" *ngIf="patientInformation">
-              <div class="scrollbar" id="style-3">
-                <!-- Tables for information -->
-                <table class="table table-striped table-hover text-center">
-                  <thead style="background-color: #325f80;">
-                    <tr style="color: white;">
-                      <th scope="col">Fecha</th>
-                      <th scope="col">Procedimeinto</th>
-                      <th scope="col">Tratamiento prescrito</th>
-                      <th scope="col"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let patientProcedure of patientProcedureList">
-                      <td>
-                        {{ patientProcedure.date }}
-                      </td>
-                      <td>
-                        {{ patientProcedure.procedure }}
-                      </td>
-                      <td>
-                        {{ patientProcedure.treatment }}
-                      </td>
-                      <td>
-                        <button
-                          type="button"
-                          class="btn btn-info"
-                          (click)="changeEditMedicalHistory(patientProcedure)"
-                          
-                        >
+                                    <tr *ngFor="let patientProcedure of patientProcedureList">
+                                        <td>
+                                            {{ patientProcedure.date }}
+                                        </td>
+                                        <td>
+                                            {{ patientProcedure.procedure }}
+                                        </td>
+                                        <td>
+                                            {{ patientProcedure.treatment }}
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-info" (click)="changeEditMedicalHistory(patientProcedure)">
                           Modificar
                         </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <!-- End tables information -->
-            </div>
-            <!--/Medical history table-->
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- End tables information -->
+                    </div>
+                    <!--/Medical history table-->
 
-            <!--Medical history forms-->
-            <div
-              style="background-color: white; border-radius: 3rem;"
-              *ngIf="addMedicalHistory"
-              id="medicalhistory"
-            >
-              <div class="col-12">
-                <h1 class="text-center" id="title1">
-                  Añadir Historial Médico
-                </h1>
-              </div>
-              <div class="row" id="padding">
-                <div class="col-6 text-center">
-                  <h3>Fecha del Procedimiento</h3>
-                </div>
-                <div class="col-4 text-center">
-                  <input
-                    required
-                    type="date"
-                    name="startDate"
-                    ngModel
-                    #startDate="ngModel"
-                    max="3000-12-31"
-                    min="1000-01-01"
-                    class="form-control"
-                    id="startDate"
-                  />
-                  <div
-                    class="alert alert-danger"
-                    *ngIf="startDate.touched && !startDate.valid"
-                  >
-                    Debe ingresar una fecha válida.
-                  </div>
-                </div>
-              </div>
-              <div class="row" id="padding">
-                <div class="col-6 text-center">
-                  <h3>Procedimeinto Realizado</h3>
-                </div>
-                <div class="col-4 text-center">
-                  <select
-                    required
-                    id="inputProcedure"
-                    placeholder="Seleccionar"
-                    class="form-control"
-                    name="inputProcedure"
-                    ngModel
-                    #inputProcedure="ngModel"
-                  >
+                    <!--Medical history forms-->
+                    <div style="background-color: white; border-radius: 3rem;" *ngIf="addMedicalHistory" id="medicalhistory">
+                        <div class="col-12">
+                            <h1 class="text-center" id="title1">
+                                Añadir Historial Médico
+                            </h1>
+                        </div>
+                        <div class="row" id="padding">
+                            <div class="col-6 text-center">
+                                <h3>Fecha del Procedimiento</h3>
+                            </div>
+                            <div class="col-4 text-center">
+                                <input required type="date" name="startDate" ngModel #startDate="ngModel" max="3000-12-31" min="1000-01-01" class="form-control" id="startDate" />
+                                <div class="alert alert-danger" *ngIf="startDate.touched && !startDate.valid">
+                                    Debe ingresar una fecha válida.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="padding">
+                            <div class="col-6 text-center">
+                                <h3>Procedimeinto Realizado</h3>
+                            </div>
+                            <div class="col-4 text-center">
+                                <select required id="inputProcedure" placeholder="Seleccionar" class="form-control" name="inputProcedure" ngModel #inputProcedure="ngModel">
                     <option *ngFor="let procedure of procedures" [value]="procedure.id">
                       {{ procedure.name }}
                     </option>
                   </select>
-                  <div
-                    class="alert alert-danger"
-                    *ngIf="inputProcedure.touched && !inputProcedure.valid"
-                  >
-                    Debe ingresar un procedimiento.
-                  </div>
-                </div>
-              </div>
-              <div class="row" id="padding">
-                <div class="col-6 text-center">
-                  <h3>Tratamiento Prescrito</h3>
-                </div>
-                <div class="col-4 text-center">
-                  <textarea
-                    type="textarea"
-                    class="form-control"
-                    placeholder="Ingrese Texto Aquí"
-                    required
-                    treatment="treatment"
-                    ngModel
-                    #treatment="ngModel"
-                    id="treatment"
-                  ></textarea>
-                  <div
-                    class="alert alert-danger"
-                    *ngIf="treatment.touched && !treatment.valid"
-                  >
-                    Debe ingresar un tratamiento.
-                  </div>
-                </div>
-              </div>
-              <div class="row" style="padding-bottom: 2rem;">
-                <div class="col-12 text-center">
-                  <button
-                    type="button"
-                    class="btn btn-success"
-                    id="button"
-                    (click)="sendNewRecord(startDate.value, inputProcedure.value, treatment.value)"
-                  >
+                                <div class="alert alert-danger" *ngIf="inputProcedure.touched && !inputProcedure.valid">
+                                    Debe ingresar un procedimiento.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="padding">
+                            <div class="col-6 text-center">
+                                <h3>Tratamiento Prescrito</h3>
+                            </div>
+                            <div class="col-4 text-center">
+                                <textarea type="textarea" class="form-control" placeholder="Ingrese Texto Aquí" required treatment="treatment" ngModel #treatment="ngModel" id="treatment"></textarea>
+                                <div class="alert alert-danger" *ngIf="treatment.touched && !treatment.valid">
+                                    Debe ingresar un tratamiento.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-bottom: 2rem;">
+                            <div class="col-12 text-center">
+                                <button type="button" class="btn btn-success" id="button" (click)="sendNewRecord(startDate.value, inputProcedure.value, treatment.value)">
                     <h4>Añadir</h4>
                   </button>
-                </div>
-              </div>
-              <div class="row" id="padding">
-                <div class="col-12 text-center">
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                    id="button"
-                    (click)="cancel()"
-                  >
+                            </div>
+                        </div>
+                        <div class="row" id="padding">
+                            <div class="col-12 text-center">
+                                <button type="button" class="btn btn-secondary" id="button" (click)="cancel()">
                     <h4>Cancelar</h4>
                   </button>
-                </div>
-              </div>
-            </div>
-            <!--/Medical history forms-->
+                            </div>
+                        </div>
+                    </div>
+                    <!--/Medical history forms-->
 
 
-            <!--Edit Medical history forms-->
-            <div
-              style="background-color: white; border-radius: 3rem;"
-              *ngIf="editMedicalHistory"
-              id="medicalhistory"
-            >
-              <div class="col-12">
-                <h1 class="text-center" id="title1">
-                  Modificar Historial Médico
-                </h1>
-              </div>
-              <div class="row" id="padding">
-                <div class="col-6 text-center">
-                  <h3>Fecha del Procedimiento</h3>
-                </div>
-                <div class="col-4 text-center">
-                  <input
-                    required
-                    type="text"
-                    name="startDate2"
-                    ngModel
-                    #startDate2="ngModel"
-                    [(ngModel)] = "patientProcedure.date"
-                    max="3000-12-31"
-                    min="1000-01-01"
-                    class="form-control"
-                    id="startDate2"
-                    disabled
-                  />
-                </div>
-              </div>
-              <div class="row" id="padding">
-                <div class="col-6 text-center">
-                  <h3>Procedimiento Realizado</h3>
-                </div>
-                <div class="col-4 text-center">
-                  <input
-                    required
-                    type="text"
-                    name="procedure2"
-                    ngModel
-                    #procedure2="ngModel"
-                    [(ngModel)] = "patientProcedure.procedure"
-                    max="3000-12-31"
-                    min="1000-01-01"
-                    class="form-control"
-                    id="procedure2"
-                    disabled
-                  />
-                </div>
-              </div>
-              <div class="row" id="padding">
-                <div class="col-6 text-center">
-                  <h3>Tratamiento Prescrito</h3>
-                </div>
-                <div class="col-4 text-center">
-                  <textarea
-                    type="textarea"
-                    class="form-control"
-                    placeholder="Ingrese Texto Aquí"
-                    required
-                    name="treatment2"
-                    treatment="treatment2"
-                    [(ngModel)] = "patientProcedure.treatment"
-                    ngModel
-                    #treatment2="ngModel"
-                    id="treatment2"
-                  ></textarea>
-                  <div
-                    class="alert alert-danger"
-                    *ngIf="treatment.touched && !treatment.valid"
-                  >
-                    Debe ingresar un tratamiento.
-                  </div>
-                </div>
-              </div>
-              <div class="row" style="padding-bottom: 2rem;">
-                <div class="col-12 text-center">
-                  <button
-                    type="button"
-                    class="btn btn-success"
-                    id="button"
-                    (click)="sendEditRecord(treatment2.value)"
-                  >
+                    <!--Edit Medical history forms-->
+                    <div style="background-color: white; border-radius: 3rem;" *ngIf="editMedicalHistory" id="medicalhistory">
+                        <div class="col-12">
+                            <h1 class="text-center" id="title1">
+                                Modificar Historial Médico
+                            </h1>
+                        </div>
+                        <div class="row" id="padding">
+                            <div class="col-6 text-center">
+                                <h3>Fecha del Procedimiento</h3>
+                            </div>
+                            <div class="col-4 text-center">
+                                <input required type="text" name="startDate2" ngModel #startDate2="ngModel" [(ngModel)]="patientProcedure.date" max="3000-12-31" min="1000-01-01" class="form-control" id="startDate2" disabled />
+                            </div>
+                        </div>
+                        <div class="row" id="padding">
+                            <div class="col-6 text-center">
+                                <h3>Procedimiento Realizado</h3>
+                            </div>
+                            <div class="col-4 text-center">
+                                <input required type="text" name="procedure2" ngModel #procedure2="ngModel" [(ngModel)]="patientProcedure.procedure" max="3000-12-31" min="1000-01-01" class="form-control" id="procedure2" disabled />
+                            </div>
+                        </div>
+                        <div class="row" id="padding">
+                            <div class="col-6 text-center">
+                                <h3>Tratamiento Prescrito</h3>
+                            </div>
+                            <div class="col-4 text-center">
+                                <textarea type="textarea" class="form-control" placeholder="Ingrese Texto Aquí" required name="treatment2" treatment="treatment2" [(ngModel)]="patientProcedure.treatment" ngModel #treatment2="ngModel" id="treatment2"></textarea>
+                                <div class="alert alert-danger" *ngIf="treatment.touched && !treatment.valid">
+                                    Debe ingresar un tratamiento.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-bottom: 2rem;">
+                            <div class="col-12 text-center">
+                                <button type="button" class="btn btn-success" id="button" (click)="sendEditRecord(treatment2.value)">
                     <h4>Modificar</h4>
                   </button>
-                </div>
-              </div>
-              <div class="row" id="padding">
-                <div class="col-12 text-center">
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                    id="button"
-                    (click)="cancel()"
-                  >
+                            </div>
+                        </div>
+                        <div class="row" id="padding">
+                            <div class="col-12 text-center">
+                                <button type="button" class="btn btn-secondary" id="button" (click)="cancel()">
                     <h4>Cancelar</h4>
                   </button>
-                </div>
-              </div>
-            </div>
-            <!--/Edit Medical history forms-->
+                            </div>
+                        </div>
+                    </div>
+                    <!--/Edit Medical history forms-->
 
-          </div>
-          <!-- End table -->
+                </div>
+                <!-- End table -->
+            </div>
         </div>
-      </div>
     </div>
     <!-- End page content holder -->
-  </body>
+</body>
+
 </html>

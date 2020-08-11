@@ -22,6 +22,12 @@ export class PatientService {
     return this.http.get(`${environment.API.HOSPITAL}/patient`, {observe: 'response'});
   }
   /**
+   * Sync with Cotec API
+   */
+  syncCotec() {
+    return this.http.get(`${environment.API.HOSPITAL}/patient/sync`, {observe: 'response'});
+  }
+  /**
    * Create a new patient
    * @param data of the patient
    */
