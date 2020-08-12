@@ -16,11 +16,10 @@
                 <img src="../../../../assets/images/logo.png" alt="..." width="100" class="mr-3 shadow-sm" />
                 <div class="media-body">
                     <button type="button" class="btn" (click)="logout()">
-            <img
-              src="https://cdn4.iconfinder.com/data/icons/internet-security-flat-2/32/Internet_Security_entrance_exit_log_out_arrow-512.png"
-              alt="button1" style="width: 35%; height: 35%;" />
-            <div class="card-inner"></div>
-          </button>
+                        <img src="https://cdn4.iconfinder.com/data/icons/internet-security-flat-2/32/Internet_Security_entrance_exit_log_out_arrow-512.png"
+                            alt="button1" style="width: 35%; height: 35%;" />
+                        <div class="card-inner"></div>
+                    </button>
                 </div>
             </div>
         </div>
@@ -55,25 +54,27 @@
           position: absolute;
         ">
             Copyright: ORBE
-    </a>
+        </a>
         <!-- Views -->
     </div>
     <!-- End vertical navbar -->
 
     <!-- Horizontal navbar -->
     <div class="horizontal-nav" id="sidebar">
-        <span class="px-3 navbar-brand mb-0 h1" style="font-size: 35px; font-weight: bold;" *ngIf="!add && !edit">Gestión de
-      Reservaciones
-    </span>
-        <span class="px-3 navbar-brand mb-0 h1" style="font-size: 35px; font-weight: bold;" *ngIf="edit">Editar Reservación
-    </span>
-        <span class="px-3 navbar-brand mb-0 h1" style="font-size: 35px; font-weight: bold;" *ngIf="add">Añadir Reservación
-    </span>
+        <span class="px-3 navbar-brand mb-0 h1" style="font-size: 35px; font-weight: bold;" *ngIf="!add && !edit">Gestión de Reservaciones
+        </span>
+        <span class="px-3 navbar-brand mb-0 h1" style="font-size: 35px; font-weight: bold;" *ngIf="edit">Editar
+            Reservación
+        </span>
+        <span class="px-3 navbar-brand mb-0 h1" style="font-size: 35px; font-weight: bold;" *ngIf="add">Añadir
+            Reservación
+        </span>
         <span class="px-3 navbar-brand my-2 my-sm-0" *ngIf="patientInformation">
-      <button class="btn btn-outline" type="submit" (click)="changeAddMedicalHistory()" style="position: absolute; right: 20%; top:0%">
-        <img src="https://img.icons8.com/ios/50/000000/add-property.png" alt="button1"/>
-      </button>
-    </span>
+            <button class="btn btn-outline" type="submit" (click)="changeAddMedicalHistory()"
+                style="position: absolute; right: 20%; top: 0%;">
+                <img src="https://img.icons8.com/ios/50/000000/add-property.png" alt="button1" />
+            </button>
+        </span>
     </div>
     <!-- End horizontal navbar -->
 
@@ -119,14 +120,16 @@
                                             <!-- /Tables for procedure -->
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-info" (click)="editProcedure(reservation, reservation.procedures)">
-                        Modificar
-                      </button>
+                                            <button type="button" class="btn btn-info" (click)="
+                            editProcedure(reservation, reservation.procedures)
+                          ">
+                                                Modificar
+                                            </button>
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-danger" (click)="deleteReservation(reservation.id)">
-                        Eliminar
-                      </button>
+                                                Eliminar
+                                            </button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -174,20 +177,15 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <h4 style="color: gray;">Fecha de salida</h4>
-                                                    <div>
-                                                        <input type="text" class="form-control" placeholder="Fecha calculada" required departureDate="departureDate" ngModel #departureDate="ngModel" id="departureDate" disabled />
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
                                                     <h4 style="color: gray;">Número de cama</h4>
-                                                    <select required class="form-control" name="bed" ngModel #bed="ngModel">
-                            <option *ngFor="let bed of beds">
-                              {{ bed.id }}
-                            </option>
-                          </select>
+                                                    <h5 style="color: red">*Si no muestra camas a elegir, no hay disponibilidad en las fechas solicitadas</h5>
+                                                    <select required class="form-control" name="bed" id="bed" ngModel #bed="ngModel" [disabled]="!(addbutton)">
+                                                        <option *ngFor="let bed of beds">
+                                                            {{ bed.bed_id }}
+                                                        </option>
+                                                    </select>
                                                     <div class="alert alert-danger" *ngIf="bed.touched && !bed.valid">
-                                                        Debe ingresar una provincia.
+                                                        Debe ingresar una cama.
                                                     </div>
                                                 </div>
                                             </div>
@@ -201,13 +199,15 @@
                                                 <div class="form-group">
                                                     <h4 style="color: gray;">Procedimientos</h4>
                                                     <select id="style-2" class="form-control" multiple="true">
-                            <option *ngFor="let procedureN of proceduresNameList"
-                              (click)="getProcedureValue(procedureN)">
-                              {{ procedureN.name }}
-                            </option>
-                          </select>
-                                                    <br>
-                                                    <h4 style="color: gray;">Procedimientos Selecionados</h4>
+                                                        <option *ngFor="let procedureN of proceduresNameList"
+                                                            (click)="getProcedureValue(procedureN)">
+                                                            {{ procedureN.name }}
+                                                        </option>
+                                                    </select>
+                                                    <br />
+                                                    <h4 style="color: gray;">
+                                                        Procedimientos Selecionados
+                                                    </h4>
                                                     <div class="scrollbar" id="style-1">
                                                         <table class="table table-striped table-hover text-center" data-sort-order="desc">
                                                             <thead>
@@ -216,7 +216,9 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr class="align-middle" *ngFor="let procedure of procedureNameSelectList">
+                                                                <tr class="align-middle" *ngFor="
+                                      let procedure of procedureNameSelectList
+                                    ">
                                                                     <td class="align-middle" (click)="deleteProcedure(procedure)">
                                                                         {{ procedure.name }}
                                                                     </td>
@@ -224,13 +226,26 @@
                                                             </tbody>
                                                         </table>
                                                     </div>
-                                                    <br>
-                                                    <div class="text-center">
-                                                        <button type="button" class="btn btn-success" style="width: 60%;" (click)="createReservation(startDate.value, bed.value)">Guardar</button>
+                                                    <br />
+                                                    <div class="text-center" *ngIf="!addbutton">
+                                                        <button type="button" class="btn btn-success" style="width: 60%;" (click)="
+                                getBedsAvailable(startDate.value)
+                                ">
+                                                                                Consultar
+                              </button>
                                                     </div>
-                                                    <br>
                                                     <div class="text-center">
-                                                        <button type="button" class="btn btn-secondary" (click)="back()" style="width: 60%;">Cancelar</button>
+                                                        <button type="button" class="btn btn-success" style="width: 60%;" *ngIf="addbutton" (click)="
+                                    createReservation(startDate.value, bed.value)
+                                  ">
+                                                                                  Guardar
+                                </button>
+                                                    </div>
+                                                    <br />
+                                                    <div class="text-center">
+                                                        <button type="button" class="btn btn-secondary" (click)="back()" style="width: 60%;">
+                                Cancelar
+                              </button>
                                                     </div>
                                                 </div>
                                                 <!-- Pathology Tables inputs  -->
@@ -286,14 +301,14 @@
                                                 <div class="form-group">
                                                     <h4 style="color: gray;">Fecha de salida</h4>
                                                     <div>
-                                                        <input type="text" class="form-control" placeholder="Fecha calculada" required departureDate="departureDate" ngModel #departureDate="ngModel" [(ngModel)]="editReservation.departure_date" value="{{editReservation.departure_date}}" id="departureDate" disabled
-                                                        />
+                                                        <input type="text" class="form-control" placeholder="Fecha calculada" required departureDate="departureDate" ngModel #departureDate="ngModel" [(ngModel)]="editReservation.departure_date" value="{{ editReservation.departure_date }}" id="departureDate"
+                                                            id="departureDate" disabled />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <h4 style="color: gray;">Número de cama</h4>
                                                     <div>
-                                                        <input type="text" class="form-control" placeholder="Número de cama" required departureDate="bed" ngModel #bed="ngModel" [(ngModel)]="editReservation.bed_id" value="{{editReservation.bed_id}}" id="bed" disabled />
+                                                        <input type="text" class="form-control" placeholder="Número de cama" required departureDate="bed" ngModel #bed="ngModel" [(ngModel)]="editReservation.bed_id" value="{{ editReservation.bed_id }}" id="bed" disabled />
                                                     </div>
                                                 </div>
                                             </div>
@@ -307,22 +322,27 @@
                                                 <div class="form-group">
                                                     <h4 style="color: gray;">Procedimientos</h4>
                                                     <select id="style-2" class="form-control" multiple="true">
-                            <option *ngFor="let procedureN of proceduresNameList"
-                              (click)="getProcedureValue(procedureN)">
-                              {{ procedureN.name }}
-                            </option>
-                          </select>
-                                                    <br>
-                                                    <h4 style="color: gray;">Procedimientos Selecionados</h4>
+                                                        <option *ngFor="let procedureN of proceduresNameList"
+                                                            (click)="getProcedureValue(procedureN)">
+                                                            {{ procedureN.name }}
+                                                        </option>
+                                                    </select>
+                                                    <br />
+                                                    <h4 style="color: gray;">
+                                                        Procedimientos Selecionados
+                                                    </h4>
                                                     <div class="scrollbar" id="style-1">
-                                                        <table class="table table-striped table-hover text-center" data-sort-order="desc">
+                                                        <table class="table table-striped table-hover text-cen
+                                                           ter" data-sort-order="desc">
                                                             <thead>
                                                                 <tr>
                                                                     <th scope="col">Nombre</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr class="align-middle" *ngFor="let procedure of procedureNameSelectList">
+                                                                <tr class="align-middle" *ngFor="
+                                      let procedure of procedureNameSelectList
+                                    ">
                                                                     <td class="align-middle" (click)="deleteProcedure(procedure)">
                                                                         {{ procedure.name }}
                                                                     </td>
@@ -330,13 +350,18 @@
                                                             </tbody>
                                                         </table>
                                                     </div>
-                                                    <br>
+                                                    <br />
                                                     <div class="text-center">
-                                                        <button type="button" class="btn btn-success" style="width: 60%;" (click)="updateReservation(startDate.value)">Guardar</button>
+                                                        <button type="button" class="btn btn-success" style="width: 60%;" (click)="updateReservation(startDate.value)">
+                                                                              Guardar
+                              </button>
                                                     </div>
-                                                    <br>
+                                                    <br />
                                                     <div class="text-center">
-                                                        <button type="button" class="btn btn-secondary" (click)="back()" style="width: 60%;">Cancelar</button>
+                                                        <button type="button" class="btn btn-secondary" (click)="back()
+                                                           " style="width: 60%;">
+                                Cancelar
+                              </button>
                                                     </div>
                                                 </div>
                                                 <!-- Pathology Tables inputs  -->

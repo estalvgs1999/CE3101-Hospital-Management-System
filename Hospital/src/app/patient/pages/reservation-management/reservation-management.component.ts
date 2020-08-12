@@ -24,6 +24,7 @@ export class ReservationManagementComponent implements OnInit {
   patientInformation = true;
   beds: any = [];
   editReservation: any;
+  addbutton = false;
 
   constructor(
     private reservationService: ReservationService,
@@ -35,6 +36,35 @@ export class ReservationManagementComponent implements OnInit {
     this.ReservationList = [];
     this.proceduresNameList = [];
   }
+
+  /*
+  Envíamos
+  {
+    "dni":"1-7745-8956",
+    "arrival_date":"2020-07-15",
+    "procedures":[
+        {
+            "id": "af73b463-8c21-4b93-8a75-6e23031f829d",
+            "name": "Apendicectomía",
+            "description": "Extracción del apéndice en casos de apendicitis aguda.",
+            "time": 5
+        },
+        {
+            "id": "d459022e-0c10-45dc-9fcd-d40ea2ee8052",
+            "name": "Biopsia de mama",
+            "description": "Procedimiento en el que se extrae una pequeña muestra de tejido mamario para detectar cáncer de seno.",
+            "time": 2
+        }]
+  }
+
+  Recibimos --> Lista
+  [{
+    "bed_id": "1a4ed03e-4a86-463d-ae49-4b4128b49725"
+  }]
+
+  Ingresa esta  lista en el drop-down
+
+*/
 
   ngOnInit() {
     // Get patient data
@@ -202,5 +232,17 @@ export class ReservationManagementComponent implements OnInit {
       }
     };
     this.router.navigate(['/patient'], navigationExtras);
+  }
+
+  // Get available bed
+  getBedsAvailable(date: string) {
+    this.reservationService.getAvailableBeds(this.dni, date, this.procedureNameSelectList).subscribe( bedResponse => {
+      console.log('beds', bedResponse);
+      this.beds = bedResponse.body;
+    });
+    if (this.beds !== []) {
+      this.addbutton = true;
+      
+    }
   }
 }

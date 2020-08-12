@@ -76,6 +76,7 @@ export class PatientRegisterComponent implements OnInit {
     this.patientService.createPatient(dataP).subscribe(res => {
       console.log('res create', res);
     });
+    this.router.navigateByUrl('/doctor');
   }
 
   // Funcion que se encarga se realizar el cierre de sesion.
