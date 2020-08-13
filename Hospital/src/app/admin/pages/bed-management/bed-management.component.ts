@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { BedService } from 'src/app/core/services/bed.service';
 import { EquipmentService } from 'src/app/core/services/equipment.service';
 import { SalonService } from 'src/app/core/services/salon.service';
+import { Router } from '@angular/router';
+import { PatientService } from 'src/app/core/services/patient.service';
 
 @Component({
   selector: 'app-bed-management',
@@ -11,6 +13,7 @@ import { SalonService } from 'src/app/core/services/salon.service';
 })
 export class BedManagementComponent implements OnInit {
 
+  // Variables
   viewBed = false;
   createBed = false;
   listBed = true;
@@ -22,15 +25,12 @@ export class BedManagementComponent implements OnInit {
   salon: any;
   bedEQUIP: any;
 
-  constructor( private bedService: BedService, private equipmentService: EquipmentService, private salonService: SalonService) {
-    this.bed = [
-      { id: 1, salon: 7, uci: true },
-      { id: 2, salon: 8, uci: false },
-      { id: 5, salon: 7, uci: false },
-      { id: 7, salon: 9, uci: false },
-    ];
+  constructor( private bedService: BedService,
+               private equipmentService: EquipmentService,
+               private salonService: SalonService,
+               private router: Router, private patientService: PatientService ) {
    }
-
+  // BD
   ngOnInit() {
     this.bedService.getAllBeds().subscribe(
       Response => {
@@ -38,7 +38,6 @@ export class BedManagementComponent implements OnInit {
         this.bed = Response.body;
       }
     );
-    // BD
     // Equip
     this.equipmentService.getAllEquipment().subscribe(
       Response => {
@@ -55,12 +54,13 @@ export class BedManagementComponent implements OnInit {
     );
   }
 
-  bedView(id) {
+  // Funcion que recibe una cama y cambia la vista a la opcion de ver informacion.
+  bedView(cama) {
     this.viewBed = true;
     this.createBed = false;
     this.listBed = false;
     this.editBed = false;
-    this.bedID = id;
+    this.bedID = cama;
     this.bedService.getAllEquipmentByBeds(this.bedID.id).subscribe(
       Response => {
         console.log('response', Response);
@@ -68,13 +68,24 @@ export class BedManagementComponent implements OnInit {
       }
     );
     for (let aux = 0; aux <= this.salon.length; aux++) {
-      if(this.salon[aux].id === this.bedID.room_id) {
+      if (this.salon[aux].id === this.bedID.room_id) {
         [this.salon[0], this.salon[aux]] = [this.salon[aux], this.salon[0]];
         break;
       }
     }
   }
 
+  // Funcion que se encarga de cerrar sesion.
+  logout() {
+    this.router.navigateByUrl('/home');
+  }
+
+  // Funcion que se encarga de sincronizar con la BD de CoTEC
+  sincro() {
+    this.patientService.syncCotec().subscribe();
+  }
+
+  // Funcion que cambia la vista la opcion de crear.
   bedCreate() {
     this.viewBed = false;
     this.createBed = true;
@@ -83,13 +94,16 @@ export class BedManagementComponent implements OnInit {
     this.bedEQUIP = [];
   }
 
+  // Funcion que cambia la vista la opcion de lista.
   bedList() {
     this.viewBed = false;
     this.createBed = false;
     this.listBed = true;
     this.editBed = false;
+    window.location.reload();
   }
 
+  // Funcion que cambia la vista la opcion de editar.
   bedEdit() {
     this.viewBed = false;
     this.createBed = false;
@@ -98,6 +112,7 @@ export class BedManagementComponent implements OnInit {
   }
 
   // BD
+  // Funcion que cambia la vista la opcion de lista y crea una cama.
   bedCrear() {
     const data = {
       // tslint:disable-next-line: no-angle-bracket-type-assertion
@@ -125,6 +140,7 @@ export class BedManagementComponent implements OnInit {
   }
 
   // BD
+  // Funcion que cambia la vista la opcion de ver informacion y edita la informacion de la cama.
   bedEditar() {
     const data = {
       // tslint:disable-next-line: no-angle-bracket-type-assertion
@@ -154,6 +170,7 @@ export class BedManagementComponent implements OnInit {
     );
   }
 
+  // Funcion que añade un equipo medico(data) a una lista.
   agregar(data) {
     this.Equip.forEach(element => {
       if (element.name === data.value) {
@@ -162,6 +179,7 @@ export class BedManagementComponent implements OnInit {
     });
   }
 
+  // Funcion que elimina un equipo medico(data) de una lista.
   eliminar(data) {
     for (let index = 0; index <= this.bedEQUIP.length; index++) {
       if (this.bedEQUIP[index].name === data) {

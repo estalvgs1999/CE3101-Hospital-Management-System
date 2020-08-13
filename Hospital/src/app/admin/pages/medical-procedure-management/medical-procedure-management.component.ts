@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ProcedureService } from 'src/app/core/services/procedure.service';
+import { Router } from '@angular/router';
+import { PatientService } from 'src/app/core/services/patient.service';
 
 @Component({
   selector: 'app-medical-procedure-management',
@@ -9,6 +11,7 @@ import { ProcedureService } from 'src/app/core/services/procedure.service';
 })
 export class MedicalProcedureManagementComponent implements OnInit {
 
+  // Variable
   viewProcedure = false;
   createProcedure = false;
   listProcedure = true;
@@ -18,15 +21,10 @@ export class MedicalProcedureManagementComponent implements OnInit {
   procedureNAME: any;
 
   constructor(
-    private procedureService: ProcedureService) {
-    this.procedure = [
-      { nombre: 'nombre1', dias: 6 },
-      { nombre: 'nombre2', dias: 7 },
-      { nombre: 'Cirugía para la lumbalgia', dias: 9 },
-      { nombre: 'nombre4', dias: 3 },
-    ];
+    private procedureService: ProcedureService, private router: Router, private patientService: PatientService ) {
   }
 
+  // BD
   ngOnInit() {
     this.procedureService.getAllProcedure().subscribe(
       Response => {
@@ -36,7 +34,8 @@ export class MedicalProcedureManagementComponent implements OnInit {
     );
   }
 
-  procedureView(name: any) {
+  // Funcion que cambia la vista la opcion de ver informacion y recibe el procedimiento médico a examinar.
+  procedureView(name) {
     this.viewProcedure = true;
     this.createProcedure = false;
     this.listProcedure = false;
@@ -44,6 +43,7 @@ export class MedicalProcedureManagementComponent implements OnInit {
     this.procedureNAME = name;
   }
 
+  // Funcion que cambia la vista la opcion de crear.
   procedureCreate() {
     this.viewProcedure = false;
     this.createProcedure = true;
@@ -51,13 +51,16 @@ export class MedicalProcedureManagementComponent implements OnInit {
     this.editProcedure = false;
   }
 
+  // Funcion que cambia la vista la opcion de lista.
   procedureList() {
     this.viewProcedure = false;
     this.createProcedure = false;
     this.listProcedure = true;
     this.editProcedure = false;
+    window.location.reload();
   }
 
+  // Funcion que cambia la vista la opcion de editar.
   procedureEdit() {
     this.viewProcedure = false;
     this.createProcedure = false;
@@ -66,6 +69,7 @@ export class MedicalProcedureManagementComponent implements OnInit {
   }
 
   // BD
+  // Funcion que cambia la vista la opcion de lista y crea un nuevo procedimeinto médico.
   procedureCrear() {
     const data = {
       // tslint:disable-next-line: no-angle-bracket-type-assertion
@@ -90,7 +94,18 @@ export class MedicalProcedureManagementComponent implements OnInit {
     );
   }
 
-  // BD 
+  // Funcion que se encarga de realizar el cierre de sesion.
+  logout() {
+    this.router.navigateByUrl('/home');
+  }
+
+  // Funcion que se encarga de sincronizar con la BD de CoTEC
+  sincro() {
+    this.patientService.syncCotec().subscribe();
+  }
+
+  // BD
+  // Funcion que cambia la vista la opcion de ver informacion y editar la informacion de un procedimiento médico.
   procedureEditar() {
     const data = {
       // tslint:disable-next-line: no-angle-bracket-type-assertion

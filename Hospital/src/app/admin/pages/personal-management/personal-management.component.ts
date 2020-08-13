@@ -3,6 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 
 import { StaffService } from 'src/app/core/services/staff.service';
+import { LocationService } from 'src/app/doctor/services/location.service';
+import { Router } from '@angular/router';
+import { PatientService } from 'src/app/core/services/patient.service';
+
 
 @Component({
   selector: 'app-personal-management',
@@ -11,6 +15,7 @@ import { StaffService } from 'src/app/core/services/staff.service';
 })
 export class PersonalManagementComponent implements OnInit {
 
+  // Variables
   viewPersonal = false;
   createPersonal = false;
   listPersonal = true;
@@ -18,17 +23,25 @@ export class PersonalManagementComponent implements OnInit {
   dniPersonal = 0;
   personal: any;
   personalDNI: any;
+  provinces: any;
+  provincesKey: string;
+  cantons: any;
+  distrits: any;
+  role = ['Administrador', 'Doctor', 'Enfermero'];
 
-  constructor( private staffService: StaffService ) {
-    this.personal = [
-      { dni: 1, nombre: 'nombre1', apellido: 'apellido1', role: 'role1' },
-      { dni: 2, nombre: 'nombre2', apellido: 'apellido2', role: 'role2' },
-      { dni: 5, nombre: 'nombre3', apellido: 'apellido3', role: 'role3' },
-      { dni: 7, nombre: 'nombre4', apellido: 'apellido4', role: 'role4' },
-    ];
+  // tslint:disable-next-line: variable-name
+  constructor( private staffService: StaffService,
+               // tslint:disable-next-line: variable-name
+               private _http: LocationService,
+               private router: Router, private patientService: PatientService ) {
   }
 
+  // BD
   ngOnInit() {
+    this._http.getProvince().subscribe(data => {
+      this.provinces = data;
+    });
+
     this.staffService.getStaff().subscribe(
       Response => {
         console.log('res proce', Response);
@@ -37,14 +50,49 @@ export class PersonalManagementComponent implements OnInit {
     );
   }
 
+  // Funcion obtiene los cantones de una provincia.
+  getCanton(cantonId: string) {
+    // tslint:disable-next-line: forin
+    for (const key in this.provinces) {
+      const value = this.provinces[key];
+      if (value === cantonId) {
+        this.provincesKey = key;
+        this._http.getCanton(key).subscribe(data => {
+          this.cantons = data;
+        });
+      }
+
+    }
+  }
+
+  getDistrit(distritId: string) {
+    // tslint:disable-next-line: forin
+    for (const key in this.cantons) {
+      const value = this.cantons[key];
+      if (value === distritId) {
+        this._http.getDistrit(this.provincesKey, key).subscribe(data => {
+          this.distrits = data;
+        });
+      }
+    }
+  }
+
+  // Funcion que cambia la vista la opcion de ver informacion y recibe el personal.
   personalView(dni) {
     this.viewPersonal = true;
     this.createPersonal = false;
     this.listPersonal = false;
     this.editPersonal = false;
     this.personalDNI = dni;
+    for (let aux = 0; aux <= this.role.length; aux++) {
+      if (this.role[aux] === this.personalDNI.role) {
+        [this.role[0], this.role[aux]] = [this.role[aux], this.role[0]];
+        break;
+      }
+    }
   }
 
+  // Funcion que cambia la vista la opcion de crear.
   personalCreate() {
     this.viewPersonal = false;
     this.createPersonal = true;
@@ -52,13 +100,16 @@ export class PersonalManagementComponent implements OnInit {
     this.editPersonal = false;
   }
 
+  // Funcion que cambia la vista la opcion de lista.
   personalList() {
     this.viewPersonal = false;
     this.createPersonal = false;
     this.listPersonal = true;
     this.editPersonal = false;
+    window.location.reload();
   }
 
+  // Funcion que cambia la vista la opcion de editar.
   personalEdit() {
     this.viewPersonal = false;
     this.createPersonal = false;
@@ -67,6 +118,7 @@ export class PersonalManagementComponent implements OnInit {
   }
 
   // BD
+  // Funcion que se encarga de eliminar un personal.
   personalDelete() {
     this.staffService.deleteMember(this.personalDNI.dni).subscribe(
       response => {
@@ -85,7 +137,18 @@ export class PersonalManagementComponent implements OnInit {
     );
   }
 
+  // Funcion que se encarga de cerrar sesion.
+  logout() {
+    this.router.navigateByUrl('/home');
+  }
+
+  // Funcion que se encarga de sincronizar con la BD de CoTEC
+  sincro() {
+    this.patientService.syncCotec().subscribe();
+  }
+
   // BD
+  // Funcion que cambia la vista la opcion de lista y crea un personal.
   personalCrear() {
     const data = {
       // tslint:disable-next-line: no-angle-bracket-type-assertion
@@ -97,7 +160,7 @@ export class PersonalManagementComponent implements OnInit {
       // tslint:disable-next-line: no-angle-bracket-type-assertion
       role: (<HTMLInputElement> document.getElementById('RoleNewData')).value,
       // tslint:disable-next-line: no-angle-bracket-type-assertion
-      dob: moment((<HTMLInputElement> document.getElementById('DobNewData')).value).format('YYYY-MM-DD'),
+      dob: (<HTMLInputElement> document.getElementById('DobNewData')).value,
       // tslint:disable-next-line: no-angle-bracket-type-assertion
       phone: (<HTMLInputElement> document.getElementById('PhoneNewData')).value,
       // tslint:disable-next-line: no-angle-bracket-type-assertion
@@ -109,7 +172,7 @@ export class PersonalManagementComponent implements OnInit {
       // tslint:disable-next-line: no-angle-bracket-type-assertion
       otherSigns: (<HTMLInputElement> document.getElementById('OtherNewData')).value,
       // tslint:disable-next-line: no-angle-bracket-type-assertion
-      startDate: moment((<HTMLInputElement> document.getElementById('DateNewData')).value, 'YYYY-MM-DD').format('YYYY-MM-DD'),
+      startDate: (<HTMLInputElement> document.getElementById('DateNewData')).value,
       // tslint:disable-next-line: no-angle-bracket-type-assertion
       username: (<HTMLInputElement> document.getElementById('UserNewData')).value,
       // tslint:disable-next-line: no-angle-bracket-type-assertion
@@ -134,6 +197,7 @@ export class PersonalManagementComponent implements OnInit {
   }
 
   // BD
+  // Funcion que cambia la vista la opcion de ver informacion y edita la informacion de un personal.
   personalEditar() {
     const data = {
       // tslint:disable-next-line: no-angle-bracket-type-assertion

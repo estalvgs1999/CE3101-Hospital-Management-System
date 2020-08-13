@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
 
   // tslint:disable-next-line: variable-name
   constructor(
+    // tslint:disable-next-line: variable-name
     private _http: LocationService,
     private patientService: PatientService,
     private staffService: StaffService,
@@ -58,6 +59,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  // Create a new patien
   send(name: string, lastName: string, dni: number, sex: string, password: string,
        date: string, phone: string, province: string, canton: string, district: string, address: string) {
 
@@ -85,22 +87,24 @@ export class HomeComponent implements OnInit {
         this.patientService.createPatient(dataP).subscribe(res => {
           console.log('res create', res);
         });
-       window.location.reload();
+        window.location.reload();
   }
 
+  // Login page 
   login(user: string, password: string) {
     console.log(user, password);
     const regex = new RegExp('^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[hospital]+(?:\.[a-zA-Z0-9-]+)*$');
     const credentials = {
       password,
       dni: user
-    }
+    };
     if (regex.test(user)) {
       console.log('dn', user.split('@')[0]);
       credentials.dni = user.split('@')[0];
       this.staffService.login(credentials).subscribe(
         resLogin2 => {
           console.log('login staff', resLogin2);
+          // tslint:disable-next-line: no-string-literal
           if (resLogin2.body['role'] === 'Administrativo') {
             this.router.navigateByUrl('/admin');
           } else {
@@ -113,13 +117,20 @@ export class HomeComponent implements OnInit {
         resLogin => {
           console.log('login Patient', resLogin);
           if (resLogin.status === 201) {
-            this.router.navigateByUrl('/patient');
+            const navigationExtras = {
+              queryParams: {
+                // tslint:disable-next-line: no-string-literal
+                special: user
+              }
+            };
+            this.router.navigate(['/patient'], navigationExtras);
           }
         }
       );
     }
   }
 
+  // Get canton for province
   getCanton(cantonId: string) {
     // tslint:disable-next-line: forin
     for (const key in this.provinces) {
@@ -134,6 +145,7 @@ export class HomeComponent implements OnInit {
   }
   }
 
+  // Get distrit for canton
   getDistrit(distritId: string) {
 
     // tslint:disable-next-line: forin

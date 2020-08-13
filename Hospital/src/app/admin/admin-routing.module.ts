@@ -7,15 +7,17 @@ import { MedicalProcedureManagementComponent } from './pages/medical-procedure-m
 import { MedicalEquipmentManagementComponent } from './pages/medical-equipment-management/medical-equipment-management.component';
 import { PersonalManagementComponent } from './pages/personal-management/personal-management.component';
 import { SalonManagementComponent } from './pages/salon-management/salon-management.component';
+import { HomeComponent } from '../home/pages/home/home.component';
 
 const routes: Routes = [
-    {path: '', component: PersonalManagementComponent},
+    {path: '', component: ReportComponent},
     { path : 'report', component: ReportComponent},
     { path : 'bed', component : BedManagementComponent },
     { path : 'procedure', component: MedicalProcedureManagementComponent},
     { path : 'equipment', component: MedicalEquipmentManagementComponent},
     { path : 'personal', component: PersonalManagementComponent},
     { path : 'salon', component: SalonManagementComponent}
+
 ];
 
 @NgModule({

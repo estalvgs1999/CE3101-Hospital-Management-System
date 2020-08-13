@@ -3,7 +3,8 @@ import { Procedure } from '../../interfaces/procedure';
 import { ReservationService } from 'src/app/core/services/reservation.service';
 import { BedService } from 'src/app/core/services/bed.service';
 import { ProcedureService } from 'src/app/core/services/procedure.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { PatientService } from 'src/app/core/services/patient.service';
 
 @Component({
   selector: 'app-reservation-management',
@@ -15,79 +16,121 @@ export class ReservationManagementComponent implements OnInit {
   ReservationList: any;
   edit = false;
   add = false;
-  patient = {dni: '1-7745-8956', name: 'Olman', lastName: 'Castro Hernández', age: 56, sex: 'Masculino'};
+  patient: any = {dni: '1-7745-8956', name: 'Olman', lastName: 'Castro Hernández', age: 56, sex: 'Masculino'};
+  dni: string;
   proceduresNameList: any;
   procedureAddList: any = [];
   procedureNameSelectList: any[] = [];
   patientInformation = true;
   beds: any = [];
   editReservation: any;
+  addbutton = false;
 
   constructor(
     private reservationService: ReservationService,
     private bedService: BedService,
     private procedureService: ProcedureService,
+    private patientService: PatientService,
+    private route: ActivatedRoute,
     private router: Router) {
-    this.ReservationList = [
-      {arrival_date: '23-04-2020', departure_date: '05-05-2020', bed_id: '2',procedures: [{name: 'uno'},  {name: 'dos'},  {name: 'dos'},  {name: 'cuatro'}]},
-      {arrival_date: '23-04-2020', departure_date: '05-05-2020', bed_id: '2',procedures: [{name: 'uno'},  {name: 'dos'},  {name: 'dos'},  {name: 'cuatro'}]},
-      {arrival_date: '23-04-2020', departure_date: '05-05-2020', bed_id: '2',procedures: [{name: 'uno'},  {name: 'dos'},  {name: 'dos'},  {name: 'cuatro'}]},
-      {arrival_date: '23-04-2020', departure_date: '05-05-2020', bed_id: '2',procedures: [{name: 'uno'},  {name: 'dos'},  {name: 'dos'},  {name: 'cuatro'}]},
-      {arrival_date: '23-04-2020', departure_date: '05-05-2020', bed_id: '2',procedures: [ {name: 'uno'},  {name: 'dos'},  {name: 'dos'},  {name: 'cuatro'}]},
-    ];
-    this.proceduresNameList = [
-      {name: 'jndjcd'},
-      {name: 'jbgbgbgb'},
-      {name: 'jnd456jcd'},
-      {name: 'jndjcnmmmmmd'},
-      {name: 'jndjccccccd'}
-    ];
+    this.ReservationList = [];
+    this.proceduresNameList = [];
   }
 
+  /*
+  Envíamos
+  {
+    "dni":"1-7745-8956",
+    "arrival_date":"2020-07-15",
+    "procedures":[
+        {
+            "id": "af73b463-8c21-4b93-8a75-6e23031f829d",
+            "name": "Apendicectomía",
+            "description": "Extracción del apéndice en casos de apendicitis aguda.",
+            "time": 5
+        },
+        {
+            "id": "d459022e-0c10-45dc-9fcd-d40ea2ee8052",
+            "name": "Biopsia de mama",
+            "description": "Procedimiento en el que se extrae una pequeña muestra de tejido mamario para detectar cáncer de seno.",
+            "time": 2
+        }]
+  }
+
+  Recibimos --> Lista
+  [{
+    "bed_id": "1a4ed03e-4a86-463d-ae49-4b4128b49725"
+  }]
+
+  Ingresa esta  lista en el drop-down
+
+*/
+
   ngOnInit() {
+    // Get patient data
+    this.route.queryParams.subscribe( params => {this.dni = params.special; console.log(this.dni); });
+    this.patientService.getOnePatient(this.dni).subscribe(Response => {
+      console.log('patient data', Response);
+      this.patient = Response.body;
+    });
+
+    // Get bed information
     this.bedService.getAllBeds().subscribe( bedResponse => {
       console.log('beds', bedResponse);
       this.beds = bedResponse.body;
     });
+    // Get all history procedure
     this.procedureService.getAllProcedure().subscribe( procedureResponse => {
       this.proceduresNameList = procedureResponse.body;
       this.procedureAddList =  procedureResponse.body;
       console.log('procedure', this.proceduresNameList);
     });
-    this.reservationService.getReservationByPatient(this.patient.dni).subscribe( res => {
+    // Get al reservation for patients
+    this.reservationService.getReservationByPatient(this.dni).subscribe( res => {
       console.log('res', res);
       this.ReservationList = res.body;
       // tslint:disable-next-line: forin
       for (const key in res.body) {
+        // tslint:disable-next-line: no-string-literal
         console.log(res.body[key]['id']);
+        // tslint:disable-next-line: no-string-literal
         this.reservationService.getProcedureByReservation(res.body[key]['id']).subscribe( resP => {
           console.log('procedure res', resP);
+          // tslint:disable-next-line: no-string-literal
           this.ReservationList[key]['procedures'] = resP.body;
         });
       }
     });
   }
 
+  // Funcion que se encarga se realizar el cierre de sesion.
+  logout() {
+    this.router.navigateByUrl('/home');
+  }
+
+  // Get information for edit procedure and change the page
   editProcedure(reservation: object, procedureList: object[]) {
-    
     this.editReservation = reservation;
     this.procedureNameSelectList = procedureList;
-    console.log('edit', this.editReservation, 'procedure',this.procedureNameSelectList);
+    console.log('edit', this.editReservation, 'procedure', this.procedureNameSelectList);
     this.edit = true;
     this.patientInformation = false;
   }
 
+  // Return to the princepal view
   back() {
     this.edit = false;
     this.add = false;
     this.patientInformation = true;
   }
 
+  // Change page to the madical histoty
   changeAddMedicalHistory() {
     this.add = true;
     this.patientInformation = false;
   }
 
+  // Sed new information
   sendNewReservation(date: string) {
     console.log(date, this.procedureNameSelectList);
   }
@@ -110,18 +153,24 @@ export class ReservationManagementComponent implements OnInit {
       this.procedureNameSelectList.splice(i, 1);
     }
   }
+
+  // Get procedure for patient id
   getProcedureByResId(id: string) {
     this.reservationService.getProcedureByReservation(id).subscribe(res => {
       console.log('res procedure', res);
       return res.body;
     });
   }
+
+  // Delete resrevation
   deleteReservation(id: string) {
     this.reservationService.deleteReservation(id).subscribe( delRes => {
       console.log('delete Response', delRes);
       window.location.reload();
     });
   }
+
+  // Create reservation
   createReservation(date: string, bedNumber: string) {
     const data = {
       PatientDni: this.patient.dni,
@@ -135,16 +184,65 @@ export class ReservationManagementComponent implements OnInit {
       window.location.reload();
     });
   }
+
+  // Update reservation information
   updateReservation(newDate: string) {
     const data = {
       ArrivalDate: newDate,
       PatientDni: this.patient.dni,
       Procedures: this.procedureNameSelectList
-    }
+    };
+    // tslint:disable-next-line: no-string-literal
     console.log('data', data, 'id', this.editReservation['id']);
+    // tslint:disable-next-line: no-string-literal
     this.reservationService.updateReservation(this.editReservation['id'], data).subscribe( upRess => {
       console.log('update res', upRess);
       window.location.reload();
     });
+  }
+
+  // Change view to Evaluation
+  changeEvaluation() {
+    const navigationExtras = {
+      queryParams: {
+        // tslint:disable-next-line: no-string-literal
+        special: this.dni
+      }
+    };
+    this.router.navigate(['/patient/evaluation'], navigationExtras);
+  }
+
+  // Change view to Reservation
+  changeReservation() {
+    const navigationExtras = {
+      queryParams: {
+        // tslint:disable-next-line: no-string-literal
+        special: this.dni
+      }
+    };
+    this.router.navigate(['/patient/reservation'], navigationExtras);
+  }
+
+  // Change view to profile
+  changeClinical() {
+    const navigationExtras = {
+      queryParams: {
+        // tslint:disable-next-line: no-string-literal
+        special: this.dni
+      }
+    };
+    this.router.navigate(['/patient'], navigationExtras);
+  }
+
+  // Get available bed
+  getBedsAvailable(date: string) {
+    this.reservationService.getAvailableBeds(this.dni, date, this.procedureNameSelectList).subscribe( bedResponse => {
+      console.log('beds', bedResponse);
+      this.beds = bedResponse.body;
+    });
+    if (this.beds !== []) {
+      this.addbutton = true;
+      
+    }
   }
 }

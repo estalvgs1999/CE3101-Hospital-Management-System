@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { EquipmentService } from 'src/app/core/services/equipment.service';
+import { Router } from '@angular/router';
+import { PatientService } from 'src/app/core/services/patient.service';
 
 @Component({
   selector: 'app-medical-equipment-management',
@@ -9,6 +11,7 @@ import { EquipmentService } from 'src/app/core/services/equipment.service';
 })
 export class MedicalEquipmentManagementComponent implements OnInit {
 
+  // Variables
   viewEquipment = false;
   createEquipment = false;
   listEquipment = true;
@@ -17,15 +20,10 @@ export class MedicalEquipmentManagementComponent implements OnInit {
   equipment: any;
   equipmentNAME: any;
 
-  constructor(private equipmentService: EquipmentService) {
-    this.equipment = [
-      { nombre: 'respiradores artificiales', proveedor: 'proveedor1', cantidad: 7 },
-      { nombre: 'nombre2', proveedor: 'proveedor2', cantidad: 2 },
-      { nombre: 'nombre3', proveedor: 'proveedor3', cantidad: 5 },
-      { nombre: 'nombre4', proveedor: 'proveedor4', cantidad: 9 },
-    ];
+  constructor(private equipmentService: EquipmentService, private router: Router, private patientService: PatientService ) {
   }
 
+  // BD
   ngOnInit() {
     this.equipmentService.getAllEquipment().subscribe(
       Response => {
@@ -35,14 +33,16 @@ export class MedicalEquipmentManagementComponent implements OnInit {
     );
   }
 
-  equipmentView(name) {
+  // Funcion que cambia la vista la opcion de ver informacion y recibe el equipo que se desea examinar.
+  equipmentView(equipo) {
     this.viewEquipment = true;
     this.createEquipment = false;
     this.listEquipment = false;
     this.editEquipment = false;
-    this.equipmentNAME = name;
+    this.equipmentNAME = equipo;
   }
 
+  // Funcion que cambia la vista la opcion de crear.
   equipmentCreate() {
     this.viewEquipment = false;
     this.createEquipment = true;
@@ -50,13 +50,16 @@ export class MedicalEquipmentManagementComponent implements OnInit {
     this.editEquipment = false;
   }
 
+  // Funcion que cambia la vista la opcion de lista.
   equipmentList() {
     this.viewEquipment = false;
     this.createEquipment = false;
     this.listEquipment = true;
     this.editEquipment = false;
+    window.location.reload();
   }
 
+  // Funcion que cambia la vista la opcion de editar.
   equipmentEdit() {
     this.viewEquipment = false;
     this.createEquipment = false;
@@ -65,6 +68,7 @@ export class MedicalEquipmentManagementComponent implements OnInit {
   }
 
   // BD
+  // Funcion que cambia la vista la opcion de lista y crea un equipo médico.
   equipmentCrear() {
     const data = {
       // tslint:disable-next-line: no-angle-bracket-type-assertion
@@ -89,7 +93,18 @@ export class MedicalEquipmentManagementComponent implements OnInit {
     );
   }
 
+  // Funcion que se encarga se realizar el cierre de sesion.
+  logout() {
+    this.router.navigateByUrl('/home');
+  }
+
+  // Funcion que se encarga de sincronizar con la BD de CoTEC
+  sincro() {
+    this.patientService.syncCotec().subscribe();
+  }
+
   // BD
+  // Funcion que cambia la vista la opcion de ver informacion y editar la informacion del equipo médico.
   equipmentEditar() {
     const data = {
       // tslint:disable-next-line: no-angle-bracket-type-assertion
